@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SALTY Docs</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F7F4ED;
+      color: #0E3A2D;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    p {
+      color: #4A4E58;
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+    .cards {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    a {
+      display: block;
+      background: #fff;
+      border: 1px solid rgba(14, 58, 45, 0.12);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      width: 280px;
+      text-decoration: none;
+      color: #0E3A2D;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    a:hover {
+      box-shadow: 0 8px 24px rgba(14, 58, 45, 0.12);
+      transform: translateY(-2px);
+    }
+    a h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    a span {
+      font-size: 0.875rem;
+      color: #666;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-top: 0.75rem;
+    }
+    .badge-eu { background: #E3F2FD; color: #1565C0; }
+    .badge-meta { background: #FFF3E0; color: #E65100; }
+  </style>
+</head>
+<body>
+  <h1>SALTY Docs</h1>
+  <p>Internal strategy and performance presentations for stakeholders</p>
+  <div class="cards">
+    <a href="eu-strategy/">
+      <h2>EU Strategy Deep-Dive</h2>
+      <span>Morocco & Sicily — competitive landscape, creative briefs, audience strategy</span>
+      <span class="badge badge-eu">Strategy</span>
+    </a>
+    <a href="meta-ads/">
+      <h2>Meta Ads Performance</h2>
+      <span>Q1 2026 advertising performance review</span>
+      <span class="badge badge-meta">Performance</span>
+    </a>
+  </div>
+</body>
+</html>

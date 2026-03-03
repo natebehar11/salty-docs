@@ -1,0 +1,3102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SALTY Retreats — Advertising Performance Review Q1 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  /* ===== FONTS ===== */
+  @font-face {
+    font-family: 'TAN Headline';
+    src: url('../assets/salty-design/TAN-Headline/TANHEADLINE-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Roca';
+    src: url('../assets/salty-design/Roca Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Roca';
+    src: url('../assets/salty-design/Roca Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Roca';
+    src: url('../assets/salty-design/Roca Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  /* ===== BRAND TOKENS ===== */
+  :root {
+    --cream: #F7F4ED;
+    --beige: #E7D7C0;
+    --teal: #0E3A2D;
+    --coral: #F75A3D;
+    --gold: #FED260;
+    --sky: #B6D4EA;
+    --seafoam: #A4E5D9;
+    --forest: #3A6B35;
+    --salmon: #FF7E70;
+    --burnt: #C74235;
+    --mauve: #CCB4B3;
+    --slate: #4A4E58;
+    --charcoal: #383838;
+  }
+
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Roca', Georgia, serif;
+    background: var(--cream);
+    color: var(--slate);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== TYPOGRAPHY ===== */
+  h1, h2, h3, h4, .section-number {
+    font-family: 'TAN Headline', 'Georgia', serif;
+    text-transform: uppercase;
+    color: var(--teal);
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+  }
+
+  h1 { font-size: 2.75rem; }
+  h2 { font-size: 1.75rem; margin-bottom: 1.5rem; }
+  h3 { font-size: 1.25rem; margin-bottom: 1rem; }
+  h4 { font-size: 1rem; margin-bottom: 0.75rem; }
+
+  p { margin-bottom: 1rem; max-width: 72ch; }
+
+  strong { font-weight: 700; }
+
+  .label {
+    font-family: 'TAN Headline', Georgia, serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--slate);
+    opacity: 0.7;
+  }
+
+  /* ===== LAYOUT ===== */
+  .page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  section {
+    padding: 4rem 0;
+  }
+
+  /* ===== WAVE DIVIDER ===== */
+  .wave-divider {
+    width: 100%;
+    height: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .wave-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -5%;
+    width: 110%;
+    height: 100%;
+    background:
+      radial-gradient(ellipse 80px 40px at 80px 100%, transparent 98%, var(--coral)) repeat-x,
+      radial-gradient(ellipse 80px 40px at 0px 0%, transparent 98%, var(--coral)) repeat-x;
+    background-size: 160px 48px;
+    background-position: 0 0;
+  }
+
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--teal);
+  }
+
+  .section-number {
+    font-size: 0.8rem;
+    color: var(--coral);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  /* ===== FULL-WIDTH SECTIONS ===== */
+  .full-teal {
+    background: var(--teal);
+    color: var(--cream);
+    padding: 4rem 0;
+  }
+  .full-teal h2, .full-teal h3, .full-teal h4, .full-teal .section-number { color: var(--gold); }
+  .full-teal p, .full-teal td, .full-teal th { color: var(--cream); }
+  .full-teal .label { color: var(--beige); opacity: 0.8; }
+
+  .full-sky {
+    background: var(--sky);
+    padding: 4rem 0;
+  }
+
+  .full-beige {
+    background: var(--beige);
+    padding: 4rem 0;
+  }
+
+  /* ===== COVER ===== */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: var(--teal);
+    color: var(--cream);
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to top, rgba(247,90,61,0.15), transparent);
+  }
+  .cover-eyebrow {
+    font-family: 'Roca', Georgia, serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--salmon);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+  .cover h1 {
+    color: var(--cream);
+    font-size: 3.5rem;
+    margin-bottom: 0.75rem;
+    max-width: 800px;
+  }
+  .cover-subtitle {
+    font-family: 'TAN Headline', Georgia, serif;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 3rem;
+  }
+  .cover-meta {
+    font-size: 0.9rem;
+    color: var(--beige);
+    opacity: 0.7;
+  }
+  .cover-retreats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+  .cover-retreat-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .cover-retreat-badge .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .cover-retreat-badge span {
+    font-family: 'TAN Headline', Georgia, serif;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+  }
+
+  /* ===== KPI CARDS ===== */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .kpi-card {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(14,58,45,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+  }
+  .kpi-card.accent-coral::before { background: var(--coral); }
+  .kpi-card.accent-gold::before { background: var(--gold); }
+  .kpi-card.accent-teal::before { background: var(--teal); }
+  .kpi-card.accent-sky::before { background: var(--sky); }
+  .kpi-card.accent-forest::before { background: var(--forest); }
+
+  .kpi-value {
+    font-family: 'TAN Headline', Georgia, serif;
+    font-size: 2.25rem;
+    color: var(--teal);
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+  }
+  .kpi-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--slate);
+    font-weight: 700;
+  }
+  .kpi-sub {
+    font-size: 0.75rem;
+    color: var(--slate);
+    opacity: 0.6;
+    margin-top: 0.25rem;
+  }
+
+  /* ===== CALLOUT ===== */
+  .callout {
+    background: var(--teal);
+    color: var(--cream);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    margin: 2rem 0;
+    position: relative;
+  }
+  .callout::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: var(--coral);
+    border-radius: 12px 0 0 12px;
+  }
+  .callout p { color: var(--cream); max-width: none; margin: 0; }
+  .callout strong { color: var(--gold); }
+
+  .callout-light {
+    background: var(--beige);
+    color: var(--teal);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    border-left: 5px solid var(--coral);
+  }
+  .callout-light p { color: var(--teal); max-width: none; margin: 0; }
+
+  /* ===== TABLES ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+  thead th {
+    font-family: 'TAN Headline', Georgia, serif;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    border-bottom: 2px solid var(--teal);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(14,58,45,0.08);
+    vertical-align: top;
+  }
+  tbody tr:hover { background: rgba(14,58,45,0.03); }
+
+  .text-right { text-align: right; }
+  .text-center { text-align: center; }
+  .mono { font-variant-numeric: tabular-nums; }
+
+  /* ===== RAG INDICATORS ===== */
+  .rag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .rag::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .rag-green::before { background: var(--forest); }
+  .rag-amber::before { background: var(--gold); }
+  .rag-red::before { background: var(--coral); }
+
+  /* ===== CHART CONTAINERS ===== */
+  .chart-container {
+    position: relative;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: var(--cream);
+    border-radius: 12px;
+    border: 1px solid rgba(14,58,45,0.06);
+  }
+  .chart-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .chart-single {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* ===== FUNNEL ===== */
+  .funnel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin: 2rem 0;
+  }
+  .funnel-step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.25rem 2rem;
+    color: white;
+    font-weight: 700;
+    position: relative;
+    clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+  }
+  .funnel-step .funnel-value {
+    font-family: 'TAN Headline', Georgia, serif;
+    font-size: 1.5rem;
+    display: block;
+  }
+  .funnel-step .funnel-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.9;
+  }
+  .funnel-arrow {
+    font-size: 0.75rem;
+    color: var(--slate);
+    padding: 0.35rem 0;
+    opacity: 0.5;
+  }
+  .funnel-rate {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--teal);
+    background: var(--gold);
+    padding: 0.15rem 0.75rem;
+    border-radius: 20px;
+    margin: 0.25rem 0;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    position: relative;
+    padding: 2rem 0;
+  }
+  .timeline-bar {
+    height: 4px;
+    background: var(--beige);
+    border-radius: 2px;
+    position: relative;
+    margin: 3rem 0 1rem;
+  }
+  .timeline-campaign {
+    position: absolute;
+    height: 8px;
+    border-radius: 4px;
+    top: -2px;
+    opacity: 0.8;
+  }
+  .timeline-dot {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    top: -5px;
+    border: 2px solid var(--cream);
+    z-index: 2;
+    cursor: default;
+  }
+  .timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--slate);
+    opacity: 0.5;
+    margin-top: 0.5rem;
+  }
+
+  /* ===== RECOMMENDATION CARDS ===== */
+  .rec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  .rec-card {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid rgba(14,58,45,0.08);
+    position: relative;
+  }
+  .rec-card .rec-number {
+    font-family: 'TAN Headline', Georgia, serif;
+    font-size: 2rem;
+    color: var(--coral);
+    opacity: 0.3;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+  }
+  .rec-card h4 { color: var(--teal); margin-bottom: 0.5rem; }
+  .rec-card p { font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .rec-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+  .rec-tag.high-impact { background: rgba(247,90,61,0.15); color: var(--coral); }
+  .rec-tag.med-impact { background: rgba(254,210,96,0.3); color: var(--charcoal); }
+  .rec-tag.low-effort { background: rgba(58,107,53,0.15); color: var(--forest); }
+  .rec-tag.med-effort { background: rgba(182,212,234,0.5); color: var(--teal); }
+
+  /* ===== COMPARISON GRID ===== */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+  .comparison-panel {
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .comparison-panel h3 { margin-bottom: 1.25rem; }
+  .comparison-panel.sri-lanka {
+    background: rgba(182,212,234,0.25);
+    border: 2px solid var(--sky);
+  }
+  .comparison-panel.panama {
+    background: rgba(247,90,61,0.08);
+    border: 2px solid var(--salmon);
+  }
+
+  /* ===== MINI STAT ===== */
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(14,58,45,0.06);
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { font-size: 0.85rem; }
+  .stat-value { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--teal); }
+
+  /* ===== SOURCE TABLE ===== */
+  .source-organic { color: var(--forest); }
+  .source-referral { color: var(--gold); }
+  .source-popup { color: var(--coral); }
+  .source-direct { color: var(--sky); }
+  .source-unknown { color: var(--slate); opacity: 0.5; }
+
+  /* ===== HEATMAP TABLE ===== */
+  .heatmap-table {
+    font-size: 0.78rem;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .heatmap-table th {
+    font-family: 'TAN Headline', Georgia, serif;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    color: var(--teal);
+    border-bottom: 2px solid var(--teal);
+    padding: 0.6rem 0.5rem;
+    text-align: left;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    background: var(--cream);
+    z-index: 1;
+  }
+  .heatmap-table td {
+    padding: 0.5rem 0.5rem;
+    border-bottom: 1px solid rgba(14,58,45,0.06);
+    vertical-align: middle;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .heatmap-table tbody tr:hover { background: rgba(14,58,45,0.04); }
+  .heatmap-table .creative-name {
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--teal);
+    max-width: 200px;
+    white-space: normal;
+    line-height: 1.3;
+  }
+  .heatmap-table .audience-name {
+    font-size: 0.72rem;
+    color: var(--slate);
+    max-width: 160px;
+    white-space: normal;
+    line-height: 1.3;
+  }
+  .heat-best { background: rgba(58,107,53,0.12); font-weight: 700; color: var(--forest); }
+  .heat-good { background: rgba(58,107,53,0.06); color: var(--forest); }
+  .heat-mid { background: transparent; }
+  .heat-warn { background: rgba(254,210,96,0.15); color: var(--charcoal); }
+  .heat-bad { background: rgba(247,90,61,0.1); color: var(--coral); }
+
+  /* ===== STRATEGY CARDS ===== */
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  .strategy-card {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 1.75rem;
+    border: 1px solid rgba(14,58,45,0.08);
+  }
+  .strategy-card h4 {
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .strategy-card p { font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .strategy-card ul {
+    list-style: none;
+    padding: 0;
+    font-size: 0.82rem;
+  }
+  .strategy-card ul li {
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(14,58,45,0.04);
+  }
+  .strategy-card ul li:last-child { border-bottom: none; }
+
+  .funnel-stage-tag {
+    display: inline-block;
+    font-family: 'TAN Headline', Georgia, serif;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+  .funnel-stage-tag.tof { background: rgba(182,212,234,0.4); color: var(--teal); }
+  .funnel-stage-tag.mof { background: rgba(254,210,96,0.3); color: var(--charcoal); }
+  .funnel-stage-tag.bof { background: rgba(247,90,61,0.15); color: var(--coral); }
+
+  /* ===== MESSAGING THEME TAGS ===== */
+  .theme-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+  .theme-escape { background: rgba(182,212,234,0.4); color: var(--teal); }
+  .theme-general { background: rgba(58,107,53,0.12); color: var(--forest); }
+  .theme-march { background: rgba(254,210,96,0.3); color: var(--charcoal); }
+  .theme-testimonial { background: rgba(247,90,61,0.12); color: var(--coral); }
+  .theme-urgency { background: rgba(199,66,53,0.12); color: var(--burnt); }
+  .theme-walkthrough { background: rgba(164,229,217,0.3); color: var(--teal); }
+
+  /* ===== ENGAGEMENT METRICS ===== */
+  .engagement-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .engagement-card {
+    text-align: center;
+    padding: 1.25rem 0.75rem;
+    background: var(--cream);
+    border-radius: 10px;
+    border: 1px solid rgba(14,58,45,0.06);
+  }
+  .engagement-card .eng-value {
+    font-family: 'TAN Headline', Georgia, serif;
+    font-size: 1.6rem;
+    color: var(--teal);
+    line-height: 1.1;
+  }
+  .engagement-card .eng-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--slate);
+    margin-top: 0.25rem;
+  }
+
+  /* ===== SCROLLABLE TABLE WRAPPER ===== */
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: 12px;
+    border: 1px solid rgba(14,58,45,0.06);
+  }
+  .table-scroll table { margin: 0; }
+
+  /* ===== PRINT STYLES ===== */
+  @media print {
+    body { font-size: 11pt; }
+    .cover { min-height: auto; padding: 3rem 2rem; page-break-after: always; }
+    section { page-break-inside: avoid; padding: 2rem 0; }
+    .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+    .chart-row { grid-template-columns: 1fr 1fr; }
+    .rec-grid { grid-template-columns: 1fr 1fr; }
+    .no-print { display: none; }
+    .callout { background: #f0f0f0 !important; color: #333 !important; }
+    .full-teal { background: #eee !important; color: #333 !important; }
+    .full-teal h2, .full-teal h3, .full-teal .section-number { color: #333 !important; }
+    .full-teal p, .full-teal td, .full-teal th { color: #333 !important; }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .chart-row, .comparison-grid, .rec-grid, .strategy-grid { grid-template-columns: 1fr; }
+    .engagement-grid { grid-template-columns: repeat(3, 1fr); }
+    .cover h1 { font-size: 2.25rem; }
+    h2 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- COVER -->
+<!-- ============================================================ -->
+<header class="cover">
+  <div class="cover-eyebrow">SALTY Retreats</div>
+  <h1>ADVERTISING PERFORMANCE REVIEW</h1>
+  <div class="cover-subtitle">Q1 2026 &mdash; Sri Lanka &amp; Panama</div>
+  <div class="cover-retreats">
+    <div class="cover-retreat-badge">
+      <div class="dot" style="background: var(--sky);"></div>
+      <span>Island Tides &middot; Sri Lanka</span>
+    </div>
+    <div class="cover-retreat-badge">
+      <div class="dot" style="background: var(--coral);"></div>
+      <span>City to Sea &middot; Panama</span>
+    </div>
+  </div>
+  <div class="cover-meta" style="margin-top: 4rem;">
+    Reporting Period: December 1, 2025 &ndash; March 1, 2026<br>
+    Prepared March 2026
+  </div>
+</header>
+
+<!-- ============================================================ -->
+<!-- 01 EXECUTIVE SUMMARY -->
+<!-- ============================================================ -->
+<section class="full-beige">
+  <div class="page">
+    <div class="section-divider">
+      <span class="section-number">01</span>
+      <h2 style="margin-bottom:0;">Executive Summary</h2>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card accent-coral">
+        <div class="kpi-value">$61,274</div>
+        <div class="kpi-label">Total Revenue (CAD)</div>
+        <div class="kpi-sub">26 guests across 2 retreats</div>
+      </div>
+      <div class="kpi-card accent-teal">
+        <div class="kpi-value">$4,602</div>
+        <div class="kpi-label">Total Ad Spend (CAD)</div>
+        <div class="kpi-sub">Meta Ads &mdash; Sri Lanka + Panama</div>
+      </div>
+      <div class="kpi-card accent-gold">
+        <div class="kpi-value">13.3x</div>
+        <div class="kpi-label">Gross ROAS</div>
+        <div class="kpi-sub">Revenue due / total ad spend</div>
+      </div>
+      <div class="kpi-card accent-sky">
+        <div class="kpi-value">160</div>
+        <div class="kpi-label">Leads Captured</div>
+        <div class="kpi-sub">Panama MOF popup form</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>The headline:</strong> $4,602 in Meta Ads drove $61,274 in retreat revenue across 26 guests &mdash; a 13.3x gross return. Panama&rsquo;s full-funnel campaign was the engine: 160 leads captured at $10/lead, with 6 of 13 guests directly traceable to the ad pipeline. Sri Lanka ads launched too late to move bookings (10 of 13 guests booked months before ads ran), but generated 6,372 landing page views at $0.10 each &mdash; strong awareness at low cost.</p>
+    </div>
+
+    <div class="kpi-grid" style="grid-template-columns: repeat(3,1fr); margin-top: 2rem;">
+      <div class="kpi-card accent-forest">
+        <div class="kpi-value">$10.00</div>
+        <div class="kpi-label">Cost Per Lead</div>
+        <div class="kpi-sub">Panama MOF &mdash; industry avg $30-50</div>
+      </div>
+      <div class="kpi-card accent-coral">
+        <div class="kpi-value">$624</div>
+        <div class="kpi-label">Cost Per Booking</div>
+        <div class="kpi-sub">Ad-attributed Panama guests</div>
+      </div>
+      <div class="kpi-card accent-teal">
+        <div class="kpi-value">3.75%</div>
+        <div class="kpi-label">Lead &rarr; Booking Rate</div>
+        <div class="kpi-sub">6 bookings from 160 leads</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 02 CAMPAIGN ARCHITECTURE & STRATEGY -->
+<!-- ============================================================ -->
+<section>
+  <div class="page">
+    <div class="section-divider">
+      <span class="section-number">02</span>
+      <h2 style="margin-bottom:0;">Campaign Architecture &amp; Strategy</h2>
+    </div>
+
+    <p>Two retreats ran overlapping ad campaigns with fundamentally different strategies, budgets, and timelines. Understanding the architecture explains why results differ so dramatically.</p>
+
+    <div class="comparison-grid">
+      <!-- SRI LANKA STRATEGY -->
+      <div class="comparison-panel sri-lanka">
+        <h3 style="color: var(--teal);">Sri Lanka &mdash; Late-Stage Awareness</h3>
+        <p class="label">Campaign: Jan 9&ndash;25, 2026 &bull; Retreat: Feb 12&ndash;21</p>
+        <div style="margin: 1.25rem 0;">
+          <span class="funnel-stage-tag tof">TOF</span>
+          <span style="font-size:0.8rem; margin-left:0.5rem; color:var(--slate);">Traffic campaign &mdash; $659 spend</span>
+        </div>
+        <p style="font-size:0.85rem;">Objective: drive landing page views to the Sri Lanka retreat page. Launched only 34 days before departure&mdash;most guests had already booked.</p>
+        <div style="margin: 1rem 0;">
+          <span class="funnel-stage-tag mof">MOF</span>
+          <span style="font-size:0.8rem; margin-left:0.5rem; color:var(--slate);">Messaging campaign &mdash; $201 spend</span>
+        </div>
+        <p style="font-size:0.85rem;">Objective: retarget warm audiences to start WhatsApp/IG conversations. Ran Jan 15&ndash;30.</p>
+        <div class="callout-light" style="margin-top:1.25rem;">
+          <p style="font-size:0.82rem;"><strong>Key limitation:</strong> No BOF campaign. No pixel conversion tracking. Launched after 10 of 13 guests had already booked. Effectively a brand awareness test, not a sales campaign.</p>
+        </div>
+      </div>
+
+      <!-- PANAMA STRATEGY -->
+      <div class="comparison-panel panama">
+        <h3 style="color: var(--teal);">Panama &mdash; Full-Funnel Sales Engine</h3>
+        <p class="label">Campaign: Dec 19, 2025&ndash;Mar 10, 2026 &bull; Retreat: Mar 14&ndash;22</p>
+        <div style="margin: 1.25rem 0;">
+          <span class="funnel-stage-tag tof">TOF</span>
+          <span style="font-size:0.8rem; margin-left:0.5rem; color:var(--slate);">Video Views &mdash; $496 spend &bull; Dec 19&ndash;Jan 15</span>
+        </div>
+        <p style="font-size:0.85rem;">Objective: maximize ThruPlays to build retargeting pools. 59,324 ThruPlays achieved at $0.008/view.</p>
+        <div style="margin: 1rem 0;">
+          <span class="funnel-stage-tag mof">MOF</span>
+          <span style="font-size:0.8rem; margin-left:0.5rem; color:var(--slate);">Lead Generation &mdash; $521 spend &bull; Jan 8&ndash;Feb 10</span>
+        </div>
+        <p style="font-size:0.85rem;">Objective: capture email leads via popup form. 71 leads at $7.34/lead from ad-attributed audiences.</p>
+        <div style="margin: 1rem 0;">
+          <span class="funnel-stage-tag bof">BOF</span>
+          <span style="font-size:0.8rem; margin-left:0.5rem; color:var(--slate);">Purchase &mdash; $935 spend &bull; Feb 2&ndash;Mar 10</span>
+        </div>
+        <p style="font-size:0.85rem;">Objective: convert warm leads to bookings via testimonials, inclusions, and urgency creative. 80 leads captured at this stage.</p>
+        <div class="callout-light" style="margin-top:1.25rem;">
+          <p style="font-size:0.82rem;"><strong>Key advantage:</strong> 3-month runway with progressive funnel. Popup form + GHL pipeline gave real lead-level data. 6 of 13 bookings directly traceable to ads.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 2.5rem;">Audience Targeting Strategy</h3>
+
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <h4><span class="funnel-stage-tag tof">TOF</span> Cold Audiences</h4>
+        <ul>
+          <li><strong>North America Interests</strong> &mdash; Travel, wellness, adventure seekers (25&ndash;45)</li>
+          <li><strong>US + Canada Core</strong> &mdash; Broad interest-based targeting for Panama</li>
+          <li><strong>UK + Europe Interests</strong> &mdash; Expanded geo for Sri Lanka</li>
+          <li><strong>Australia + NZ Interests</strong> &mdash; Secondary geo for Sri Lanka</li>
+          <li><strong>March Break (ON/BC)</strong> &mdash; Seasonal targeting for Panama</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <h4><span class="funnel-stage-tag mof">MOF</span> Warm Audiences</h4>
+        <ul>
+          <li><strong>LLA Website Visitors 1&ndash;3%</strong> &mdash; Lookalike of past site visitors</li>
+          <li><strong>Engaged IG/FB Users</strong> &mdash; Interacted with SALTY content</li>
+          <li><strong>Video Viewers 50%+</strong> &mdash; Watched 50%+ of TOF videos</li>
+          <li><strong>Website Visitors 30&ndash;90 Days</strong> &mdash; Recent site browsers</li>
+          <li><strong>Escape Winter</strong> &mdash; Custom audience (seasonal intent)</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <h4><span class="funnel-stage-tag bof">BOF</span> Hot Audiences</h4>
+        <ul>
+          <li><strong>High-Intent Visitors/Checkout</strong> &mdash; Pricing page viewers, cart abandoners</li>
+          <li><strong>Short-Window Visitors (14D)</strong> &mdash; Very recent site visitors</li>
+          <li><strong>Pricing Page Visitors</strong> &mdash; Viewed pricing, didn&rsquo;t convert</li>
+          <li><strong>Canada March Break (BOF)</strong> &mdash; Retargeting March Break viewers</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 2.5rem;">Creative &amp; Messaging Strategy</h3>
+    <p>Ads were built around 6 distinct messaging themes, each serving a different psychological trigger in the funnel:</p>
+
+    <div style="overflow-x: auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Messaging Theme</th>
+          <th>Funnel Stage</th>
+          <th>Psychological Trigger</th>
+          <th>Creatives Used</th>
+          <th>Format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="theme-tag theme-general">General Brand</span></td>
+          <td>TOF</td>
+          <td>Aspiration &mdash; &ldquo;this looks fun, I want that life&rdquo;</td>
+          <td>Brett &ldquo;Feel Like Sh**&rdquo;, Nate Steve Irwin, Erin 9&ndash;5, So Much Fun Workout</td>
+          <td>Video (8s&ndash;37s)</td>
+        </tr>
+        <tr>
+          <td><span class="theme-tag theme-escape">Escape Winter</span></td>
+          <td>TOF</td>
+          <td>Seasonal urgency &mdash; &ldquo;escape the cold now&rdquo;</td>
+          <td>Erin Burnout, Nate Steve Irwin, Brett &ldquo;Feel Like Sh**&rdquo;, So Much Fun Workout</td>
+          <td>Video</td>
+        </tr>
+        <tr>
+          <td><span class="theme-tag theme-march">March Break</span></td>
+          <td>TOF / MOF</td>
+          <td>Timing trigger &mdash; &ldquo;use your March Break for this&rdquo;</td>
+          <td>Erin 9&ndash;5, Nate Steve Irwin, Carousel (5 slides)</td>
+          <td>Video + Carousel</td>
+        </tr>
+        <tr>
+          <td><span class="theme-tag theme-testimonial">Social Proof</span></td>
+          <td>MOF / BOF</td>
+          <td>Trust &mdash; &ldquo;real people loved this&rdquo;</td>
+          <td>Cindy Testimonial, Olivia Testimonial</td>
+          <td>Video</td>
+        </tr>
+        <tr>
+          <td><span class="theme-tag theme-walkthrough">Trip Details</span></td>
+          <td>MOF / BOF</td>
+          <td>Certainty &mdash; &ldquo;here&rsquo;s exactly what you get&rdquo;</td>
+          <td>Trip Walkthrough, Nate Inclusions Video, Jace Details Video, Carousel (5&ndash;6 slides)</td>
+          <td>Video + Carousel</td>
+        </tr>
+        <tr>
+          <td><span class="theme-tag theme-urgency">Urgency / Pricing</span></td>
+          <td>BOF</td>
+          <td>Scarcity &mdash; &ldquo;spots filling, payment plans available&rdquo;</td>
+          <td>Urgency Static #2 (Payment Plan)</td>
+          <td>Static Image</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout" style="margin-top: 2rem;">
+      <p><strong>Strategy insight:</strong> The funnel was designed to move people from aspiration (TOF video hooks) &rarr; consideration (MOF carousels + testimonials capturing emails) &rarr; conversion (BOF retargeting with social proof + urgency). Panama executed this fully. Sri Lanka only reached step one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 03 REVENUE OVERVIEW -->
+<!-- ============================================================ -->
+<section>
+  <div class="page">
+    <div class="section-divider">
+      <span class="section-number">03</span>
+      <h2 style="margin-bottom:0;">Revenue Overview</h2>
+    </div>
+
+    <div class="comparison-grid">
+      <div class="comparison-panel sri-lanka">
+        <h3 style="color: var(--teal);">Sri Lanka &mdash; Island Tides</h3>
+        <p class="label">February 12&ndash;21, 2026</p>
+        <div class="stat-row"><span class="stat-label">Confirmed Guests</span><span class="stat-value">13</span></div>
+        <div class="stat-row"><span class="stat-label">Revenue Due</span><span class="stat-value">$31,787 CAD</span></div>
+        <div class="stat-row"><span class="stat-label">Revenue Collected</span><span class="stat-value">$30,037 CAD</span></div>
+        <div class="stat-row"><span class="stat-label">Outstanding</span><span class="stat-value" style="color:var(--coral);">$1,750 CAD</span></div>
+        <div class="stat-row"><span class="stat-label">Avg Revenue / Guest</span><span class="stat-value">$2,445 CAD</span></div>
+        <div class="stat-row"><span class="stat-label">Ad Spend</span><span class="stat-value">$860 CAD</span></div>
+        <div class="stat-row"><span class="stat-label">ROAS</span><span class="stat-value">37.0x</span></div>
+      </div>
+      <div class="comparison-panel panama">
+        <h3 style="color: var(--teal);">Panama &mdash; City to Sea</h3>
+        <p class="label">March 14&ndash;22, 2026</p>
+        <div class="stat-row"><span class="stat-label">Confirmed Guests</span><span class="stat-value">13</span></div>
+        <div class="stat-row"><span class="stat-label">Revenue Due</span><span class="stat-value">$29,487 CAD</span></div>
+        <div class="stat-row"><span class="stat-label">Revenue Collected</span><span class="stat-value">$25,287 CAD</span></div>
+        <div class="stat-row"><span class="stat-label">Outstanding</span><span class="stat-value" style="color:var(--coral);">$4,200 CAD</span></div>
+        <div class="stat-row"><span class="stat-label">Avg Revenue / Guest</span><span class="stat-value">$2,268 CAD</span></div>
+        <div class="stat-row"><span class="stat-label">Ad Spend</span><span class="stat-value">$3,742 CAD</span></div>
+        <div class="stat-row"><span class="stat-label">ROAS</span><span class="stat-value">7.9x</span></div>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <h4>Revenue Due vs. Collected by Retreat</h4>
+      <div style="max-width:600px; margin: 0 auto;">
+        <canvas id="revenueChart"></canvas>
+      </div>
+    </div>
+
+    <div class="callout-light">
+      <p><strong>Note on Sri Lanka ROAS:</strong> The 37x figure is misleading. 10 of 13 Sri Lanka guests booked before ads ran. Actual ad-attributable revenue is at most $7,047 (3 guests) on $860 spend = 8.2x, and that attribution is uncertain. Panama&rsquo;s 7.9x is the honest, verifiable number.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 03 AD SPEND BREAKDOWN -->
+<!-- ============================================================ -->
+<section class="full-teal">
+  <div class="page">
+    <div class="section-divider" style="border-bottom-color: var(--gold);">
+      <span class="section-number" style="color: var(--coral);">04</span>
+      <h2 style="margin-bottom:0;">Ad Spend Breakdown</h2>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-container" style="background: rgba(247,244,237,0.08); border-color: rgba(255,255,255,0.1);">
+        <h4 style="color: var(--gold); font-size: 0.85rem;">Sri Lanka &mdash; $860 Total</h4>
+        <canvas id="slSpendDonut"></canvas>
+      </div>
+      <div class="chart-container" style="background: rgba(247,244,237,0.08); border-color: rgba(255,255,255,0.1);">
+        <h4 style="color: var(--gold); font-size: 0.85rem;">Panama &mdash; $3,742 Total</h4>
+        <canvas id="paSpendDonut"></canvas>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 2.5rem;">Campaign-Level Metrics</h3>
+
+    <table style="margin-top: 1rem;">
+      <thead>
+        <tr>
+          <th style="color: var(--gold); border-bottom-color: var(--gold);">Campaign</th>
+          <th class="text-right" style="color: var(--gold); border-bottom-color: var(--gold);">Spend</th>
+          <th class="text-right" style="color: var(--gold); border-bottom-color: var(--gold);">Impressions</th>
+          <th class="text-right" style="color: var(--gold); border-bottom-color: var(--gold);">Reach</th>
+          <th class="text-right" style="color: var(--gold); border-bottom-color: var(--gold);">Clicks</th>
+          <th class="text-right" style="color: var(--gold); border-bottom-color: var(--gold);">LPV</th>
+          <th class="text-right" style="color: var(--gold); border-bottom-color: var(--gold);">Leads</th>
+          <th class="text-right" style="color: var(--gold); border-bottom-color: var(--gold);">CPL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td><strong>Sri Lanka TOF</strong> <span style="opacity:0.5; font-size:0.8rem;">Traffic &middot; Jan 9&ndash;25</span></td>
+          <td class="text-right mono">$659</td>
+          <td class="text-right mono">76,673</td>
+          <td class="text-right mono">58,576</td>
+          <td class="text-right mono">7,644</td>
+          <td class="text-right mono">6,372</td>
+          <td class="text-right mono">2</td>
+          <td class="text-right mono">&mdash;</td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td><strong>Sri Lanka MOF</strong> <span style="opacity:0.5; font-size:0.8rem;">Messaging &middot; Jan 15&ndash;30</span></td>
+          <td class="text-right mono">$201</td>
+          <td class="text-right mono">19,686</td>
+          <td class="text-right mono">10,614</td>
+          <td class="text-right mono">142</td>
+          <td class="text-right mono">1</td>
+          <td class="text-right mono">5</td>
+          <td class="text-right mono">$40.26</td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.15);">
+          <td style="padding-left: 2rem; opacity: 0.6;"><em>Sri Lanka Subtotal</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>$860</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>96,359</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>69,190</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>7,786</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>6,373</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>7</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>&mdash;</em></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td><strong>Panama TOF</strong> <span style="opacity:0.5; font-size:0.8rem;">Video Views &middot; Dec 19&ndash;Jan 15</span></td>
+          <td class="text-right mono">$1,208</td>
+          <td class="text-right mono">583,285</td>
+          <td class="text-right mono">393,956</td>
+          <td class="text-right mono">403</td>
+          <td class="text-right mono">235</td>
+          <td class="text-right mono">2</td>
+          <td class="text-right mono">&mdash;</td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td><strong>Panama MOF</strong> <span style="opacity:0.5; font-size:0.8rem;">Leads &middot; Jan 8&ndash;Feb 10</span></td>
+          <td class="text-right mono">$1,600</td>
+          <td class="text-right mono">74,606</td>
+          <td class="text-right mono">41,890</td>
+          <td class="text-right mono">1,470</td>
+          <td class="text-right mono">1,501</td>
+          <td class="text-right mono" style="color: var(--gold);"><strong>160</strong></td>
+          <td class="text-right mono" style="color: var(--gold);"><strong>$10.00</strong></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td><strong>Panama BOF</strong> <span style="opacity:0.5; font-size:0.8rem;">Purchase &middot; Feb 2&ndash;Mar 10</span></td>
+          <td class="text-right mono">$935</td>
+          <td class="text-right mono">64,854</td>
+          <td class="text-right mono">47,131</td>
+          <td class="text-right mono">3,422</td>
+          <td class="text-right mono">3,184</td>
+          <td class="text-right mono">100</td>
+          <td class="text-right mono">$9.35</td>
+        </tr>
+        <tr>
+          <td style="padding-left: 2rem; opacity: 0.6;"><em>Panama Subtotal</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>$3,742</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>722,745</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>482,977</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>5,295</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>4,920</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>262</em></td>
+          <td class="text-right mono" style="opacity:0.6;"><em>&mdash;</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 05 CREATIVE PERFORMANCE DEEP DIVE -->
+<!-- ============================================================ -->
+<section>
+  <div class="page">
+    <div class="section-divider">
+      <span class="section-number">05</span>
+      <h2 style="margin-bottom:0;">Creative Performance Deep Dive</h2>
+    </div>
+
+    <p>Every ad creative, every audience, every metric. This section breaks down exactly what ran, where, and how each piece performed&mdash;from cost efficiency to engagement.</p>
+
+    <!-- OVERVIEW CHARTS (preserved from original) -->
+    <h3>Panama MOF &mdash; Cost Per Lead by Creative</h3>
+    <p>Where real lead data exists. Lower is better.</p>
+    <div class="chart-container">
+      <canvas id="paCplChart" height="280"></canvas>
+    </div>
+
+    <div class="callout-light">
+      <p><strong>Carousel wins on efficiency.</strong> At $4.97/lead, the 5-slide carousel outperformed every video creative by 2&ndash;3x. Cindy Testimonial cost $14.61/lead. <strong>Recommendation:</strong> Test more static/carousel formats in MOF before defaulting to video.</p>
+    </div>
+
+    <h3 style="margin-top: 3rem;">Sri Lanka TOF &mdash; Cost Per Landing Page View by Creative</h3>
+    <p>Awareness campaign efficiency. Lower is better.</p>
+    <div class="chart-container">
+      <canvas id="slCplvChart" height="240"></canvas>
+    </div>
+
+    <div class="callout-light">
+      <p><strong>Erin Burnout Video dominated.</strong> 63% of all Sri Lanka spend, generating 90% of landing page views at $0.10/LPV. Nothing else was close. This creative is a proven top-of-funnel workhorse.</p>
+    </div>
+
+    <!-- =========================================================== -->
+    <!-- SRI LANKA CREATIVE × AUDIENCE DETAIL TABLE -->
+    <!-- =========================================================== -->
+    <h3 style="margin-top: 4rem; padding-top: 2rem; border-top: 3px solid var(--sky);">Sri Lanka &mdash; Every Ad &times; Every Audience</h3>
+    <p>TOF Traffic campaign (Jan 9&ndash;25) + MOF Messaging campaign (Jan 15&ndash;30). Sorted by spend descending within each funnel stage.</p>
+
+    <h4 style="margin-top: 2rem;"><span class="funnel-stage-tag tof">TOF</span> Traffic Campaign &mdash; Creative &times; Audience</h4>
+    <div class="table-scroll">
+    <table class="heatmap-table">
+      <thead>
+        <tr>
+          <th>Creative</th>
+          <th>Audience</th>
+          <th class="text-right">Spend</th>
+          <th class="text-right">Impr</th>
+          <th class="text-right">Reach</th>
+          <th class="text-right">Clicks</th>
+          <th class="text-right">CTR</th>
+          <th class="text-right">CPC</th>
+          <th class="text-right">LPV</th>
+          <th class="text-right">Cost/LPV</th>
+          <th class="text-right">ThruPlays</th>
+          <th class="text-right">Cost/ThruPlay</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="creative-name">Erin &mdash; Burnout Video <span class="theme-tag theme-general">General</span></td>
+          <td class="audience-name">North America Interests</td>
+          <td class="text-right">$114.39</td>
+          <td class="text-right">13,892</td>
+          <td class="text-right">10,276</td>
+          <td class="text-right">1,837</td>
+          <td class="text-right heat-best">13.22%</td>
+          <td class="text-right heat-best">$0.06</td>
+          <td class="text-right heat-best">1,539</td>
+          <td class="text-right heat-best">$0.07</td>
+          <td class="text-right">682</td>
+          <td class="text-right">$0.17</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Erin &mdash; Burnout Video <span class="theme-tag theme-general">General</span></td>
+          <td class="audience-name">UK + Europe Interests</td>
+          <td class="text-right">$60.45</td>
+          <td class="text-right">7,501</td>
+          <td class="text-right">6,156</td>
+          <td class="text-right">567</td>
+          <td class="text-right heat-good">7.56%</td>
+          <td class="text-right heat-good">$0.11</td>
+          <td class="text-right">504</td>
+          <td class="text-right heat-good">$0.12</td>
+          <td class="text-right">363</td>
+          <td class="text-right">$0.17</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Nate &mdash; Steve Irwin <span class="theme-tag theme-general">General</span></td>
+          <td class="audience-name">Australia + NZ Interests</td>
+          <td class="text-right">$21.64</td>
+          <td class="text-right">2,104</td>
+          <td class="text-right">1,857</td>
+          <td class="text-right">115</td>
+          <td class="text-right heat-good">5.47%</td>
+          <td class="text-right heat-good">$0.19</td>
+          <td class="text-right">82</td>
+          <td class="text-right heat-mid">$0.26</td>
+          <td class="text-right">108</td>
+          <td class="text-right">$0.20</td>
+        </tr>
+        <tr>
+          <td class="creative-name">So Much Fun Workout <span class="theme-tag theme-general">General</span></td>
+          <td class="audience-name">LLA Website Visitors 1&ndash;3%</td>
+          <td class="text-right">$17.18</td>
+          <td class="text-right">2,150</td>
+          <td class="text-right">1,835</td>
+          <td class="text-right">70</td>
+          <td class="text-right heat-mid">3.26%</td>
+          <td class="text-right heat-mid">$0.25</td>
+          <td class="text-right">114</td>
+          <td class="text-right heat-good">$0.15</td>
+          <td class="text-right">91</td>
+          <td class="text-right">$0.19</td>
+        </tr>
+        <tr>
+          <td class="creative-name">So Much Fun Workout <span class="theme-tag theme-general">General</span></td>
+          <td class="audience-name">North America Interests</td>
+          <td class="text-right">$6.83</td>
+          <td class="text-right">767</td>
+          <td class="text-right">714</td>
+          <td class="text-right">48</td>
+          <td class="text-right heat-good">6.26%</td>
+          <td class="text-right heat-good">$0.14</td>
+          <td class="text-right">54</td>
+          <td class="text-right heat-good">$0.13</td>
+          <td class="text-right">32</td>
+          <td class="text-right">$0.21</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Brett &mdash; Feel Like Sh** (8s) <span class="theme-tag theme-general">General</span></td>
+          <td class="audience-name">Australia + NZ Interests</td>
+          <td class="text-right">$6.35</td>
+          <td class="text-right">837</td>
+          <td class="text-right">769</td>
+          <td class="text-right">24</td>
+          <td class="text-right heat-mid">2.87%</td>
+          <td class="text-right heat-mid">$0.26</td>
+          <td class="text-right">27</td>
+          <td class="text-right heat-mid">$0.24</td>
+          <td class="text-right">132</td>
+          <td class="text-right heat-best">$0.05</td>
+        </tr>
+        <tr>
+          <td class="creative-name">So Much Fun Workout <span class="theme-tag theme-escape">Escape Winter</span></td>
+          <td class="audience-name">UK + Europe Interests</td>
+          <td class="text-right">$5.95</td>
+          <td class="text-right">811</td>
+          <td class="text-right">731</td>
+          <td class="text-right">26</td>
+          <td class="text-right heat-mid">3.21%</td>
+          <td class="text-right heat-mid">$0.23</td>
+          <td class="text-right">40</td>
+          <td class="text-right heat-good">$0.15</td>
+          <td class="text-right">40</td>
+          <td class="text-right heat-good">$0.15</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Erin &mdash; Burnout Video <span class="theme-tag theme-escape">Escape Winter</span></td>
+          <td class="audience-name">LLA Website Visitors 1&ndash;3%</td>
+          <td class="text-right">$5.04</td>
+          <td class="text-right">468</td>
+          <td class="text-right">459</td>
+          <td class="text-right">75</td>
+          <td class="text-right heat-best">16.03%</td>
+          <td class="text-right heat-best">$0.07</td>
+          <td class="text-right">67</td>
+          <td class="text-right heat-best">$0.08</td>
+          <td class="text-right">26</td>
+          <td class="text-right">$0.19</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Nate &mdash; Steve Irwin <span class="theme-tag theme-escape">Escape Winter</span></td>
+          <td class="audience-name">LLA Website Visitors 1&ndash;3%</td>
+          <td class="text-right">$3.44</td>
+          <td class="text-right">219</td>
+          <td class="text-right">210</td>
+          <td class="text-right">28</td>
+          <td class="text-right heat-best">12.79%</td>
+          <td class="text-right heat-good">$0.12</td>
+          <td class="text-right">26</td>
+          <td class="text-right heat-good">$0.13</td>
+          <td class="text-right">9</td>
+          <td class="text-right">$0.38</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Nate &mdash; Steve Irwin <span class="theme-tag theme-general">General</span></td>
+          <td class="audience-name">North America Interests</td>
+          <td class="text-right">$3.01</td>
+          <td class="text-right">321</td>
+          <td class="text-right">321</td>
+          <td class="text-right">24</td>
+          <td class="text-right heat-good">7.48%</td>
+          <td class="text-right heat-good">$0.13</td>
+          <td class="text-right">22</td>
+          <td class="text-right heat-good">$0.14</td>
+          <td class="text-right">18</td>
+          <td class="text-right">$0.17</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Brett &mdash; Feel Like Sh** (8s) <span class="theme-tag theme-general">General</span></td>
+          <td class="audience-name">UK + Europe Interests</td>
+          <td class="text-right">$2.39</td>
+          <td class="text-right">314</td>
+          <td class="text-right">308</td>
+          <td class="text-right">10</td>
+          <td class="text-right heat-mid">3.18%</td>
+          <td class="text-right heat-mid">$0.24</td>
+          <td class="text-right">7</td>
+          <td class="text-right heat-warn">$0.34</td>
+          <td class="text-right">40</td>
+          <td class="text-right heat-best">$0.06</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Nate &mdash; Steve Irwin <span class="theme-tag theme-escape">Escape Winter</span></td>
+          <td class="audience-name">UK + Europe Interests</td>
+          <td class="text-right">$2.24</td>
+          <td class="text-right">208</td>
+          <td class="text-right">200</td>
+          <td class="text-right">15</td>
+          <td class="text-right heat-good">7.21%</td>
+          <td class="text-right heat-good">$0.15</td>
+          <td class="text-right">14</td>
+          <td class="text-right heat-good">$0.16</td>
+          <td class="text-right">7</td>
+          <td class="text-right">$0.32</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Brett &mdash; Feel Like Sh** (8s) <span class="theme-tag theme-general">General</span></td>
+          <td class="audience-name">North America Interests</td>
+          <td class="text-right">$0.18</td>
+          <td class="text-right">45</td>
+          <td class="text-right">44</td>
+          <td class="text-right">3</td>
+          <td class="text-right heat-good">6.67%</td>
+          <td class="text-right heat-best">$0.06</td>
+          <td class="text-right">3</td>
+          <td class="text-right heat-best">$0.06</td>
+          <td class="text-right">10</td>
+          <td class="text-right heat-best">$0.02</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Brett &mdash; Feel Like Sh** (8s) <span class="theme-tag theme-escape">Escape Winter</span></td>
+          <td class="audience-name">LLA Website Visitors 1&ndash;3%</td>
+          <td class="text-right" style="opacity:0.4;">$0.08</td>
+          <td class="text-right" style="opacity:0.4;">21</td>
+          <td class="text-right" style="opacity:0.4;">19</td>
+          <td class="text-right" style="opacity:0.4;">0</td>
+          <td class="text-right" style="opacity:0.4;">&mdash;</td>
+          <td class="text-right" style="opacity:0.4;">&mdash;</td>
+          <td class="text-right" style="opacity:0.4;">1</td>
+          <td class="text-right" style="opacity:0.4;">$0.08</td>
+          <td class="text-right" style="opacity:0.4;">1</td>
+          <td class="text-right" style="opacity:0.4;">$0.08</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout-light" style="margin-top: 1rem;">
+      <p><strong>Key findings &mdash; Sri Lanka TOF:</strong> The Erin Burnout Video with the &ldquo;General&rdquo; angle is the undisputed champion&mdash;$174.84 total spend across 2 audiences generating 2,043 landing page views at $0.09 avg CPC. The &ldquo;Escape Winter&rdquo; angle on Lookalike audiences showed the highest CTRs (12&ndash;16%) but tiny budgets limited statistical significance. Brett&rsquo;s 8-second hook generated cheap ThruPlays ($0.02&ndash;$0.06) but converted less efficiently to landing page views.</p>
+    </div>
+
+    <h4 style="margin-top: 2.5rem;"><span class="funnel-stage-tag mof">MOF</span> Messaging Campaign &mdash; Creative &times; Audience</h4>
+    <div class="table-scroll">
+    <table class="heatmap-table">
+      <thead>
+        <tr>
+          <th>Creative</th>
+          <th>Audience</th>
+          <th class="text-right">Spend</th>
+          <th class="text-right">Impr</th>
+          <th class="text-right">Clicks</th>
+          <th class="text-right">CTR</th>
+          <th class="text-right">ThruPlays</th>
+          <th class="text-right">Leads</th>
+          <th class="text-right">CPL</th>
+          <th class="text-right">Engagements</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="creative-name">Trip Walkthrough <span class="theme-tag theme-walkthrough">Details</span></td>
+          <td class="audience-name">Escape Winter (custom)</td>
+          <td class="text-right">$48.88</td>
+          <td class="text-right">6,209</td>
+          <td class="text-right">52</td>
+          <td class="text-right">0.84%</td>
+          <td class="text-right">156</td>
+          <td class="text-right heat-bad">0</td>
+          <td class="text-right">&mdash;</td>
+          <td class="text-right">1,878</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Trip Walkthrough <span class="theme-tag theme-walkthrough">Details</span></td>
+          <td class="audience-name">Website Visitors 30&ndash;90 Days</td>
+          <td class="text-right">$45.49</td>
+          <td class="text-right">4,258</td>
+          <td class="text-right">23</td>
+          <td class="text-right">0.54%</td>
+          <td class="text-right">122</td>
+          <td class="text-right heat-good">2</td>
+          <td class="text-right">$22.75</td>
+          <td class="text-right">953</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Carousel (6 slides) <span class="theme-tag theme-walkthrough">Details</span></td>
+          <td class="audience-name">Engaged IG/FB Users</td>
+          <td class="text-right" style="opacity:0.4;">$0.58</td>
+          <td class="text-right" style="opacity:0.4;">28</td>
+          <td class="text-right" style="opacity:0.4;">0</td>
+          <td class="text-right" style="opacity:0.4;">&mdash;</td>
+          <td class="text-right" style="opacity:0.4;">0</td>
+          <td class="text-right" style="opacity:0.4;">0</td>
+          <td class="text-right" style="opacity:0.4;">&mdash;</td>
+          <td class="text-right" style="opacity:0.4;">2</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout-light" style="margin-top: 1rem;">
+      <p><strong>Key findings &mdash; Sri Lanka MOF:</strong> Only the Trip Walkthrough ran with meaningful budget. Website Visitor retargeting generated 2 messaging leads at $22.75 each. The &ldquo;Escape Winter&rdquo; custom audience got more impressions but zero leads&mdash;possibly too cold. The 6-slide carousel was barely served (28 impressions). MOF was underfunded and under-tested.</p>
+    </div>
+
+    <!-- =========================================================== -->
+    <!-- PANAMA CREATIVE × AUDIENCE DETAIL TABLE -->
+    <!-- =========================================================== -->
+    <h3 style="margin-top: 4rem; padding-top: 2rem; border-top: 3px solid var(--salmon);">Panama &mdash; Every Ad &times; Every Audience</h3>
+    <p>Full-funnel campaign: TOF Video Views (Dec 19&ndash;Jan 15) &rarr; MOF Leads (Jan 8&ndash;Feb 10) &rarr; BOF Purchase (Feb 2&ndash;Mar 10).</p>
+
+    <h4 style="margin-top: 2rem;"><span class="funnel-stage-tag tof">TOF</span> Video Views Campaign &mdash; Creative &times; Audience</h4>
+    <div class="table-scroll">
+    <table class="heatmap-table">
+      <thead>
+        <tr>
+          <th>Creative</th>
+          <th>Audience</th>
+          <th class="text-right">Spend</th>
+          <th class="text-right">Impr</th>
+          <th class="text-right">Reach</th>
+          <th class="text-right">Clicks</th>
+          <th class="text-right">CTR</th>
+          <th class="text-right">ThruPlays</th>
+          <th class="text-right">Cost/ThruPlay</th>
+          <th class="text-right">Engagements</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="creative-name">Brett &mdash; Feel Like Sh** (8s) <span class="theme-tag theme-general">General</span></td>
+          <td class="audience-name">US + Canada Interests (Core)</td>
+          <td class="text-right heat-best">$477.61</td>
+          <td class="text-right heat-best">263,304</td>
+          <td class="text-right">193,878</td>
+          <td class="text-right">172</td>
+          <td class="text-right heat-bad">0.07%</td>
+          <td class="text-right heat-best">58,174</td>
+          <td class="text-right heat-best">$0.008</td>
+          <td class="text-right heat-best">151,809</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Erin &mdash; 9-5 <span class="theme-tag theme-general">General</span></td>
+          <td class="audience-name">LLA Website Visitors 1&ndash;3%</td>
+          <td class="text-right">$7.81</td>
+          <td class="text-right">1,166</td>
+          <td class="text-right">974</td>
+          <td class="text-right">0</td>
+          <td class="text-right">&mdash;</td>
+          <td class="text-right">416</td>
+          <td class="text-right heat-good">$0.019</td>
+          <td class="text-right">785</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Nate &mdash; Steve Irwin (37s) <span class="theme-tag theme-march">March Break</span></td>
+          <td class="audience-name">March Break (ON/BC)</td>
+          <td class="text-right">$6.24</td>
+          <td class="text-right">1,070</td>
+          <td class="text-right">900</td>
+          <td class="text-right">1</td>
+          <td class="text-right">0.09%</td>
+          <td class="text-right">342</td>
+          <td class="text-right heat-good">$0.018</td>
+          <td class="text-right">680</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Erin &mdash; 9-5 <span class="theme-tag theme-march">March Break</span></td>
+          <td class="audience-name">March Break (ON/BC)</td>
+          <td class="text-right">$4.56</td>
+          <td class="text-right">2,240</td>
+          <td class="text-right">1,972</td>
+          <td class="text-right">1</td>
+          <td class="text-right">0.04%</td>
+          <td class="text-right">392</td>
+          <td class="text-right heat-best">$0.012</td>
+          <td class="text-right">1,350</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout-light" style="margin-top: 1rem;">
+      <p><strong>Key findings &mdash; Panama TOF:</strong> Brett&rsquo;s &ldquo;Feel Like Sh**&rdquo; 8-second hook was the TOF workhorse&mdash;96% of TOF budget, generating 58,174 ThruPlays at an extraordinary $0.008 each and 151K engagements. CTR was low (0.07%) because the campaign was optimized for ThruPlays, not clicks. This built the massive retargeting pool that fed MOF/BOF. March Break creatives ran on tiny budgets but proved efficient ($0.012&ndash;$0.018/ThruPlay).</p>
+    </div>
+
+    <h4 style="margin-top: 2.5rem;"><span class="funnel-stage-tag mof">MOF</span> Leads Campaign &mdash; Creative &times; Audience</h4>
+    <div class="table-scroll">
+    <table class="heatmap-table">
+      <thead>
+        <tr>
+          <th>Creative</th>
+          <th>Audience</th>
+          <th class="text-right">Spend</th>
+          <th class="text-right">Impr</th>
+          <th class="text-right">Clicks</th>
+          <th class="text-right">CTR</th>
+          <th class="text-right">CPC</th>
+          <th class="text-right">Leads</th>
+          <th class="text-right">CPL</th>
+          <th class="text-right">Follows</th>
+          <th class="text-right">Engagements</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="creative-name">Carousel (5 slides) <span class="theme-tag theme-walkthrough">Details</span></td>
+          <td class="audience-name">Engaged IG/FB Users</td>
+          <td class="text-right">$268.23</td>
+          <td class="text-right">21,475</td>
+          <td class="text-right">325</td>
+          <td class="text-right">1.51%</td>
+          <td class="text-right">$0.83</td>
+          <td class="text-right heat-best">54</td>
+          <td class="text-right heat-best">$4.97</td>
+          <td class="text-right heat-best">112</td>
+          <td class="text-right">508</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Cindy Testimonial <span class="theme-tag theme-testimonial">Social Proof</span></td>
+          <td class="audience-name">Website Visitors 30&ndash;90 Days</td>
+          <td class="text-right">$219.21</td>
+          <td class="text-right">4,528</td>
+          <td class="text-right">132</td>
+          <td class="text-right heat-good">2.92%</td>
+          <td class="text-right">$1.66</td>
+          <td class="text-right">15</td>
+          <td class="text-right heat-warn">$14.61</td>
+          <td class="text-right">31</td>
+          <td class="text-right">1,868</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Carousel (5 slides) &mdash; Copy <span class="theme-tag theme-march">March Break</span></td>
+          <td class="audience-name">Canada March Break</td>
+          <td class="text-right">$22.01</td>
+          <td class="text-right">1,573</td>
+          <td class="text-right">36</td>
+          <td class="text-right">2.29%</td>
+          <td class="text-right heat-best">$0.61</td>
+          <td class="text-right">2</td>
+          <td class="text-right">$11.01</td>
+          <td class="text-right">7</td>
+          <td class="text-right">54</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Carousel (5 slides) <span class="theme-tag theme-walkthrough">Details</span></td>
+          <td class="audience-name">Video Viewers 50%</td>
+          <td class="text-right">$11.59</td>
+          <td class="text-right">959</td>
+          <td class="text-right">13</td>
+          <td class="text-right">1.36%</td>
+          <td class="text-right">$0.89</td>
+          <td class="text-right heat-bad">0</td>
+          <td class="text-right">&mdash;</td>
+          <td class="text-right">6</td>
+          <td class="text-right">16</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout-light" style="margin-top: 1rem;">
+      <p><strong>Key findings &mdash; Panama MOF:</strong> The 5-slide carousel to Engaged IG/FB Users was the star&mdash;54 leads at $4.97 each with 112 new follows. Cindy Testimonial to Website Visitors was 3x more expensive per lead ($14.61) but had higher CTR (2.92%) and drove 1,868 engagements. The March Break carousel copy variant was cost-efficient on CPC ($0.61) but the audience was too small. Video Viewers 50% audience generated zero leads&mdash;possibly too broad or the carousel didn&rsquo;t resonate with video-first viewers.</p>
+    </div>
+
+    <h4 style="margin-top: 2.5rem;"><span class="funnel-stage-tag bof">BOF</span> Purchase Campaign &mdash; Creative &times; Audience</h4>
+    <div class="table-scroll">
+    <table class="heatmap-table">
+      <thead>
+        <tr>
+          <th>Creative</th>
+          <th>Audience</th>
+          <th class="text-right">Spend</th>
+          <th class="text-right">Impr</th>
+          <th class="text-right">Clicks</th>
+          <th class="text-right">CTR</th>
+          <th class="text-right">CPC</th>
+          <th class="text-right">Leads</th>
+          <th class="text-right">CPL</th>
+          <th class="text-right">Follows</th>
+          <th class="text-right">Engagements</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="creative-name">Olivia Testimonial <span class="theme-tag theme-testimonial">Social Proof</span></td>
+          <td class="audience-name">High-Intent / Checkout Abandoners</td>
+          <td class="text-right heat-best">$385.57</td>
+          <td class="text-right">22,340</td>
+          <td class="text-right heat-best">777</td>
+          <td class="text-right heat-good">3.48%</td>
+          <td class="text-right heat-good">$0.50</td>
+          <td class="text-right heat-best">41</td>
+          <td class="text-right heat-good">$9.40</td>
+          <td class="text-right heat-best">112</td>
+          <td class="text-right heat-best">10,658</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Nate Inclusions Video <span class="theme-tag theme-walkthrough">Details</span></td>
+          <td class="audience-name">High-Intent / Checkout Abandoners</td>
+          <td class="text-right">$123.18</td>
+          <td class="text-right">8,839</td>
+          <td class="text-right">100</td>
+          <td class="text-right">1.13%</td>
+          <td class="text-right">$1.23</td>
+          <td class="text-right">15</td>
+          <td class="text-right">$8.21</td>
+          <td class="text-right">12</td>
+          <td class="text-right">1,705</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Olivia Testimonial <span class="theme-tag theme-testimonial">Social Proof</span></td>
+          <td class="audience-name">Short-Window Visitors (14D)</td>
+          <td class="text-right">$42.60</td>
+          <td class="text-right">3,616</td>
+          <td class="text-right">171</td>
+          <td class="text-right heat-best">4.73%</td>
+          <td class="text-right heat-best">$0.25</td>
+          <td class="text-right">6</td>
+          <td class="text-right heat-best">$7.10</td>
+          <td class="text-right">16</td>
+          <td class="text-right">1,763</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Nate Inclusions Video <span class="theme-tag theme-walkthrough">Details</span></td>
+          <td class="audience-name">Canada March Break (BOF)</td>
+          <td class="text-right">$6.44</td>
+          <td class="text-right">391</td>
+          <td class="text-right">93</td>
+          <td class="text-right heat-best">23.79%</td>
+          <td class="text-right heat-best">$0.07</td>
+          <td class="text-right">1</td>
+          <td class="text-right heat-good">$6.44</td>
+          <td class="text-right">0</td>
+          <td class="text-right">343</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Urgency Static #2 (Payment Plan) <span class="theme-tag theme-urgency">Urgency</span></td>
+          <td class="audience-name">Pricing Page / Price-Sensitive</td>
+          <td class="text-right">$1.86</td>
+          <td class="text-right">89</td>
+          <td class="text-right">4</td>
+          <td class="text-right">4.49%</td>
+          <td class="text-right">$0.47</td>
+          <td class="text-right heat-bad">0</td>
+          <td class="text-right">&mdash;</td>
+          <td class="text-right">0</td>
+          <td class="text-right">4</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Jace Details Video <span class="theme-tag theme-walkthrough">Details</span></td>
+          <td class="audience-name">Canada March Break (BOF)</td>
+          <td class="text-right">$1.01</td>
+          <td class="text-right">81</td>
+          <td class="text-right">1</td>
+          <td class="text-right">1.23%</td>
+          <td class="text-right">$1.01</td>
+          <td class="text-right">0</td>
+          <td class="text-right">&mdash;</td>
+          <td class="text-right">0</td>
+          <td class="text-right">32</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout-light" style="margin-top: 1rem;">
+      <p><strong>Key findings &mdash; Panama BOF:</strong> Olivia Testimonial dominated BOF&mdash;$428 total spend across 2 audiences generating 47 leads at $9.10 avg and 12,421 engagements. It proves social proof is the strongest BOF driver. Short-Window Visitors (14-day recency) had the lowest CPL ($7.10) and highest CTR (4.73%)&mdash;recency trumps total volume. The March Break BOF retarget of Nate Inclusions showed a 23.79% CTR (tiny audience, high resonance) but only 1 lead. Urgency Static creative was barely served and generated zero leads&mdash;the pricing/payment plan angle underperformed social proof.</p>
+    </div>
+
+    <!-- =========================================================== -->
+    <!-- MESSAGING THEME ANALYSIS -->
+    <!-- =========================================================== -->
+    <h3 style="margin-top: 4rem; padding-top: 2rem; border-top: 3px solid var(--gold);">Messaging Theme Analysis</h3>
+    <p>Creatives grouped by messaging angle. Which psychological triggers drove the best results across both retreats?</p>
+
+    <div style="overflow-x: auto; margin-top: 1.5rem;">
+    <table class="heatmap-table">
+      <thead>
+        <tr>
+          <th>Messaging Theme</th>
+          <th class="text-right">Total Spend</th>
+          <th class="text-right">Impressions</th>
+          <th class="text-right">Clicks</th>
+          <th class="text-right">Avg CTR</th>
+          <th class="text-right">LPV / Leads</th>
+          <th class="text-right">Avg CPL</th>
+          <th class="text-right">ThruPlays</th>
+          <th class="text-right">Total Eng.</th>
+          <th class="text-right">Verdict</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="theme-tag theme-general">General Brand</span></td>
+          <td class="text-right">$746</td>
+          <td class="text-right">296,271</td>
+          <td class="text-right">2,962</td>
+          <td class="text-right">3.95%</td>
+          <td class="text-right">2,520 LPV</td>
+          <td class="text-right">$0.12/LPV</td>
+          <td class="text-right">59,729</td>
+          <td class="text-right">159,579</td>
+          <td class="text-right"><span class="rag rag-green">Best TOF</span></td>
+        </tr>
+        <tr>
+          <td><span class="theme-tag theme-testimonial">Social Proof</span></td>
+          <td class="text-right">$647</td>
+          <td class="text-right">30,484</td>
+          <td class="text-right">1,080</td>
+          <td class="text-right">3.54%</td>
+          <td class="text-right">62 leads</td>
+          <td class="text-right">$10.44/lead</td>
+          <td class="text-right">3,220</td>
+          <td class="text-right">14,289</td>
+          <td class="text-right"><span class="rag rag-green">Best BOF</span></td>
+        </tr>
+        <tr>
+          <td><span class="theme-tag theme-walkthrough">Trip Details</span></td>
+          <td class="text-right">$503</td>
+          <td class="text-right">23,059</td>
+          <td class="text-right">318</td>
+          <td class="text-right">2.49%</td>
+          <td class="text-right">72 leads</td>
+          <td class="text-right">$6.25/lead</td>
+          <td class="text-right">1,055</td>
+          <td class="text-right">5,541</td>
+          <td class="text-right"><span class="rag rag-green">Best MOF</span></td>
+        </tr>
+        <tr>
+          <td><span class="theme-tag theme-escape">Escape Winter</span></td>
+          <td class="text-right">$17</td>
+          <td class="text-right">1,727</td>
+          <td class="text-right">144</td>
+          <td class="text-right">9.96%</td>
+          <td class="text-right">108 LPV</td>
+          <td class="text-right">$0.13/LPV</td>
+          <td class="text-right">83</td>
+          <td class="text-right">376</td>
+          <td class="text-right"><span class="rag rag-amber">Under-tested</span></td>
+        </tr>
+        <tr>
+          <td><span class="theme-tag theme-march">March Break</span></td>
+          <td class="text-right">$33</td>
+          <td class="text-right">5,883</td>
+          <td class="text-right">38</td>
+          <td class="text-right">0.79%</td>
+          <td class="text-right">2 leads</td>
+          <td class="text-right">$11.01/lead</td>
+          <td class="text-right">734</td>
+          <td class="text-right">2,084</td>
+          <td class="text-right"><span class="rag rag-amber">Niche</span></td>
+        </tr>
+        <tr>
+          <td><span class="theme-tag theme-urgency">Urgency / Pricing</span></td>
+          <td class="text-right">$2</td>
+          <td class="text-right">89</td>
+          <td class="text-right">4</td>
+          <td class="text-right">4.49%</td>
+          <td class="text-right">0 leads</td>
+          <td class="text-right">&mdash;</td>
+          <td class="text-right">0</td>
+          <td class="text-right">4</td>
+          <td class="text-right"><span class="rag rag-red">Failed</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout" style="margin-top: 2rem;">
+      <p><strong>Messaging hierarchy:</strong> <strong>General brand content</strong> (aspirational, lifestyle) is the most efficient at TOF&mdash;massive reach at sub-$0.01/ThruPlay. <strong>Trip details &amp; carousels</strong> win MOF ($6.25/lead) because they answer &ldquo;what do I actually get?&rdquo; <strong>Social proof testimonials</strong> are the BOF closer&mdash;62 leads from high-intent audiences at $10/lead. <strong>Escape Winter</strong> showed the highest raw CTR (9.96%) but was too under-budgeted to draw conclusions. <strong>Urgency/pricing</strong> messaging failed completely&mdash;for a $2,000+ product, price shouldn&rsquo;t lead; experience should.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 06 CONTENT ENGAGEMENT ANALYSIS -->
+<!-- ============================================================ -->
+<section class="full-beige">
+  <div class="page">
+    <div class="section-divider">
+      <span class="section-number">06</span>
+      <h2 style="margin-bottom:0;">Content Engagement Analysis</h2>
+    </div>
+
+    <p>Beyond clicks and leads, engagement metrics reveal which content resonated emotionally&mdash;driving follows, reactions, shares, saves, and comments. These are leading indicators of brand affinity and future conversion.</p>
+
+    <h3>Aggregate Engagement &mdash; Both Retreats Combined</h3>
+    <div class="engagement-grid">
+      <div class="engagement-card">
+        <div class="eng-value">182,076</div>
+        <div class="eng-label">Total Engagements</div>
+      </div>
+      <div class="engagement-card">
+        <div class="eng-value">1,277</div>
+        <div class="eng-label">Profile Visits</div>
+      </div>
+      <div class="engagement-card">
+        <div class="eng-value">301</div>
+        <div class="eng-label">Follows</div>
+      </div>
+      <div class="engagement-card">
+        <div class="eng-value">307</div>
+        <div class="eng-label">Reactions</div>
+      </div>
+      <div class="engagement-card">
+        <div class="eng-value">67</div>
+        <div class="eng-label">Shares</div>
+      </div>
+      <div class="engagement-card">
+        <div class="eng-value">100</div>
+        <div class="eng-label">Saves</div>
+      </div>
+    </div>
+
+    <div class="callout-light" style="margin-bottom: 2rem;">
+      <p><strong>Why this matters:</strong> For a $2,000+ product, the buyer journey is long. A follow or save today becomes a booking in 3&ndash;6 months. These 301 new followers and 100 saves represent a retargetable, engaged audience for future retreats.</p>
+    </div>
+
+    <h3>Top Content by Engagement</h3>
+    <p>Ranked by total post engagements. Engagement includes views, clicks, reactions, comments, shares, and saves.</p>
+
+    <div class="table-scroll">
+    <table class="heatmap-table">
+      <thead>
+        <tr>
+          <th>Creative</th>
+          <th>Retreat</th>
+          <th>Funnel</th>
+          <th>Audience</th>
+          <th class="text-right">Engagements</th>
+          <th class="text-right">Profile Visits</th>
+          <th class="text-right">Follows</th>
+          <th class="text-right">Reactions</th>
+          <th class="text-right">Comments</th>
+          <th class="text-right">Shares</th>
+          <th class="text-right">Saves</th>
+          <th class="text-right">Spend</th>
+          <th class="text-right">Cost/Eng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="creative-name">Brett &mdash; Feel Like Sh** (8s)</td>
+          <td>Panama</td>
+          <td><span class="funnel-stage-tag tof">TOF</span></td>
+          <td class="audience-name">US + Canada Core</td>
+          <td class="text-right heat-best">151,809</td>
+          <td class="text-right">23</td>
+          <td class="text-right">0</td>
+          <td class="text-right">60</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">2</td>
+          <td class="text-right">$477.61</td>
+          <td class="text-right heat-best">$0.003</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Olivia Testimonial</td>
+          <td>Panama</td>
+          <td><span class="funnel-stage-tag bof">BOF</span></td>
+          <td class="audience-name">High-Intent / Checkout</td>
+          <td class="text-right heat-best">10,658</td>
+          <td class="text-right heat-best">1,167</td>
+          <td class="text-right heat-best">112</td>
+          <td class="text-right heat-best">68</td>
+          <td class="text-right">0</td>
+          <td class="text-right heat-good">13</td>
+          <td class="text-right heat-good">16</td>
+          <td class="text-right">$385.57</td>
+          <td class="text-right">$0.04</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Erin &mdash; Burnout Video</td>
+          <td>Sri Lanka</td>
+          <td><span class="funnel-stage-tag tof">TOF</span></td>
+          <td class="audience-name">North America Interests</td>
+          <td class="text-right">3,721</td>
+          <td class="text-right">9</td>
+          <td class="text-right">0</td>
+          <td class="text-right">3</td>
+          <td class="text-right">0</td>
+          <td class="text-right">1</td>
+          <td class="text-right">1</td>
+          <td class="text-right">$114.39</td>
+          <td class="text-right">$0.03</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Trip Walkthrough</td>
+          <td>Sri Lanka</td>
+          <td><span class="funnel-stage-tag mof">MOF</span></td>
+          <td class="audience-name">Escape Winter</td>
+          <td class="text-right">1,878</td>
+          <td class="text-right">6</td>
+          <td class="text-right">2</td>
+          <td class="text-right">454</td>
+          <td class="text-right heat-good">4</td>
+          <td class="text-right">1</td>
+          <td class="text-right heat-best">3</td>
+          <td class="text-right">$48.88</td>
+          <td class="text-right">$0.03</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Erin &mdash; Burnout Video</td>
+          <td>Sri Lanka</td>
+          <td><span class="funnel-stage-tag tof">TOF</span></td>
+          <td class="audience-name">UK + Europe Interests</td>
+          <td class="text-right">1,864</td>
+          <td class="text-right heat-good">111</td>
+          <td class="text-right heat-good">5</td>
+          <td class="text-right">3</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">$60.45</td>
+          <td class="text-right">$0.03</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Cindy Testimonial</td>
+          <td>Panama</td>
+          <td><span class="funnel-stage-tag mof">MOF</span></td>
+          <td class="audience-name">Website Visitors 30&ndash;90D</td>
+          <td class="text-right">1,868</td>
+          <td class="text-right">138</td>
+          <td class="text-right">31</td>
+          <td class="text-right">39</td>
+          <td class="text-right heat-good">1</td>
+          <td class="text-right heat-good">5</td>
+          <td class="text-right heat-good">11</td>
+          <td class="text-right">$219.21</td>
+          <td class="text-right">$0.12</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Olivia Testimonial</td>
+          <td>Panama</td>
+          <td><span class="funnel-stage-tag bof">BOF</span></td>
+          <td class="audience-name">Short-Window Visitors (14D)</td>
+          <td class="text-right">1,763</td>
+          <td class="text-right">287</td>
+          <td class="text-right">16</td>
+          <td class="text-right">7</td>
+          <td class="text-right">0</td>
+          <td class="text-right">3</td>
+          <td class="text-right">2</td>
+          <td class="text-right">$42.60</td>
+          <td class="text-right">$0.02</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Nate Inclusions Video</td>
+          <td>Panama</td>
+          <td><span class="funnel-stage-tag bof">BOF</span></td>
+          <td class="audience-name">High-Intent / Checkout</td>
+          <td class="text-right">1,705</td>
+          <td class="text-right">243</td>
+          <td class="text-right">12</td>
+          <td class="text-right">35</td>
+          <td class="text-right">0</td>
+          <td class="text-right">6</td>
+          <td class="text-right">5</td>
+          <td class="text-right">$123.18</td>
+          <td class="text-right">$0.07</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Erin &mdash; 9-5</td>
+          <td>Panama</td>
+          <td><span class="funnel-stage-tag tof">TOF</span></td>
+          <td class="audience-name">March Break (ON/BC)</td>
+          <td class="text-right">1,350</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">$4.56</td>
+          <td class="text-right heat-best">$0.003</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Trip Walkthrough</td>
+          <td>Sri Lanka</td>
+          <td><span class="funnel-stage-tag mof">MOF</span></td>
+          <td class="audience-name">Website Visitors 30&ndash;90D</td>
+          <td class="text-right">953</td>
+          <td class="text-right">125</td>
+          <td class="text-right">7</td>
+          <td class="text-right">76</td>
+          <td class="text-right heat-good">1</td>
+          <td class="text-right">0</td>
+          <td class="text-right heat-best">12</td>
+          <td class="text-right">$45.49</td>
+          <td class="text-right">$0.05</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Erin &mdash; 9-5</td>
+          <td>Panama</td>
+          <td><span class="funnel-stage-tag tof">TOF</span></td>
+          <td class="audience-name">LLA Website Visitors 1&ndash;3%</td>
+          <td class="text-right">785</td>
+          <td class="text-right">7</td>
+          <td class="text-right">0</td>
+          <td class="text-right">2</td>
+          <td class="text-right">0</td>
+          <td class="text-right">1</td>
+          <td class="text-right">0</td>
+          <td class="text-right">$7.81</td>
+          <td class="text-right heat-best">$0.01</td>
+        </tr>
+        <tr>
+          <td class="creative-name">So Much Fun Workout</td>
+          <td>Sri Lanka</td>
+          <td><span class="funnel-stage-tag tof">TOF</span></td>
+          <td class="audience-name">LLA Website Visitors 1&ndash;3%</td>
+          <td class="text-right">762</td>
+          <td class="text-right">78</td>
+          <td class="text-right">7</td>
+          <td class="text-right">4</td>
+          <td class="text-right heat-good">2</td>
+          <td class="text-right heat-good">2</td>
+          <td class="text-right heat-good">3</td>
+          <td class="text-right">$17.18</td>
+          <td class="text-right">$0.02</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Nate &mdash; Steve Irwin</td>
+          <td>Sri Lanka</td>
+          <td><span class="funnel-stage-tag tof">TOF</span></td>
+          <td class="audience-name">Australia + NZ Interests</td>
+          <td class="text-right">747</td>
+          <td class="text-right">17</td>
+          <td class="text-right">2</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">$21.64</td>
+          <td class="text-right">$0.03</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Nate &mdash; Steve Irwin</td>
+          <td>Panama</td>
+          <td><span class="funnel-stage-tag tof">TOF</span></td>
+          <td class="audience-name">March Break (ON/BC)</td>
+          <td class="text-right">680</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">1</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">0</td>
+          <td class="text-right">$6.24</td>
+          <td class="text-right heat-best">$0.009</td>
+        </tr>
+        <tr>
+          <td class="creative-name">Carousel (5 slides)</td>
+          <td>Panama</td>
+          <td><span class="funnel-stage-tag mof">MOF</span></td>
+          <td class="audience-name">Engaged IG/FB Users</td>
+          <td class="text-right">508</td>
+          <td class="text-right heat-best">617</td>
+          <td class="text-right heat-best">112</td>
+          <td class="text-right heat-best">99</td>
+          <td class="text-right">0</td>
+          <td class="text-right heat-best">34</td>
+          <td class="text-right heat-best">50</td>
+          <td class="text-right">$268.23</td>
+          <td class="text-right">$0.53</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="margin-top: 3rem;">Follow-Driving Content</h3>
+    <p>Which ads drove the most Instagram follows? Follows are a key leading indicator of future purchase intent.</p>
+
+    <div class="comparison-grid">
+      <div class="comparison-panel panama" style="background: rgba(247,90,61,0.06);">
+        <h4 style="color: var(--teal);">Top Follows &mdash; Panama</h4>
+        <div class="stat-row"><span class="stat-label">Carousel (5 slides) &rarr; Engaged IG/FB</span><span class="stat-value">112</span></div>
+        <div class="stat-row"><span class="stat-label">Olivia Testimonial &rarr; High-Intent</span><span class="stat-value">112</span></div>
+        <div class="stat-row"><span class="stat-label">Cindy Testimonial &rarr; Website Visitors</span><span class="stat-value">31</span></div>
+        <div class="stat-row"><span class="stat-label">Olivia Testimonial &rarr; Short-Window 14D</span><span class="stat-value">16</span></div>
+        <div class="stat-row"><span class="stat-label">Nate Inclusions &rarr; High-Intent</span><span class="stat-value">12</span></div>
+        <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid rgba(14,58,45,0.1);">
+          <div class="stat-row"><span class="stat-label"><strong>Panama Total Follows</strong></span><span class="stat-value" style="color:var(--coral);">290</span></div>
+        </div>
+      </div>
+      <div class="comparison-panel sri-lanka" style="background: rgba(182,212,234,0.15);">
+        <h4 style="color: var(--teal);">Top Follows &mdash; Sri Lanka</h4>
+        <div class="stat-row"><span class="stat-label">So Much Fun Workout &rarr; LLA</span><span class="stat-value">7</span></div>
+        <div class="stat-row"><span class="stat-label">Erin Burnout Video &rarr; UK/EU</span><span class="stat-value">5</span></div>
+        <div class="stat-row"><span class="stat-label">Nate Steve Irwin &rarr; AUS/NZ</span><span class="stat-value">2</span></div>
+        <div class="stat-row"><span class="stat-label">Trip Walkthrough &rarr; Escape Winter</span><span class="stat-value">2</span></div>
+        <div class="stat-row" style="opacity: 0.4;"><span class="stat-label">All other creatives</span><span class="stat-value">0</span></div>
+        <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid rgba(14,58,45,0.1);">
+          <div class="stat-row"><span class="stat-label"><strong>Sri Lanka Total Follows</strong></span><span class="stat-value" style="color:var(--teal);">16</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 2rem;">
+      <p><strong>Engagement takeaway:</strong> The 5-slide carousel drove the highest-quality engagement: 112 follows, 99 reactions, 34 shares, 50 saves&mdash;all from Engaged IG/FB Users. This is despite having &ldquo;only&rdquo; 508 total engagements. Meanwhile, Brett&rsquo;s TOF video had 151K engagements but zero follows. <strong>Volume engagement &ne; quality engagement.</strong> Carousels and testimonials build followers; short-form hooks build awareness. Both are necessary, but measure them differently.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 07 AUDIENCE PERFORMANCE -->
+<!-- ============================================================ -->
+<section class="full-beige">
+  <div class="page">
+    <div class="section-divider">
+      <span class="section-number">07</span>
+      <h2 style="margin-bottom:0;">Audience Performance</h2>
+    </div>
+
+    <h3>Sri Lanka TOF &mdash; By Audience Segment</h3>
+    <div class="chart-container" style="background: var(--cream);">
+      <canvas id="slAudienceChart" height="260"></canvas>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Audience</th>
+          <th class="text-right">Spend</th>
+          <th class="text-right">Impressions</th>
+          <th class="text-right">LPV</th>
+          <th class="text-right">Cost/LPV</th>
+          <th class="text-right">Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>North America Interests</td>
+          <td class="text-right mono">$223</td>
+          <td class="text-right mono">26,185</td>
+          <td class="text-right mono">2,601</td>
+          <td class="text-right mono">$0.09</td>
+          <td class="text-right"><span class="rag rag-green">Best</span></td>
+        </tr>
+        <tr>
+          <td>LLA Website Visitors 1&ndash;3%</td>
+          <td class="text-right mono">$96</td>
+          <td class="text-right mono">8,737</td>
+          <td class="text-right mono">976</td>
+          <td class="text-right mono">$0.10</td>
+          <td class="text-right"><span class="rag rag-green">Strong</span></td>
+        </tr>
+        <tr>
+          <td>Australia + NZ Interests</td>
+          <td class="text-right mono">$183</td>
+          <td class="text-right mono">22,217</td>
+          <td class="text-right mono">1,495</td>
+          <td class="text-right mono">$0.12</td>
+          <td class="text-right"><span class="rag rag-green">Strong</span></td>
+        </tr>
+        <tr>
+          <td>UK + Europe Interests</td>
+          <td class="text-right mono">$158</td>
+          <td class="text-right mono">19,534</td>
+          <td class="text-right mono">1,300</td>
+          <td class="text-right mono">$0.12</td>
+          <td class="text-right"><span class="rag rag-green">Strong</span></td>
+        </tr>
+        <tr>
+          <td>MOF Audiences (Retargeting)</td>
+          <td class="text-right mono">$201</td>
+          <td class="text-right mono">19,686</td>
+          <td class="text-right mono">1</td>
+          <td class="text-right mono">$201.28</td>
+          <td class="text-right"><span class="rag rag-red">Poor</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-light">
+      <p><strong>All interest-based audiences performed well.</strong> North America was marginally best at $0.09/LPV. MOF retargeting audiences (Website Visitors 30&ndash;90 Days, Engaged IG/FB Users) were optimized for messaging, not traffic&mdash;the high cost/LPV is expected. The Lookalike audience (1&ndash;3%) also performed strongly, validating the seed audience quality.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 08 CONVERSION FUNNEL -->
+<!-- ============================================================ -->
+<section>
+  <div class="page">
+    <div class="section-divider">
+      <span class="section-number">08</span>
+      <h2 style="margin-bottom:0;">Conversion Funnel</h2>
+    </div>
+
+    <div class="comparison-grid">
+      <!-- PANAMA FUNNEL -->
+      <div>
+        <h3 style="text-align:center; margin-bottom: 1.5rem;">Panama &mdash; Full Funnel</h3>
+        <div class="funnel">
+          <div class="funnel-step" style="background: var(--teal); width: 100%;">
+            <div>
+              <span class="funnel-value">393,956</span>
+              <span class="funnel-label">TOF Reach</span>
+            </div>
+          </div>
+          <div class="funnel-arrow">&darr;</div>
+          <div class="funnel-step" style="background: var(--forest); width: 85%;">
+            <div>
+              <span class="funnel-value">4,920</span>
+              <span class="funnel-label">Landing Page Views</span>
+            </div>
+          </div>
+          <div class="funnel-rate">1.25% of reach</div>
+          <div class="funnel-step" style="background: var(--coral); width: 65%;">
+            <div>
+              <span class="funnel-value">187</span>
+              <span class="funnel-label">GHL Pipeline Contacts</span>
+            </div>
+          </div>
+          <div class="funnel-rate">3.80% of LPV</div>
+          <div class="funnel-step" style="background: var(--burnt); width: 45%;">
+            <div>
+              <span class="funnel-value">160</span>
+              <span class="funnel-label">Popup Leads Captured</span>
+            </div>
+          </div>
+          <div class="funnel-rate">85.6% of contacts</div>
+          <div class="funnel-step" style="background: var(--charcoal); width: 25%;">
+            <div>
+              <span class="funnel-value">6</span>
+              <span class="funnel-label">Ad-Attributed Bookings</span>
+            </div>
+          </div>
+          <div class="funnel-rate">3.75% lead &rarr; booking</div>
+        </div>
+        <p style="text-align:center; font-size:0.85rem; color: var(--slate); margin-top:1rem;">
+          <strong>$3,742 spend &rarr; 6 bookings = $624/booking</strong>
+        </p>
+      </div>
+
+      <!-- SRI LANKA FUNNEL -->
+      <div>
+        <h3 style="text-align:center; margin-bottom: 1.5rem;">Sri Lanka &mdash; Partial Funnel</h3>
+        <div class="funnel">
+          <div class="funnel-step" style="background: var(--sky); width: 100%; color: var(--teal);">
+            <div>
+              <span class="funnel-value" style="color: var(--teal);">58,576</span>
+              <span class="funnel-label" style="color: var(--teal);">TOF Reach</span>
+            </div>
+          </div>
+          <div class="funnel-arrow">&darr;</div>
+          <div class="funnel-step" style="background: #8ABDD6; width: 85%; color: var(--teal);">
+            <div>
+              <span class="funnel-value" style="color: var(--teal);">6,372</span>
+              <span class="funnel-label" style="color: var(--teal);">Landing Page Views</span>
+            </div>
+          </div>
+          <div class="funnel-rate">10.88% of reach</div>
+          <div class="funnel-step" style="background: var(--mauve); width: 55%; color: var(--teal);">
+            <div>
+              <span class="funnel-value" style="color: var(--teal);">5</span>
+              <span class="funnel-label" style="color: var(--teal);">Messaging Conversations</span>
+            </div>
+          </div>
+          <div style="text-align:center; padding: 1rem;">
+            <span style="font-size:0.85rem; color:var(--slate); opacity:0.6;">No conversion tracking below this point</span>
+          </div>
+          <div class="funnel-step" style="background: var(--beige); width: 35%; color: var(--teal);">
+            <div>
+              <span class="funnel-value" style="color: var(--teal);">0&ndash;3</span>
+              <span class="funnel-label" style="color: var(--teal);">Possible Ad Bookings</span>
+            </div>
+          </div>
+        </div>
+        <p style="text-align:center; font-size:0.85rem; color: var(--slate); margin-top:1rem;">
+          <strong>$860 spend &mdash; attribution uncertain</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 09 ATTRIBUTION ANALYSIS -->
+<!-- ============================================================ -->
+<section class="full-teal">
+  <div class="page">
+    <div class="section-divider" style="border-bottom-color: var(--gold);">
+      <span class="section-number" style="color: var(--coral);">09</span>
+      <h2 style="margin-bottom:0;">Attribution Analysis</h2>
+    </div>
+
+    <p style="max-width: none; margin-bottom: 2rem;">Without UTM parameters, direct ad-to-booking attribution is impossible. However, by cross-referencing GHL lead sources, registration dates, discount codes, and Lisa&rsquo;s booking forms, we can build a reasonable picture.</p>
+
+    <h3>Panama Guest Attribution</h3>
+    <div class="chart-row" style="margin-bottom: 2rem;">
+      <div class="chart-container" style="background: rgba(247,244,237,0.08); border-color: rgba(255,255,255,0.1);">
+        <canvas id="paAttributionChart"></canvas>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div class="stat-row" style="border-bottom-color: rgba(255,255,255,0.1);"><span class="stat-label">Popup / Ad Funnel</span><span class="stat-value" style="color: var(--coral);">6 guests (46%)</span></div>
+        <div class="stat-row" style="border-bottom-color: rgba(255,255,255,0.1);"><span class="stat-label">Referral Codes</span><span class="stat-value" style="color: var(--gold);">5 guests (38%)</span></div>
+        <div class="stat-row" style="border-bottom-color: rgba(255,255,255,0.1);"><span class="stat-label">Organic / Repeat</span><span class="stat-value" style="color: var(--forest);">2 guests (15%)</span></div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="color: var(--gold); border-bottom-color: var(--gold);">Guest</th>
+          <th style="color: var(--gold); border-bottom-color: var(--gold);">Registered</th>
+          <th style="color: var(--gold); border-bottom-color: var(--gold);">Revenue (CAD)</th>
+          <th style="color: var(--gold); border-bottom-color: var(--gold);">GHL Source</th>
+          <th style="color: var(--gold); border-bottom-color: var(--gold);">Discount</th>
+          <th style="color: var(--gold); border-bottom-color: var(--gold);">Attribution</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+          <td>Janick Besner</td><td class="mono">Jan 31</td><td class="mono text-right">$2,299</td>
+          <td><span class="source-popup">Popup (Panama)</span></td><td>PANAMA250</td>
+          <td><span class="rag rag-green">Ad Funnel</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+          <td>Ashley Jones</td><td class="mono">Jan 31</td><td class="mono text-right">$2,549</td>
+          <td><span class="source-popup">Popup (Sri Lanka)</span></td><td>PANAMA250</td>
+          <td><span class="rag rag-green">Ad Funnel</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+          <td>Smita Patel</td><td class="mono">Feb 4</td><td class="mono text-right">$1,999</td>
+          <td><span class="source-popup">Popup (Panama)</span></td><td>PANAMA250</td>
+          <td><span class="rag rag-green">Ad Funnel</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+          <td>Joanna Jedrzejewska</td><td class="mono">Feb 5</td><td class="mono text-right">$1,999</td>
+          <td><span class="source-popup">Popup (Panama)</span></td><td>PANAMA250</td>
+          <td><span class="rag rag-green">Ad Funnel</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+          <td>Lesley Morrison</td><td class="mono">Feb 6</td><td class="mono text-right">$2,249</td>
+          <td><span class="source-popup">Popup (Panama)</span></td><td>&mdash;</td>
+          <td><span class="rag rag-green">Ad Funnel</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+          <td>Justine Thompson</td><td class="mono">Feb 10</td><td class="mono text-right">$2,549</td>
+          <td><span class="source-popup">Popup (Panama)</span></td><td>PANAMA250</td>
+          <td><span class="rag rag-green">Ad Funnel</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+          <td>Jacob Mortimore</td><td class="mono">Dec 30</td><td class="mono text-right">$2,499</td>
+          <td><span class="source-direct">Payment Page</span></td><td>RILEY ($300)</td>
+          <td><span class="rag rag-amber">Referral</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+          <td>Emily Ferguson</td><td class="mono">Dec 30</td><td class="mono text-right">$2,499</td>
+          <td><span class="source-direct">Direct</span></td><td>RILEY ($300)</td>
+          <td><span class="rag rag-amber">Referral</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+          <td>Sarah Mullaly</td><td class="mono">Jan 19</td><td class="mono text-right">$1,949</td>
+          <td><span class="source-direct">Payment Page</span></td><td>JACEY ($300)</td>
+          <td><span class="rag rag-amber">Referral</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+          <td>Mohena Singh</td><td class="mono">Jan 20</td><td class="mono text-right">$1,949</td>
+          <td><span class="source-direct">Payment Page</span></td><td>JACEY ($300)</td>
+          <td><span class="rag rag-amber">Referral</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+          <td>Lina Vallejos</td><td class="mono">Feb 9</td><td class="mono text-right">$2,249</td>
+          <td><span class="source-direct">Payment Page</span></td><td>JACEY ($300)</td>
+          <td><span class="rag rag-amber">Referral</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+          <td>Ana Paula Felices Moreno</td><td class="mono">Jun 3 &rsquo;25</td><td class="mono text-right">$1,899</td>
+          <td><span class="source-organic">Direct</span></td><td>S-Club ($100)</td>
+          <td><span class="rag rag-green" style="opacity: 0.5;">Organic</span></td>
+        </tr>
+        <tr>
+          <td>Megan Van Veen</td><td class="mono">Nov 4 &rsquo;25</td><td class="mono text-right">$2,799</td>
+          <td><span class="source-organic">Royal Ottawa LP</span></td><td>&mdash;</td>
+          <td><span class="rag rag-green" style="opacity: 0.5;">Organic</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout" style="background: rgba(247,90,61,0.15); margin-top: 2rem;">
+      <p style="color: var(--cream);"><strong style="color: var(--gold);">Cross-funnel signal:</strong> Ashley Jones entered through the <em>Sri Lanka</em> website popup but booked Panama. Visitors browse multiple retreats. Do not silo retargeting by destination.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 10 INDUSTRY BENCHMARKING -->
+<!-- ============================================================ -->
+<section>
+  <div class="page">
+    <div class="section-divider">
+      <span class="section-number">10</span>
+      <h2 style="margin-bottom:0;">Industry Benchmarking</h2>
+    </div>
+
+    <p>SALTY&rsquo;s metrics compared against travel &amp; tourism industry averages from Meta&rsquo;s 2024&ndash;2025 benchmarks and WordStream&rsquo;s cross-industry data. Context: SALTY is a high-ticket ($2,000+), long-consideration-cycle product&mdash;standard travel benchmarks (hotels, flights) are directional, not identical.</p>
+
+    <table style="margin-top: 2rem;">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th class="text-right">SALTY (Panama)</th>
+          <th class="text-right">SALTY (Sri Lanka)</th>
+          <th class="text-right">Travel Industry Avg</th>
+          <th class="text-right">Assessment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>CTR (Link Click-Through)</strong></td>
+          <td class="text-right mono">0.73%</td>
+          <td class="text-right mono">8.07%</td>
+          <td class="text-right mono">0.90%</td>
+          <td class="text-right"><span class="rag rag-green">Above Avg (SL)</span></td>
+        </tr>
+        <tr>
+          <td><strong>CPC (Cost Per Click) CAD</strong></td>
+          <td class="text-right mono">$0.71</td>
+          <td class="text-right mono">$0.11</td>
+          <td class="text-right mono">$0.63</td>
+          <td class="text-right"><span class="rag rag-green">Strong</span></td>
+        </tr>
+        <tr>
+          <td><strong>CPL (Cost Per Lead) CAD</strong></td>
+          <td class="text-right mono">$10.00</td>
+          <td class="text-right mono">N/A</td>
+          <td class="text-right mono">$30&ndash;$50</td>
+          <td class="text-right"><span class="rag rag-green">Excellent</span></td>
+        </tr>
+        <tr>
+          <td><strong>Cost/LPV (Landing Page View)</strong></td>
+          <td class="text-right mono">$0.52</td>
+          <td class="text-right mono">$0.10</td>
+          <td class="text-right mono">$0.50&ndash;$1.50</td>
+          <td class="text-right"><span class="rag rag-green">Strong</span></td>
+        </tr>
+        <tr>
+          <td><strong>Lead &rarr; Booking Rate</strong></td>
+          <td class="text-right mono">3.75%</td>
+          <td class="text-right mono">N/A</td>
+          <td class="text-right mono">2&ndash;3%</td>
+          <td class="text-right"><span class="rag rag-green">Above Avg</span></td>
+        </tr>
+        <tr>
+          <td><strong>ROAS (Ad-Attributed)</strong></td>
+          <td class="text-right mono">7.9x</td>
+          <td class="text-right mono">Uncertain</td>
+          <td class="text-right mono">4&ndash;6x</td>
+          <td class="text-right"><span class="rag rag-green">Excellent</span></td>
+        </tr>
+        <tr>
+          <td><strong>Cost Per Booking (CAD)</strong></td>
+          <td class="text-right mono">$624</td>
+          <td class="text-right mono">N/A</td>
+          <td class="text-right mono">$150&ndash;$500*</td>
+          <td class="text-right"><span class="rag rag-amber">Acceptable</span></td>
+        </tr>
+        <tr>
+          <td><strong>Frequency</strong></td>
+          <td class="text-right mono">1.50</td>
+          <td class="text-right mono">1.31</td>
+          <td class="text-right mono">1.5&ndash;3.0</td>
+          <td class="text-right"><span class="rag rag-green">Healthy</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 0.5rem;">* Industry avg for hotels/packages at $200&ndash;$500 price point. No direct benchmark exists for $2,000+ group retreats.</p>
+
+    <div class="callout" style="margin-top: 2rem;">
+      <p><strong>Context matters.</strong> SALTY is not selling hotel rooms. At a $2,268 average ticket, $624 cost-per-booking means ad spend is 27.5% of the first booking&rsquo;s revenue. For a high-ticket, group experience product with long consideration cycles, this is efficient. The $10 CPL is the standout metric&mdash;3&ndash;5x better than travel industry average, meaning the top-of-funnel creative and targeting are working exceptionally well.</p>
+    </div>
+
+    <div class="chart-container" style="margin-top: 2rem;">
+      <h4>SALTY Performance vs. Industry Average</h4>
+      <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 1rem;">100% = industry average. For cost metrics, lower is better. For performance metrics, higher is better.</p>
+      <div style="max-width: 700px; margin: 0 auto;">
+        <canvas id="benchmarkChart" height="280"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 11 STRATEGIC RECOMMENDATIONS -->
+<!-- ============================================================ -->
+<section class="full-beige">
+  <div class="page">
+    <div class="section-divider">
+      <span class="section-number">11</span>
+      <h2 style="margin-bottom:0;">Strategic Recommendations</h2>
+    </div>
+
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-number">01</div>
+        <h4>IMPLEMENT UTM TRACKING</h4>
+        <p>Without UTMs, every GHL lead shows the same generic source. Add <code style="font-size:0.8rem; background: var(--beige); padding: 0.1rem 0.4rem; border-radius: 3px;">utm_source=meta&amp;utm_campaign={{campaign.name}}&amp;utm_content={{ad.name}}</code> to all ad destination URLs. Configure GHL to capture UTM fields on popup forms.</p>
+        <p><strong>Impact:</strong> Eliminates the biggest gap in this analysis. Enables creative-level and audience-level attribution all the way to booking.</p>
+        <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+          <span class="rec-tag high-impact">High Impact</span>
+          <span class="rec-tag low-effort">Low Effort</span>
+        </div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">02</div>
+        <h4>WHATSAPP BOF CAMPAIGNS</h4>
+        <p>Panama BOF tracked 100 &ldquo;leads&rdquo; but 0 purchases in Meta&rsquo;s pixel&mdash;because conversion happens in conversation, not on a landing page. Your own campaign notes say it: <em>&ldquo;Make BOF about WhatsApp exclusively. Close rate is so high.&rdquo;</em></p>
+        <p><strong>Impact:</strong> Shifts BOF spend ($935 on Panama) from a pixel event Meta can&rsquo;t optimize for, to a high-intent action (WhatsApp conversation started) that aligns with how people actually buy.</p>
+        <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+          <span class="rec-tag high-impact">High Impact</span>
+          <span class="rec-tag med-effort">Med Effort</span>
+        </div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">03</div>
+        <h4>DOUBLE DOWN ON CAROUSELS</h4>
+        <p>The 5-slide carousel outperformed every video creative in Panama MOF at $4.43/lead vs. $12&ndash;18 for testimonial videos. Test 3&ndash;4 new carousel variants per retreat: destination highlights, daily itinerary previews, guest testimonial quotes, before/after lifestyle shots.</p>
+        <p><strong>Impact:</strong> Could reduce CPL by 40&ndash;60% in MOF, stretching the same budget to capture 2&ndash;3x more leads.</p>
+        <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+          <span class="rec-tag high-impact">High Impact</span>
+          <span class="rec-tag low-effort">Low Effort</span>
+        </div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">04</div>
+        <h4>START ADS 4+ MONTHS BEFORE RETREAT</h4>
+        <p>Sri Lanka ads launched January 9 for a February retreat. 10 of 13 guests had already booked. For a product with a 2&ndash;6 month consideration cycle, TOF awareness needs to start 4&ndash;6 months out, with MOF/BOF ramping 2&ndash;3 months before departure.</p>
+        <p><strong>Impact:</strong> Prevents spending $860 after the buying window has closed. Gives the funnel time to work on high-ticket decisions.</p>
+        <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+          <span class="rec-tag high-impact">High Impact</span>
+          <span class="rec-tag low-effort">Low Effort</span>
+        </div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">05</div>
+        <h4>FORMALIZE REFERRAL TRACKING</h4>
+        <p>5 of 13 Panama guests used referral discount codes (RILEY, JACEY)&mdash;38% of bookings from word-of-mouth. This channel is powerful but invisible to ad reporting. Create a standardized referral program: unique codes per referrer, tracked in GHL, with incentives.</p>
+        <p><strong>Impact:</strong> Makes the #2 acquisition channel measurable and scalable. Currently flying blind on what&rsquo;s driving ~40% of bookings.</p>
+        <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+          <span class="rec-tag high-impact">High Impact</span>
+          <span class="rec-tag med-effort">Med Effort</span>
+        </div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">06</div>
+        <h4>REDEFINE SUCCESS METRICS</h4>
+        <p>For a $2,000+ product with long consideration cycles, direct ad &rarr; purchase attribution will always be incomplete. The metrics that matter: <strong>email captures, WhatsApp conversations started, DM conversations, follows</strong>&mdash;high-engagement, high-intent actions that feed the relationship-driven sales process.</p>
+        <p><strong>Impact:</strong> Aligns reporting with actual business reality. Prevents misallocating budget based on incomplete purchase-pixel data.</p>
+        <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+          <span class="rec-tag med-impact">Med Impact</span>
+          <span class="rec-tag low-effort">Low Effort</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 12 NEXT STEPS -->
+<!-- ============================================================ -->
+<section class="full-teal">
+  <div class="page">
+    <div class="section-divider" style="border-bottom-color: var(--gold);">
+      <span class="section-number" style="color: var(--coral);">12</span>
+      <h2 style="margin-bottom:0;">Next Steps</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="color: var(--gold); border-bottom-color: var(--gold); width: 3rem;">#</th>
+          <th style="color: var(--gold); border-bottom-color: var(--gold);">Action</th>
+          <th style="color: var(--gold); border-bottom-color: var(--gold);">Owner</th>
+          <th style="color: var(--gold); border-bottom-color: var(--gold);">Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td class="mono">1</td>
+          <td>Add UTM parameters to all Meta ad destination URLs and configure GHL popup forms to capture UTM fields</td>
+          <td>Sabhi + Nate</td>
+          <td><span class="rag rag-red">Immediate</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td class="mono">2</td>
+          <td>Build WhatsApp-optimized BOF campaign template for next retreat launch</td>
+          <td>Nate + KP</td>
+          <td><span class="rag rag-red">Before Next Launch</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td class="mono">3</td>
+          <td>Create 3&ndash;4 new carousel creative variants for MOF testing</td>
+          <td>Erin + KP</td>
+          <td><span class="rag rag-amber">Next Campaign</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td class="mono">4</td>
+          <td>Build campaign calendar: TOF starts T-5 months, MOF at T-3, BOF at T-2 for each retreat</td>
+          <td>Nate</td>
+          <td><span class="rag rag-amber">Next Campaign</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td class="mono">5</td>
+          <td>Design referral program: unique codes, GHL tracking, guest incentives</td>
+          <td>Nate + Sabhi</td>
+          <td><span class="rag rag-amber">Q2 2026</span></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <td class="mono">6</td>
+          <td>Define KPI dashboard: email captures, WhatsApp convos, DMs, follows alongside traditional metrics</td>
+          <td>Nate</td>
+          <td><span class="rag rag-green">Q2 2026</span></td>
+        </tr>
+        <tr>
+          <td class="mono">7</td>
+          <td>Collect outstanding payments: $1,750 (Sri Lanka) + $4,200 (Panama) = $5,950 CAD</td>
+          <td>Lisa (MT)</td>
+          <td><span class="rag rag-red">Immediate</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="text-align:center; padding: 4rem 0 2rem; opacity: 0.4;">
+      <p style="font-family: 'Roca', Georgia, serif; font-style: italic; color: var(--beige);">SALTY Retreats &mdash; Make fun of wellness.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- RAW DATA APPENDIX -->
+<!-- ============================================================ -->
+<section>
+  <div class="page">
+    <div class="section-divider">
+      <span class="section-number">A</span>
+      <h2 style="margin-bottom:0;">Appendix: Raw Data</h2>
+    </div>
+
+    <h3>Sri Lanka &mdash; Guest List (Source: Movement Travel Booking Form)</h3>
+    <div style="overflow-x: auto;">
+    <table style="font-size: 0.8rem;">
+      <thead>
+        <tr>
+          <th>#</th><th>Guest</th><th>Email</th><th>Registered</th><th>Room</th><th>Type</th><th class="text-right">Due (CAD)</th><th class="text-right">Paid (CAD)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Nina Mandic</td><td>nina-m@live.com</td><td class="mono">Jun 19</td><td>Shared Double</td><td>Early Bird</td><td class="text-right mono">$2,249</td><td class="text-right mono">$2,249</td></tr>
+        <tr><td>2</td><td>Gabby Beech</td><td>gabbybeech2@gmail.com</td><td class="mono">Jun 23</td><td>Triple</td><td>Early Bird</td><td class="text-right mono">$2,299</td><td class="text-right mono">$2,299</td></tr>
+        <tr><td>3</td><td>Katie Cason</td><td>katierosecason@gmail.com</td><td class="mono">Jun 27</td><td>Triple</td><td>Early Bird</td><td class="text-right mono">$2,299</td><td class="text-right mono">$2,299</td></tr>
+        <tr><td>4</td><td>Lauren Larmon</td><td>laurenlarmon@yahoo.ca</td><td class="mono">Jun 27</td><td>Dorm</td><td>Early Bird (S-Club)</td><td class="text-right mono">$1,949</td><td class="text-right mono">$1,949</td></tr>
+        <tr><td>5</td><td>Brandi Amm</td><td>bamm@outlook.com</td><td class="mono">Jul 20</td><td>Shared Double</td><td>Regular (-$250)</td><td class="text-right mono">$2,599</td><td class="text-right mono">$2,599</td></tr>
+        <tr><td>6</td><td>Andrew Amm</td><td>swimlife@gmail.com</td><td class="mono">Jul 20</td><td>Shared Double</td><td>Regular (-$250)</td><td class="text-right mono">$2,599</td><td class="text-right mono">$2,599</td></tr>
+        <tr><td>7</td><td>Louise Goodman</td><td>loutattoos@gmail.com</td><td class="mono">Aug 13</td><td>Shared Double</td><td>Regular</td><td class="text-right mono">$2,899</td><td class="text-right mono">$2,899</td></tr>
+        <tr><td>8</td><td>Lorne Keefe</td><td>lkeefer13@gmail.com</td><td class="mono">Aug 13</td><td>Shared Double</td><td>Regular</td><td class="text-right mono">$2,899</td><td class="text-right mono">$2,899</td></tr>
+        <tr><td>9</td><td>Mandala Moynahan</td><td>mandala.moynahan@gmail.com</td><td class="mono">Oct 4</td><td>Dorm</td><td>Regular (-$250)</td><td class="text-right mono">$1,999</td><td class="text-right mono">$1,649</td></tr>
+        <tr><td>10</td><td>Charlotte Timm</td><td>charlotte.timm2@gmail.com</td><td class="mono">Oct 10</td><td>Split Double</td><td>Regular</td><td class="text-right mono">$2,949</td><td class="text-right mono">$2,599</td></tr>
+        <tr><td>11</td><td>Lindsay Brown</td><td>teewhy93@hotmail.com</td><td class="mono">Jan 11</td><td>Shared Double</td><td>Regular (-$400)</td><td class="text-right mono">$2,449</td><td class="text-right mono">$2,099</td></tr>
+        <tr><td>12</td><td>Chace Gribble</td><td>chace111@hotmail.co.uk</td><td class="mono">Jan 21</td><td>Shared Double</td><td>Regular (-$250)</td><td class="text-right mono">$2,599</td><td class="text-right mono">$2,249</td></tr>
+        <tr><td>13</td><td>Karlee Ratzlaff</td><td>karlee.ratzlaff@gmail.com</td><td class="mono">Jan 30</td><td>Dorm</td><td>Regular (-$250)</td><td class="text-right mono">$1,999</td><td class="text-right mono">$1,649</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="margin-top: 3rem;">Panama &mdash; Guest List (Source: Movement Travel Booking Form)</h3>
+    <div style="overflow-x: auto;">
+    <table style="font-size: 0.8rem;">
+      <thead>
+        <tr>
+          <th>#</th><th>Guest</th><th>Email</th><th>Registered</th><th>Room</th><th>Type</th><th class="text-right">Due (CAD)</th><th class="text-right">Paid (CAD)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Ana Paula Felices Moreno</td><td>anapaulafelices@gmail.com</td><td class="mono">Jun 3</td><td>Quad</td><td>Early Bird (S-Club -$100)</td><td class="text-right mono">$1,899</td><td class="text-right mono">$1,899</td></tr>
+        <tr><td>2</td><td>Megan Van Veen</td><td>vanveenmegan@gmail.com</td><td class="mono">Nov 4</td><td>Double</td><td>Regular</td><td class="text-right mono">$2,799</td><td class="text-right mono">$2,449</td></tr>
+        <tr><td>3</td><td>Jacob Mortimore</td><td>jakemortimore@hotmail.com</td><td class="mono">Dec 30</td><td>Double</td><td>Regular (-$300 RILEY)</td><td class="text-right mono">$2,499</td><td class="text-right mono">$2,149</td></tr>
+        <tr><td>4</td><td>Emily Ferguson</td><td>emziedaisy@hotmail.com</td><td class="mono">Dec 30</td><td>Double</td><td>Regular (-$300 RILEY)</td><td class="text-right mono">$2,499</td><td class="text-right mono">$2,149</td></tr>
+        <tr><td>5</td><td>Sarah Mullaly</td><td>smullaly15@hotmail.com</td><td class="mono">Jan 19</td><td>Quad</td><td>Regular (-$300 JACEY)</td><td class="text-right mono">$1,949</td><td class="text-right mono">$1,599</td></tr>
+        <tr><td>6</td><td>Mohena Singh</td><td>mohena.s@gmail.com</td><td class="mono">Jan 20</td><td>Quad</td><td>Regular (-$300 JACEY)</td><td class="text-right mono">$1,949</td><td class="text-right mono">$1,599</td></tr>
+        <tr><td>7</td><td>Janick Besner</td><td>janickbesner@gmail.com</td><td class="mono">Jan 31</td><td>Triple</td><td>Regular (-$250 PANAMA250)</td><td class="text-right mono">$2,299</td><td class="text-right mono">$1,949</td></tr>
+        <tr><td>8</td><td>Ashley Jones</td><td>ashley.nichellej@gmail.com</td><td class="mono">Jan 31</td><td>Double</td><td>Regular (-$250 PANAMA250)</td><td class="text-right mono">$2,549</td><td class="text-right mono">$2,199</td></tr>
+        <tr><td>9</td><td>Smita Patel</td><td>s_patel015@hotmail.com</td><td class="mono">Feb 4</td><td>Quad</td><td>Regular (-$250 PANAMA250)</td><td class="text-right mono">$1,999</td><td class="text-right mono">$1,649</td></tr>
+        <tr><td>10</td><td>Joanna Jedrzejewska</td><td>jedrzejews@gmail.com</td><td class="mono">Feb 5</td><td>Quad</td><td>Regular (-$250 PANAMA250)</td><td class="text-right mono">$1,999</td><td class="text-right mono">$1,649</td></tr>
+        <tr><td>11</td><td>Lesley Morrison</td><td>lam85@hotmail.com</td><td class="mono">Feb 6</td><td>Quad</td><td>Regular</td><td class="text-right mono">$2,249</td><td class="text-right mono">$1,899</td></tr>
+        <tr><td>12</td><td>Lina Vallejos</td><td>lina.vallejos@hotmail.com</td><td class="mono">Feb 9</td><td>Triple</td><td>Regular (-$300 JACEY)</td><td class="text-right mono">$2,249</td><td class="text-right mono">$1,899</td></tr>
+        <tr><td>13</td><td>Justine Thompson</td><td>jthomperss@icloud.com</td><td class="mono">Feb 10</td><td>Double</td><td>Regular (-$250 PANAMA250)</td><td class="text-right mono">$2,549</td><td class="text-right mono">$2,199</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="margin-top: 3rem;">Raw Ad-Level Data &mdash; Sri Lanka (Dec 1, 2025 &ndash; Mar 1, 2026)</h3>
+    <p style="font-size: 0.85rem; color: var(--slate); margin-bottom: 1rem;">Complete Meta Ads export &mdash; 18 ad &times; audience combinations across TOF Traffic and MOF Messaging campaigns.</p>
+    <div class="table-scroll">
+    <table class="heatmap-table" style="font-size: 0.72rem;">
+      <thead>
+        <tr>
+          <th style="min-width:120px;">Ad Name</th>
+          <th style="min-width:110px;">Audience</th>
+          <th>Campaign</th>
+          <th>Spend</th>
+          <th>Impr</th>
+          <th>Reach</th>
+          <th>Freq</th>
+          <th>Clicks</th>
+          <th>CTR</th>
+          <th>CPC</th>
+          <th>LPV</th>
+          <th>$/LPV</th>
+          <th>ThruPlays</th>
+          <th>$/Thru</th>
+          <th>Leads</th>
+          <th>CPL</th>
+          <th>Profile Visits</th>
+          <th>Follows</th>
+          <th>Reactions</th>
+          <th>Engagements</th>
+          <th>Comments</th>
+          <th>Shares</th>
+          <th>Saves</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Brett Feel Like Sh**</td><td>UK + Europe</td><td>TOF Traffic</td><td>$2.39</td><td>314</td><td>308</td><td>1.02</td><td>10</td><td>3.18%</td><td>$0.24</td><td>7</td><td>$0.34</td><td>40</td><td>$0.06</td><td>–</td><td>–</td><td>3</td><td>0</td><td>1</td><td>97</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>So Much Fun Workout</td><td>UK + Europe</td><td>TOF Traffic</td><td>$5.95</td><td>811</td><td>731</td><td>1.11</td><td>26</td><td>3.21%</td><td>$0.23</td><td>40</td><td>$0.15</td><td>40</td><td>$0.15</td><td>–</td><td>–</td><td>21</td><td>3</td><td>1</td><td>256</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Nate Steve Irwin</td><td>UK + Europe</td><td>TOF Traffic</td><td>$2.24</td><td>208</td><td>200</td><td>1.04</td><td>15</td><td>7.21%</td><td>$0.15</td><td>14</td><td>$0.16</td><td>7</td><td>$0.32</td><td>–</td><td>–</td><td>2</td><td>0</td><td>0</td><td>50</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Brett Feel Like Sh**</td><td>Australia + NZ</td><td>TOF Traffic</td><td>$6.35</td><td>837</td><td>769</td><td>1.09</td><td>24</td><td>2.87%</td><td>$0.26</td><td>27</td><td>$0.24</td><td>132</td><td>$0.05</td><td>–</td><td>–</td><td>14</td><td>1</td><td>0</td><td>326</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Nate Steve Irwin</td><td>Australia + NZ</td><td>TOF Traffic</td><td>$21.64</td><td>2,104</td><td>1,857</td><td>1.13</td><td>115</td><td>5.47%</td><td>$0.19</td><td>82</td><td>$0.26</td><td>108</td><td>$0.20</td><td>–</td><td>–</td><td>17</td><td>2</td><td>0</td><td>747</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Erin Burnout Video</td><td>LLA 1-3%</td><td>TOF Traffic</td><td>$5.04</td><td>468</td><td>459</td><td>1.02</td><td>75</td><td>16.03%</td><td>$0.07</td><td>67</td><td>$0.08</td><td>26</td><td>$0.19</td><td>–</td><td>–</td><td>2</td><td>1</td><td>0</td><td>153</td><td>0</td><td>0</td><td>1</td></tr>
+        <tr><td>So Much Fun Workout</td><td>LLA 1-3%</td><td>TOF Traffic</td><td>$17.18</td><td>2,150</td><td>1,835</td><td>1.17</td><td>70</td><td>3.26%</td><td>$0.25</td><td>114</td><td>$0.15</td><td>91</td><td>$0.19</td><td>1</td><td>$17.18</td><td>78</td><td>7</td><td>4</td><td>762</td><td>0</td><td>2</td><td>3</td></tr>
+        <tr><td>Brett Feel Like Sh**</td><td>LLA 1-3%</td><td>TOF Traffic</td><td>$0.08</td><td>21</td><td>19</td><td>1.11</td><td>0</td><td>–</td><td>–</td><td>1</td><td>$0.08</td><td>1</td><td>$0.08</td><td>–</td><td>–</td><td>1</td><td>0</td><td>0</td><td>6</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Nate Steve Irwin</td><td>LLA 1-3%</td><td>TOF Traffic</td><td>$3.44</td><td>219</td><td>210</td><td>1.04</td><td>28</td><td>12.79%</td><td>$0.12</td><td>26</td><td>$0.13</td><td>9</td><td>$0.38</td><td>–</td><td>–</td><td>0</td><td>0</td><td>0</td><td>67</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Erin Burnout Video</td><td>North America</td><td>TOF Traffic</td><td>$114.39</td><td>13,892</td><td>10,276</td><td>1.35</td><td>1,837</td><td>13.22%</td><td>$0.06</td><td>1,539</td><td>$0.07</td><td>682</td><td>$0.17</td><td>–</td><td>–</td><td>9</td><td>0</td><td>3</td><td>3,721</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Brett Feel Like Sh**</td><td>North America</td><td>TOF Traffic</td><td>$0.18</td><td>45</td><td>44</td><td>1.02</td><td>3</td><td>6.67%</td><td>$0.06</td><td>3</td><td>$0.06</td><td>10</td><td>$0.02</td><td>–</td><td>–</td><td>1</td><td>0</td><td>0</td><td>18</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>So Much Fun Workout</td><td>North America</td><td>TOF Traffic</td><td>$6.83</td><td>767</td><td>714</td><td>1.07</td><td>48</td><td>6.26%</td><td>$0.14</td><td>54</td><td>$0.13</td><td>32</td><td>$0.21</td><td>–</td><td>–</td><td>15</td><td>1</td><td>0</td><td>169</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Nate Steve Irwin</td><td>North America</td><td>TOF Traffic</td><td>$3.01</td><td>321</td><td>321</td><td>1.00</td><td>24</td><td>7.48%</td><td>$0.13</td><td>22</td><td>$0.14</td><td>18</td><td>$0.17</td><td>–</td><td>–</td><td>1</td><td>0</td><td>0</td><td>120</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Erin Burnout Video</td><td>UK + Europe</td><td>TOF Traffic</td><td>$60.45</td><td>7,501</td><td>6,156</td><td>1.22</td><td>567</td><td>7.56%</td><td>$0.11</td><td>504</td><td>$0.12</td><td>363</td><td>$0.17</td><td>–</td><td>–</td><td>111</td><td>5</td><td>3</td><td>1,864</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr style="background: rgba(14,58,45,0.04); font-weight: 600;"><td colspan="3" style="text-align:right;">Sri Lanka TOF Subtotal</td><td>$249.17</td><td>29,658</td><td>–</td><td>–</td><td>2,842</td><td>–</td><td>–</td><td>2,500</td><td>–</td><td>1,559</td><td>–</td><td>1</td><td>–</td><td>275</td><td>20</td><td>12</td><td>8,356</td><td>0</td><td>2</td><td>4</td></tr>
+        <tr><td>Trip Walkthrough</td><td>Website 30-90D</td><td>MOF Messaging</td><td>$45.49</td><td>4,258</td><td>2,424</td><td>1.76</td><td>23</td><td>0.54%</td><td>$1.98</td><td>1</td><td>$45.49</td><td>122</td><td>$0.37</td><td>2</td><td>$22.75</td><td>125</td><td>7</td><td>76</td><td>953</td><td>1</td><td>0</td><td>12</td></tr>
+        <tr><td>Carousel (6 slides)</td><td>Engaged IG/FB</td><td>MOF Messaging</td><td>$0.58</td><td>28</td><td>24</td><td>1.17</td><td>0</td><td>–</td><td>–</td><td>0</td><td>–</td><td>0</td><td>–</td><td>0</td><td>–</td><td>2</td><td>1</td><td>2</td><td>2</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Trip Walkthrough</td><td>Escape Winter</td><td>MOF Messaging</td><td>$48.88</td><td>6,209</td><td>3,350</td><td>1.85</td><td>52</td><td>0.84%</td><td>$0.94</td><td>0</td><td>–</td><td>156</td><td>$0.31</td><td>0</td><td>–</td><td>6</td><td>2</td><td>454</td><td>1,878</td><td>4</td><td>1</td><td>3</td></tr>
+        <tr style="background: rgba(14,58,45,0.04); font-weight: 600;"><td colspan="3" style="text-align:right;">Sri Lanka MOF Subtotal</td><td>$94.95</td><td>10,495</td><td>–</td><td>–</td><td>75</td><td>–</td><td>–</td><td>1</td><td>–</td><td>278</td><td>–</td><td>2</td><td>–</td><td>133</td><td>10</td><td>532</td><td>2,833</td><td>5</td><td>1</td><td>15</td></tr>
+        <tr style="background: var(--beige); font-weight: 700;"><td colspan="3" style="text-align:right;">SRI LANKA TOTAL</td><td>$344.12</td><td>40,153</td><td>–</td><td>–</td><td>2,917</td><td>–</td><td>–</td><td>2,501</td><td>–</td><td>1,837</td><td>–</td><td>3</td><td>–</td><td>408</td><td>30</td><td>544</td><td>11,189</td><td>5</td><td>3</td><td>19</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="margin-top: 3rem;">Raw Ad-Level Data &mdash; Panama (Dec 1, 2025 &ndash; Mar 1, 2026)</h3>
+    <p style="font-size: 0.85rem; color: var(--slate); margin-bottom: 1rem;">Complete Meta Ads export &mdash; 15 ad &times; audience combinations across TOF Video Views, MOF Leads, and BOF Purchase campaigns.</p>
+    <div class="table-scroll">
+    <table class="heatmap-table" style="font-size: 0.72rem;">
+      <thead>
+        <tr>
+          <th style="min-width:120px;">Ad Name</th>
+          <th style="min-width:110px;">Audience</th>
+          <th>Campaign</th>
+          <th>Spend</th>
+          <th>Impr</th>
+          <th>Reach</th>
+          <th>Freq</th>
+          <th>Clicks</th>
+          <th>CTR</th>
+          <th>CPC</th>
+          <th>LPV</th>
+          <th>$/LPV</th>
+          <th>ThruPlays</th>
+          <th>$/Thru</th>
+          <th>Leads</th>
+          <th>CPL</th>
+          <th>Purchases</th>
+          <th>Profile Visits</th>
+          <th>Follows</th>
+          <th>Reactions</th>
+          <th>Engagements</th>
+          <th>Comments</th>
+          <th>Shares</th>
+          <th>Saves</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Brett Feel Like Sh**</td><td>US + Canada</td><td>TOF Video Views</td><td>$477.61</td><td>263,304</td><td>193,878</td><td>1.36</td><td>172</td><td>0.07%</td><td>$2.78</td><td>99</td><td>$4.82</td><td>58,174</td><td>$0.01</td><td>–</td><td>–</td><td>0</td><td>23</td><td>0</td><td>60</td><td>151,809</td><td>0</td><td>0</td><td>2</td></tr>
+        <tr><td>Nate Steve Irwin</td><td>March Break (ON/BC)</td><td>TOF Video Views</td><td>$6.24</td><td>1,070</td><td>900</td><td>1.19</td><td>1</td><td>0.09%</td><td>$6.24</td><td>0</td><td>–</td><td>342</td><td>$0.02</td><td>–</td><td>–</td><td>0</td><td>0</td><td>0</td><td>1</td><td>680</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Erin 9-5</td><td>LLA 1-3%</td><td>TOF Video Views</td><td>$7.81</td><td>1,166</td><td>974</td><td>1.20</td><td>0</td><td>–</td><td>–</td><td>0</td><td>–</td><td>416</td><td>$0.02</td><td>1</td><td>$7.81</td><td>0</td><td>7</td><td>0</td><td>2</td><td>785</td><td>0</td><td>1</td><td>0</td></tr>
+        <tr><td>Erin 9-5</td><td>March Break (ON/BC)</td><td>TOF Video Views</td><td>$4.56</td><td>2,240</td><td>1,972</td><td>1.14</td><td>1</td><td>0.04%</td><td>$4.56</td><td>0</td><td>–</td><td>392</td><td>$0.01</td><td>–</td><td>–</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1,350</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr style="background: rgba(14,58,45,0.04); font-weight: 600;"><td colspan="3" style="text-align:right;">Panama TOF Subtotal</td><td>$496.22</td><td>267,780</td><td>–</td><td>–</td><td>174</td><td>–</td><td>–</td><td>99</td><td>–</td><td>59,324</td><td>–</td><td>1</td><td>–</td><td>0</td><td>30</td><td>0</td><td>63</td><td>154,624</td><td>0</td><td>1</td><td>2</td></tr>
+        <tr><td>Carousel (5 slides)</td><td>Video Viewers 50%</td><td>MOF Leads</td><td>$11.59</td><td>959</td><td>820</td><td>1.17</td><td>13</td><td>1.36%</td><td>$0.89</td><td>16</td><td>$0.72</td><td>0</td><td>–</td><td>0</td><td>–</td><td>0</td><td>23</td><td>6</td><td>2</td><td>16</td><td>0</td><td>0</td><td>1</td></tr>
+        <tr><td>Cindy Testimonial</td><td>Website 30-90D</td><td>MOF Leads</td><td>$219.21</td><td>4,528</td><td>3,360</td><td>1.35</td><td>132</td><td>2.92%</td><td>$1.66</td><td>131</td><td>$1.67</td><td>449</td><td>$0.49</td><td>15</td><td>$14.61</td><td>0</td><td>138</td><td>31</td><td>39</td><td>1,868</td><td>1</td><td>5</td><td>11</td></tr>
+        <tr><td>Carousel (5 slides)</td><td>Engaged IG/FB</td><td>MOF Leads</td><td>$268.23</td><td>21,475</td><td>9,177</td><td>2.34</td><td>325</td><td>1.51%</td><td>$0.83</td><td>371</td><td>$0.72</td><td>0</td><td>–</td><td>54</td><td>$4.97</td><td>0</td><td>617</td><td>112</td><td>99</td><td>508</td><td>0</td><td>34</td><td>50</td></tr>
+        <tr><td>Carousel (5 slides) – MB Copy</td><td>Canada March Break</td><td>MOF Leads</td><td>$22.01</td><td>1,573</td><td>1,376</td><td>1.14</td><td>36</td><td>2.29%</td><td>$0.61</td><td>32</td><td>$0.69</td><td>0</td><td>–</td><td>2</td><td>$11.01</td><td>0</td><td>36</td><td>7</td><td>11</td><td>54</td><td>0</td><td>3</td><td>4</td></tr>
+        <tr style="background: rgba(14,58,45,0.04); font-weight: 600;"><td colspan="3" style="text-align:right;">Panama MOF Subtotal</td><td>$521.04</td><td>28,535</td><td>–</td><td>–</td><td>506</td><td>–</td><td>–</td><td>550</td><td>–</td><td>449</td><td>–</td><td>71</td><td>–</td><td>0</td><td>814</td><td>156</td><td>151</td><td>2,446</td><td>1</td><td>42</td><td>66</td></tr>
+        <tr><td>Olivia Testimonial</td><td>High-Intent/Checkout</td><td>BOF Purchase</td><td>$385.57</td><td>22,340</td><td>16,373</td><td>1.36</td><td>777</td><td>3.48%</td><td>$0.50</td><td>826</td><td>$0.47</td><td>2,405</td><td>$0.16</td><td>41</td><td>$9.40</td><td>0</td><td>1,167</td><td>112</td><td>68</td><td>10,658</td><td>0</td><td>13</td><td>16</td></tr>
+        <tr><td>Nate Inclusions Video</td><td>High-Intent/Checkout</td><td>BOF Purchase</td><td>$123.18</td><td>8,839</td><td>3,789</td><td>2.33</td><td>100</td><td>1.13%</td><td>$1.23</td><td>90</td><td>$1.37</td><td>448</td><td>$0.27</td><td>15</td><td>$8.21</td><td>0</td><td>243</td><td>12</td><td>35</td><td>1,705</td><td>0</td><td>6</td><td>5</td></tr>
+        <tr><td>Olivia Testimonial</td><td>Short-Window 14D</td><td>BOF Purchase</td><td>$42.60</td><td>3,616</td><td>3,168</td><td>1.14</td><td>171</td><td>4.73%</td><td>$0.25</td><td>206</td><td>$0.21</td><td>366</td><td>$0.12</td><td>6</td><td>$7.10</td><td>0</td><td>287</td><td>16</td><td>7</td><td>1,763</td><td>0</td><td>3</td><td>2</td></tr>
+        <tr><td>Nate Inclusions Video</td><td>Canada March Break (BOF)</td><td>BOF Purchase</td><td>$6.44</td><td>391</td><td>309</td><td>1.27</td><td>93</td><td>23.79%</td><td>$0.07</td><td>71</td><td>$0.09</td><td>165</td><td>$0.04</td><td>1</td><td>$6.44</td><td>0</td><td>3</td><td>0</td><td>1</td><td>343</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Urgency Static #2</td><td>Pricing Page/Price-Sensitive</td><td>BOF Purchase</td><td>$1.86</td><td>89</td><td>71</td><td>1.25</td><td>4</td><td>4.49%</td><td>$0.47</td><td>3</td><td>$0.62</td><td>0</td><td>–</td><td>0</td><td>–</td><td>0</td><td>14</td><td>0</td><td>0</td><td>4</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Jace Details Video</td><td>Canada March Break (BOF)</td><td>BOF Purchase</td><td>$1.01</td><td>81</td><td>79</td><td>1.03</td><td>1</td><td>1.23%</td><td>$1.01</td><td>0</td><td>–</td><td>7</td><td>$0.14</td><td>0</td><td>–</td><td>0</td><td>2</td><td>0</td><td>1</td><td>32</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr style="background: rgba(14,58,45,0.04); font-weight: 600;"><td colspan="3" style="text-align:right;">Panama BOF Subtotal</td><td>$560.66</td><td>35,356</td><td>–</td><td>–</td><td>1,146</td><td>–</td><td>–</td><td>1,196</td><td>–</td><td>3,391</td><td>–</td><td>63</td><td>–</td><td>0</td><td>1,716</td><td>140</td><td>112</td><td>14,505</td><td>0</td><td>22</td><td>23</td></tr>
+        <tr style="background: var(--beige); font-weight: 700;"><td colspan="3" style="text-align:right;">PANAMA TOTAL</td><td>$1,577.92</td><td>331,671</td><td>–</td><td>–</td><td>1,826</td><td>–</td><td>–</td><td>1,845</td><td>–</td><td>63,164</td><td>–</td><td>135</td><td>–</td><td>0</td><td>2,560</td><td>296</td><td>326</td><td>171,575</td><td>1</td><td>65</td><td>91</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="margin-top: 3rem;">GHL Pipeline Summary</h3>
+    <div class="comparison-grid">
+      <div class="comparison-panel sri-lanka">
+        <h4 style="color: var(--teal);">Sri Lanka Pipeline</h4>
+        <div class="stat-row"><span class="stat-label">Total Contacts</span><span class="stat-value">39</span></div>
+        <div class="stat-row"><span class="stat-label">Booking Movement Travel</span><span class="stat-value">10</span></div>
+        <div class="stat-row"><span class="stat-label">Deposit Paid</span><span class="stat-value">2</span></div>
+        <div class="stat-row"><span class="stat-label">Nurture</span><span class="stat-value">~20</span></div>
+        <div class="stat-row"><span class="stat-label">New Lead</span><span class="stat-value">~7</span></div>
+      </div>
+      <div class="comparison-panel panama">
+        <h4 style="color: var(--teal);">Panama Pipeline</h4>
+        <div class="stat-row"><span class="stat-label">Total Contacts</span><span class="stat-value">187</span></div>
+        <div class="stat-row"><span class="stat-label">Booking Movement Travel</span><span class="stat-value">4</span></div>
+        <div class="stat-row"><span class="stat-label">Deposit Paid</span><span class="stat-value">7</span></div>
+        <div class="stat-row"><span class="stat-label">Nurture</span><span class="stat-value">~40</span></div>
+        <div class="stat-row"><span class="stat-label">New Lead</span><span class="stat-value">~136</span></div>
+        <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid rgba(14,58,45,0.1);">
+          <div class="stat-row"><span class="stat-label">Popup-Sourced</span><span class="stat-value" style="color: var(--coral);">180 (96%)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CHARTS JS -->
+<!-- ============================================================ -->
+<script>
+// Brand colors
+const C = {
+  teal: '#0E3A2D', coral: '#F75A3D', gold: '#FED260', sky: '#B6D4EA',
+  forest: '#3A6B35', salmon: '#FF7E70', beige: '#E7D7C0', seafoam: '#A4E5D9',
+  burnt: '#C74235', mauve: '#CCB4B3', slate: '#4A4E58', cream: '#F7F4ED'
+};
+
+Chart.defaults.font.family = "'Roca', Georgia, serif";
+Chart.defaults.font.size = 13;
+Chart.defaults.color = C.slate;
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.pointStyle = 'circle';
+
+// ===== REVENUE CHART =====
+new Chart(document.getElementById('revenueChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Sri Lanka', 'Panama'],
+    datasets: [
+      { label: 'Collected', data: [30037, 25287], backgroundColor: C.teal, borderRadius: 6 },
+      { label: 'Outstanding', data: [1750, 4200], backgroundColor: C.coral, borderRadius: 6 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: $${ctx.raw.toLocaleString()} CAD` } }
+    },
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: { stacked: true, ticks: { callback: v => `$${(v/1000).toFixed(0)}K` }, grid: { color: 'rgba(14,58,45,0.06)' } }
+    }
+  }
+});
+
+// ===== SRI LANKA SPEND DONUT =====
+new Chart(document.getElementById('slSpendDonut'), {
+  type: 'doughnut',
+  data: {
+    labels: ['TOF — Traffic ($659)', 'MOF — Messaging ($201)'],
+    datasets: [{ data: [659, 201], backgroundColor: [C.sky, C.seafoam], borderWidth: 0, borderRadius: 4 }]
+  },
+  options: {
+    responsive: true,
+    cutout: '60%',
+    plugins: {
+      legend: { position: 'bottom', labels: { color: C.cream, padding: 16 } }
+    }
+  }
+});
+
+// ===== PANAMA SPEND DONUT =====
+new Chart(document.getElementById('paSpendDonut'), {
+  type: 'doughnut',
+  data: {
+    labels: ['TOF — Video Views ($1,208)', 'MOF — Leads ($1,600)', 'BOF — Purchase ($935)'],
+    datasets: [{ data: [1208, 1600, 935], backgroundColor: [C.coral, C.gold, C.burnt], borderWidth: 0, borderRadius: 4 }]
+  },
+  options: {
+    responsive: true,
+    cutout: '60%',
+    plugins: {
+      legend: { position: 'bottom', labels: { color: C.cream, padding: 16 } }
+    }
+  }
+});
+
+// ===== PANAMA CPL CHART =====
+new Chart(document.getElementById('paCplChart'), {
+  type: 'bar',
+  data: {
+    labels: [
+      'Carousel (5 slides)', 'Nate Inclusions Video', 'Jace Details Video',
+      'Cindy Testimonial', 'MB Carousel Copy', 'MB Cindy Testimonial'
+    ],
+    datasets: [{
+      label: 'Cost Per Lead (CAD)',
+      data: [4.43, 8.59, 10.44, 12.65, 11.01, 17.91],
+      backgroundColor: [C.forest, C.teal, C.teal, C.coral, C.teal, C.coral],
+      borderRadius: 6
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => `$${ctx.raw.toFixed(2)} / lead` } }
+    },
+    scales: {
+      x: { grid: { color: 'rgba(14,58,45,0.06)' }, ticks: { callback: v => `$${v}` } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// ===== SRI LANKA CPLV CHART =====
+new Chart(document.getElementById('slCplvChart'), {
+  type: 'bar',
+  data: {
+    labels: [
+      'Erin Burnout Video', 'So Much Fun Workout', 'Nate Steve Irwin',
+      'Brett Feel Like Sh**'
+    ],
+    datasets: [{
+      label: 'Cost Per LPV (CAD)',
+      data: [0.10, 0.14, 0.19, 0.21],
+      backgroundColor: [C.forest, C.teal, C.teal, C.teal],
+      borderRadius: 6
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => `$${ctx.raw.toFixed(2)} / LPV` } }
+    },
+    scales: {
+      x: { grid: { color: 'rgba(14,58,45,0.06)' }, ticks: { callback: v => `$${v}` } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// ===== SRI LANKA AUDIENCE CHART =====
+new Chart(document.getElementById('slAudienceChart'), {
+  type: 'bar',
+  data: {
+    labels: ['North America', 'LLA 1-3%', 'Australia + NZ', 'UK + Europe'],
+    datasets: [
+      { label: 'Spend (CAD)', data: [223, 96, 183, 158], backgroundColor: C.teal, borderRadius: 6 },
+      { label: 'LPV', data: [2601, 976, 1495, 1300], backgroundColor: C.sky, borderRadius: 6, yAxisID: 'y1' }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'bottom' } },
+    scales: {
+      x: { grid: { display: false } },
+      y: { position: 'left', ticks: { callback: v => `$${v}` }, grid: { color: 'rgba(14,58,45,0.06)' } },
+      y1: { position: 'right', ticks: { callback: v => v.toLocaleString() }, grid: { display: false } }
+    }
+  }
+});
+
+// ===== PANAMA ATTRIBUTION PIE =====
+new Chart(document.getElementById('paAttributionChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Ad Funnel (Popup)', 'Referral Codes', 'Organic / Repeat'],
+    datasets: [{
+      data: [6, 5, 2],
+      backgroundColor: [C.coral, C.gold, C.forest],
+      borderWidth: 3,
+      borderColor: C.teal
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: '55%',
+    plugins: {
+      legend: { position: 'bottom', labels: { color: C.cream, padding: 16 } },
+      tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.raw} guests` } }
+    }
+  }
+});
+
+// ===== BENCHMARK CHART (normalized to % of industry avg) =====
+// Cost metrics: SALTY/Industry * 100 (lower = better, green)
+// Perf metrics: SALTY/Industry * 100 (higher = better, green)
+const benchLabels = ['Cost/Lead', 'CPC', 'Cost/LPV', 'Lead→Booking', 'ROAS'];
+const saltyVals = [10.00, 0.71, 0.52, 3.75, 7.9];
+const industryVals = [40, 0.63, 1.00, 2.5, 5.0];
+const isCost = [true, false, true, false, false]; // CPC is slightly above avg so amber
+const pctOfIndustry = saltyVals.map((v, i) => Math.round((v / industryVals[i]) * 100));
+// Colors: green if better than avg, coral if worse
+const benchColors = pctOfIndustry.map((pct, i) => {
+  if (isCost[i]) return pct <= 100 ? C.forest : C.coral;  // lower cost = good
+  return pct >= 100 ? C.forest : C.coral;  // higher perf = good
+});
+
+new Chart(document.getElementById('benchmarkChart'), {
+  type: 'bar',
+  data: {
+    labels: benchLabels,
+    datasets: [{
+      label: 'SALTY as % of Industry Average',
+      data: pctOfIndustry,
+      backgroundColor: benchColors,
+      borderRadius: 6
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => {
+        const i = ctx.dataIndex;
+        return `SALTY: ${saltyVals[i]} vs Industry: ${industryVals[i]} (${pctOfIndustry[i]}%)`;
+      }}}
+    },
+    scales: {
+      x: {
+        grid: { color: 'rgba(14,58,45,0.06)' },
+        ticks: { callback: v => `${v}%` },
+        min: 0,
+        max: 200
+      },
+      y: { grid: { display: false } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>

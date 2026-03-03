@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SALTY EU Strategy Deep-Dive</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    :root {
+      --teal: #0E3A2D;
+      --coral: #F75A3D;
+      --gold: #FED260;
+      --sand: #E7D7C0;
+      --cream: #F7F4ED;
+      --sky: #B6D4EA;
+      --forest: #3A6B35;
+      --white: #FFFFFF;
+      --light-green: #E8F5E9;
+      --light-blue: #E3F2FD;
+      --light-yellow: #FFF8E1;
+      --light-purple: #F3E5F5;
+      --light-red: #FFEBEE;
+      --light-orange: #FFF3E0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
+      color: var(--teal);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--teal);
+      padding: 0;
+      display: flex;
+      align-items: stretch;
+      height: 56px;
+      box-shadow: 0 2px 20px rgba(14, 58, 45, 0.3);
+    }
+
+    nav .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--gold);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      letter-spacing: -0.5px;
+    }
+
+    nav .tabs {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      flex: 1;
+    }
+
+    nav .tabs::-webkit-scrollbar { display: none; }
+
+    nav .tab {
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    nav .tab:hover { color: rgba(255,255,255,0.9); }
+    nav .tab.active {
+      color: var(--white);
+      border-bottom-color: var(--coral);
+    }
+
+    .tab-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    /* CONTENT */
+    main {
+      margin-top: 56px;
+      padding: 40px 32px 80px;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .sheet { display: none; }
+    .sheet.active { display: block; }
+
+    /* HERO */
+    .sheet-hero {
+      background: linear-gradient(135deg, var(--teal), #1a5a46);
+      border-radius: 20px;
+      padding: 48px 56px;
+      margin-bottom: 40px;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sheet-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(254,210,96,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .sheet-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .sheet-hero p {
+      font-size: 16px;
+      opacity: 0.8;
+      max-width: 700px;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .sheet-hero .accent-bar {
+      width: 60px;
+      height: 4px;
+      background: var(--coral);
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    /* SECTION */
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--teal);
+      margin: 48px 0 24px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title .badge {
+      background: var(--gold);
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* CARDS */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border: 1px solid rgba(14, 58, 45, 0.08);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 24px rgba(14, 58, 45, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .card-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--teal);
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .threat-badge, .priority-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+
+    .threat-high, .priority-critical {
+      background: var(--light-red);
+      color: var(--coral);
+    }
+
+    .threat-medium {
+      background: var(--light-orange);
+      color: #E65100;
+    }
+
+    .threat-low, .priority-medium {
+      background: var(--light-green);
+      color: var(--forest);
+    }
+
+    .priority-high {
+      background: var(--light-yellow);
+      color: #E65100;
+    }
+
+    .card-body p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .card-body .label {
+      font-weight: 600;
+      color: var(--teal);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 14px;
+      margin-bottom: 4px;
+    }
+
+    .card-body .value {
+      font-size: 14px;
+      color: #333;
+    }
+
+    /* TABLE STYLE */
+    .data-table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border: 1px solid rgba(14, 58, 45, 0.08);
+      background: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .data-table thead th {
+      background: var(--teal);
+      color: var(--white);
+      font-weight: 600;
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+    }
+
+    .data-table tbody td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #f0ede8;
+      vertical-align: top;
+    }
+
+    .data-table tbody tr:hover { background: rgba(14, 58, 45, 0.02); }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+
+    /* CREATIVE CARD */
+    .creative-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border: 1px solid rgba(14, 58, 45, 0.08);
+      overflow: hidden;
+      margin-bottom: 20px;
+      transition: box-shadow 0.2s;
+    }
+
+    .creative-card:hover {
+      box-shadow: 0 8px 24px rgba(14, 58, 45, 0.1);
+    }
+
+    .creative-card .creative-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      background: linear-gradient(135deg, var(--teal), #1a5a46);
+      color: var(--white);
+    }
+
+    .creative-card .creative-header h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .creative-card .creative-meta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .creative-card .creative-meta .funnel-tag {
+      background: rgba(255,255,255,0.15);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .creative-card .creative-meta .format-tag {
+      background: var(--gold);
+      color: var(--teal);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .creative-card .creative-body {
+      padding: 24px;
+    }
+
+    .creative-card .hook {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 16px;
+      line-height: 1.4;
+      padding-left: 16px;
+      border-left: 3px solid var(--coral);
+    }
+
+    .creative-card .body-copy {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 16px;
+      white-space: pre-line;
+    }
+
+    .creative-card .insight {
+      background: var(--light-blue);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #333;
+      margin-top: 16px;
+    }
+
+    .creative-card .insight strong {
+      color: var(--teal);
+    }
+
+    .creative-card .cta-display {
+      display: inline-block;
+      background: var(--coral);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 20px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+
+    .creative-card .market-tag {
+      font-size: 12px;
+      color: var(--forest);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    /* FUNNEL DIVIDER */
+    .funnel-divider {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--coral);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 32px 0 16px;
+      border-bottom: 2px solid var(--sand);
+      margin-bottom: 20px;
+    }
+
+    /* POSITIONING CALLOUT */
+    .callout {
+      background: linear-gradient(135deg, rgba(14, 58, 45, 0.04), rgba(254, 210, 96, 0.08));
+      border: 1px solid var(--sand);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+    }
+
+    .callout h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .callout p {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.7;
+    }
+
+    /* MARKET CARD */
+    .market-card {
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid rgba(14, 58, 45, 0.08);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .market-card .market-header {
+      background: var(--teal);
+      color: var(--white);
+      padding: 20px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .market-card .market-header h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .market-card .market-header .budget {
+      background: var(--gold);
+      color: var(--teal);
+      font-weight: 800;
+      font-size: 18px;
+      padding: 6px 16px;
+      border-radius: 10px;
+    }
+
+    .market-card .market-body {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .market-card .market-stat {
+      padding: 16px;
+      background: var(--cream);
+      border-radius: 12px;
+    }
+
+    .market-card .market-stat .stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #999;
+      margin-bottom: 6px;
+    }
+
+    .market-card .market-stat .stat-value {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .market-card .full-width {
+      grid-column: 1 / -1;
+    }
+
+    /* MSG FRAMEWORK */
+    .msg-row {
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid #f0ede8;
+    }
+
+    .msg-row:last-child { border-bottom: none; }
+
+    .msg-row > div {
+      padding: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .msg-row .principle {
+      font-weight: 700;
+      color: var(--teal);
+      background: var(--cream);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .msg-row .na-version { background: var(--light-red); }
+    .msg-row .eu-version { background: var(--light-green); }
+    .msg-row .why { background: var(--white); color: #555; }
+
+    /* ACTION ITEMS */
+    .action-card {
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid rgba(14, 58, 45, 0.08);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      padding: 24px 28px;
+      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 20px;
+      align-items: start;
+      transition: box-shadow 0.2s;
+    }
+
+    .action-card:hover {
+      box-shadow: 0 8px 24px rgba(14, 58, 45, 0.1);
+    }
+
+    .action-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--teal);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .action-content h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+
+    .action-content .action-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .action-content .action-meta span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .action-content .action-detail {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .card-grid { grid-template-columns: 1fr; }
+      .market-card .market-body { grid-template-columns: 1fr; }
+      .msg-row { grid-template-columns: 1fr; }
+      .action-card { grid-template-columns: 40px 1fr; }
+      .action-card .priority-badge { display: none; }
+      main { padding: 24px 16px 60px; }
+      .sheet-hero { padding: 32px 28px; }
+      .sheet-hero h1 { font-size: 26px; }
+      nav .tab { padding: 0 12px; font-size: 11px; }
+    }
+
+    @media (max-width: 500px) {
+      nav .logo { font-size: 14px; padding: 0 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">SALTY EU STRATEGY</div>
+  <div class="tabs">
+    <div class="tab active" data-sheet="competitive">
+      <span class="tab-indicator" style="background:var(--teal)"></span>
+      Competitive
+    </div>
+    <div class="tab" data-sheet="morocco-creative">
+      <span class="tab-indicator" style="background:var(--coral)"></span>
+      Morocco Creative
+    </div>
+    <div class="tab" data-sheet="sicily-creative">
+      <span class="tab-indicator" style="background:var(--gold)"></span>
+      Sicily Creative
+    </div>
+    <div class="tab" data-sheet="audience">
+      <span class="tab-indicator" style="background:var(--sky)"></span>
+      Audience
+    </div>
+    <div class="tab" data-sheet="messaging">
+      <span class="tab-indicator" style="background:var(--forest)"></span>
+      Messaging
+    </div>
+    <div class="tab" data-sheet="actions">
+      <span class="tab-indicator" style="background:var(--coral)"></span>
+      Actions
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============================================================ -->
+<!-- SHEET 1: COMPETITIVE LANDSCAPE -->
+<!-- ============================================================ -->
+<div class="sheet active" id="competitive">
+  <div class="sheet-hero">
+    <div class="accent-bar"></div>
+    <h1>Competitive Landscape</h1>
+    <p>Morocco &amp; Sicily competitor analysis — pricing, positioning, threat assessment, and SALTY's competitive advantages in the European market.</p>
+  </div>
+
+  <div class="section-title">
+    Morocco — Taghazout Competitive Landscape
+    <span class="badge">6 Competitors</span>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-name">Surf Maroc / Amouage</div>
+          <div class="card-subtitle">Taghazout · GBP 635–1,013/wk</div>
+        </div>
+        <span class="threat-badge threat-high">HIGH</span>
+      </div>
+      <div class="card-body">
+        <p>Boutique oceanfront hotel. Premium positioning. 'Members club but uncontrived.' Infinity pool, gym, spa. First alcohol license in Taghazout.</p>
+        <div class="label">Target Market</div>
+        <div class="value">UK, Europe</div>
+        <div class="label">What SALTY Can Learn</div>
+        <div class="value">They own the premium end. SALTY differentiates on COMMUNITY + COACHING + ALL-IN vs their hotel-that-happens-to-surf model.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-name">Dfrost Almugar</div>
+          <div class="card-subtitle">Taghazout · From EUR 595/wk</div>
+        </div>
+        <span class="threat-badge threat-medium">MEDIUM</span>
+      </div>
+      <div class="card-body">
+        <p>Community-oriented surf+yoga villa. Authentic, non-commercial. 3-course dinner included.</p>
+        <div class="label">Target Market</div>
+        <div class="value">Germany, Netherlands</div>
+        <div class="label">What SALTY Can Learn</div>
+        <div class="value">Similar community angle to SALTY at a lower price. SALTY must emphasize the RETREAT experience (structured programming, coaches, transformation) vs their casual camp vibe.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-name">Solid Surf House</div>
+          <div class="card-subtitle">Tamraght · EUR 399–549/wk</div>
+        </div>
+        <span class="threat-badge threat-low">LOW</span>
+      </div>
+      <div class="card-body">
+        <p>'One Package Fits All.' Budget-to-mid. 10 rooms, all-inclusive. Running summer discounts.</p>
+        <div class="label">Target Market</div>
+        <div class="value">Budget EU travelers</div>
+        <div class="label">What SALTY Can Learn</div>
+        <div class="value">Not a direct competitor on price. But they capture the price-shopping audience first. SALTY's messaging must justify the premium immediately.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-name">Endless Wave Morocco</div>
+          <div class="card-subtitle">Tamraght · EUR 470–620/wk</div>
+        </div>
+        <span class="threat-badge threat-low">LOW</span>
+      </div>
+      <div class="card-body">
+        <p>Mid-range, ISA-certified, small groups (4-6). Markets 'zero hidden costs.'</p>
+        <div class="label">Target Market</div>
+        <div class="value">EU budget-mid</div>
+        <div class="label">What SALTY Can Learn</div>
+        <div class="value">Their 'zero hidden costs' messaging is smart. SALTY should be equally transparent on pricing in EU ads — Europeans hate surprises.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-name">Soul & Surf</div>
+          <div class="card-subtitle">Portugal (Algarve) · From EUR 1,175/wk</div>
+        </div>
+        <span class="threat-badge threat-medium">MEDIUM</span>
+      </div>
+      <div class="card-body">
+        <p>Premium surf+yoga in Algarve. Design-forward, wellness-first. Strong Instagram presence.</p>
+        <div class="label">Target Market</div>
+        <div class="value">UK, Northern EU</div>
+        <div class="label">What SALTY Can Learn</div>
+        <div class="value">Not in Morocco but competes for the same European surf+yoga wallet. Their aesthetic and brand positioning is aspirational. SALTY competes on warmth + adventure.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-name">The Salty Pelican</div>
+          <div class="card-subtitle">Portugal + Sri Lanka · EUR 799–1,249/wk</div>
+        </div>
+        <span class="threat-badge threat-medium">MEDIUM</span>
+      </div>
+      <div class="card-body">
+        <p>Surf+yoga+strength. 'Salty' branding overlap. TripAdvisor, Hostelworld presence.</p>
+        <div class="label">Target Market</div>
+        <div class="value">EU + global</div>
+        <div class="label">What SALTY Can Learn</div>
+        <div class="value">BRAND CONFUSION RISK. Same 'salty' name. Different product. Monitor for SEO/paid search conflicts. Consider 'SALTY Retreats' as the full brand in EU markets.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Morocco Positioning -->
+  <div class="section-title">SALTY's Morocco Positioning vs Competitors</div>
+
+  <div class="callout">
+    <h4>Price Position</h4>
+    <p>~USD 2,150–2,650 (EUR 1,950–2,400) for 7 nights. This places SALTY at 2–4x the local Taghazout market. You are NOT competing with EUR 500/week surf camps. You are competing with Soul &amp; Surf, Surf Maroc Amouage, and mid-premium European wellness retreats.</p>
+  </div>
+  <div class="callout">
+    <h4>Differentiation</h4>
+    <p>Community + Structured Programming + All-Inclusive + Coaching Staff. Local camps offer surf lessons + accommodation. SALTY offers a CURATED EXPERIENCE with daily programming, professional coaches, yoga, fitness, meals, excursions, and a vetted community. The European buyer needs to see this difference in the first 3 seconds of an ad.</p>
+  </div>
+  <div class="callout">
+    <h4>European Advantage</h4>
+    <p>3-hour flight from London. 2.5 hours from Paris. No jet lag. For a European buyer, Morocco is a WEEKEND TRIP distance. This fundamentally changes the purchase calculus — it's not a big-deal international trip, it's an easy holiday.</p>
+  </div>
+  <div class="callout" style="border-left: 4px solid var(--coral);">
+    <h4>Regulatory Note</h4>
+    <p>EU Meta ads: no 'negative self-perception' messaging for wellness. Cannot use 'you're burnt out / broken / need fixing' framing. Instead: 'you deserve this / upgrade your life / this exists for you.' Positive aspiration, not pain-point exploitation.</p>
+  </div>
+
+  <!-- Sicily Competitors -->
+  <div class="section-title">
+    Sicily — Competitive Landscape
+    <span class="badge">4 Competitors</span>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-name">Yoga Escapes</div>
+          <div class="card-subtitle">Siracusa (5-star) · GBP 2,400–2,900</div>
+        </div>
+        <span class="threat-badge threat-high">HIGH</span>
+      </div>
+      <div class="card-body">
+        <p>Ultra-luxury. 'No rules, no mandatories.' Private beach, wine tasting. Targets affluent UK women.</p>
+        <div class="label">What SALTY Can Learn</div>
+        <div class="value">Top of market. SALTY's price is competitive but positioning must be DIFFERENT — energy, community, adventure vs their spa-hotel-with-yoga approach.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-name">Adventure Yogi</div>
+          <div class="card-subtitle">Near Ragusa · GBP 1,599–1,879</div>
+        </div>
+        <span class="threat-badge threat-high">HIGH</span>
+      </div>
+      <div class="card-body">
+        <p>Cultural immersion — Ragusa/Modica day trip, cooking class, infinity pool. 19th-century farmhouse.</p>
+        <div class="label">What SALTY Can Learn</div>
+        <div class="value">CLOSEST COMPETITOR to SALTY's positioning. Similar price, similar cultural immersion angle. SALTY differentiates on SURF + FITNESS + PARTY vs their yoga-only model.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-name">Present Practice Yoga</div>
+          <div class="card-subtitle">Southern Sicily · USD 2,800–3,800</div>
+        </div>
+        <span class="threat-badge threat-low">LOW</span>
+      </div>
+      <div class="card-body">
+        <p>Manifestation/self-inquiry. Cacao ceremony, journaling workshops. 'Presence, purpose, pleasure.'</p>
+        <div class="label">What SALTY Can Learn</div>
+        <div class="value">Different buyer. The 'woo-woo' spiritual market. SALTY is the ACTIVE, SOCIAL alternative for people who want transformation through adventure, not meditation circles.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-name">Bene Mudra</div>
+          <div class="card-subtitle">Near Agrigento · USD 2,995–3,495</div>
+        </div>
+        <span class="threat-badge threat-low">LOW</span>
+      </div>
+      <div class="card-body">
+        <p>Yoga + psychic medium. Valley of the Temples. Vegetarian/vegan.</p>
+        <div class="label">What SALTY Can Learn</div>
+        <div class="value">Not a competitor. Completely different audience. Useful only as a pricing reference — validates that USD 3K+ is accepted for Sicily retreats.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sicily Positioning -->
+  <div class="section-title">SALTY's Sicily Positioning vs Competitors</div>
+
+  <div class="callout">
+    <h4>Price Position</h4>
+    <p>~USD 2,350–2,800 (GBP 1,850–2,200). Directly competes with Adventure Yogi (GBP 1,599–1,879) and undercuts Yoga Escapes (GBP 2,400+). SALTY offers MORE (surf, fitness, parties) at a competitive price.</p>
+  </div>
+  <div class="callout" style="border-left: 4px solid var(--coral);">
+    <h4>Differentiation — Blue Ocean</h4>
+    <p>PARTY (9/10) + Surf + Ferragosto = No competitor has this combination. Every Sicily retreat competitor is yoga-only or yoga+cultural immersion. NONE offer surf. NONE acknowledge the party/social angle. NONE market around Ferragosto. SALTY owns a blue ocean.</p>
+  </div>
+  <div class="callout" style="border-left: 4px solid var(--gold);">
+    <h4>Ferragosto Angle — First-Mover</h4>
+    <p>Unclaimed territory — no wellness brand markets around it. Research confirmed: zero competitors are building campaigns around Ferragosto. This is a genuine first-mover opportunity.</p>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SHEET 2: MOROCCO EU CREATIVE -->
+<!-- ============================================================ -->
+<div class="sheet" id="morocco-creative">
+  <div class="sheet-hero" style="background: linear-gradient(135deg, #F75A3D, #e04828);">
+    <div class="accent-bar" style="background: var(--gold);"></div>
+    <h1>Morocco — EU Creative &amp; Messaging</h1>
+    <p>EU-specific ad concepts across the full funnel. European wellness ads cannot use 'negative self-perception' framing. Lead with aspiration and accessibility, not pain points.</p>
+  </div>
+
+  <div class="funnel-divider">Top of Funnel — Awareness</div>
+
+  <div class="creative-card">
+    <div class="creative-header">
+      <h3>'3 Hours From London' — Accessibility Hook</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">TOF</span>
+        <span class="format-tag">Video (Reel)</span>
+        <span class="priority-badge priority-critical">CRITICAL</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK + Ireland</div>
+      <div class="hook">3 hours from London. No jet lag. A completely different world.</div>
+      <div class="body-copy">Quick montage: Heathrow departure board → plane window → Morocco sunrise → surf in the ocean → sunset yoga on a rooftop.
+
+Text overlay: '7 nights. All-inclusive. Surf. Yoga. Morocco.'
+
+This is the #1 objection killer for Brits — they don't realize Morocco is as close as Spain.</div>
+      <div class="cta-display">See the Full Trip →</div>
+      <div class="insight"><strong>Why this works for Europeans:</strong> European travelers underestimate Morocco's proximity. '3 hours from London' reframes it from 'exotic faraway trip' to 'easy holiday.' This removes the biggest psychological barrier for UK buyers. Competitors like Surf Maroc don't lead with this.</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header">
+      <h3>'Your Next Long Weekend' — Normalization Hook</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">TOF</span>
+        <span class="format-tag">Video (Reel)</span>
+        <span class="priority-badge priority-high">HIGH</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK, Netherlands, Germany</div>
+      <div class="hook">Some people go to Mallorca. We go to Morocco.</div>
+      <div class="body-copy">Split-screen: generic beach resort (crowded, sunburnt tourists, pool bar) vs Morocco (uncrowded surf break, rooftop yoga, tagine dinner, laughing group of friends).
+
+No voiceover — music + text overlays. Positions SALTY as the ALTERNATIVE to the standard European holiday.</div>
+      <div class="cta-display">Choose Different →</div>
+      <div class="insight"><strong>Why this works:</strong> Europeans are saturated with 'beach holiday' options. This positions SALTY against the mainstream choice, not against other retreats. Taps into the 'I'm bored of the same holiday' sentiment.</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header">
+      <h3>'Surf Taghazout' — Sport-Led Hook</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">TOF</span>
+        <span class="format-tag">Video (Reel)</span>
+        <span class="priority-badge priority-high">HIGH</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK, Germany, Netherlands, Scandinavia</div>
+      <div class="hook">Europe's closest warm-water surf. And it's not what you think.</div>
+      <div class="body-copy">Fast-cut surf footage: barrels, longboard cruising, beginner lessons, high-fives in the lineup. Then the reveal: yoga at sunset, communal dinner, stargazing.
+
+'SALTY Retreats. More than a surf trip.'</div>
+      <div class="cta-display">Explore the Trip →</div>
+      <div class="insight"><strong>Why this works:</strong> Taghazout is already a known surf destination for European surfers. This creative speaks to people who've heard of it and upgrades their expectation. 50+ surf camps in Taghazout means awareness exists; SALTY captures the premium buyer.</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header">
+      <h3>'The Anti-Retreat Retreat' — Anti-Woo Positioning</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">TOF</span>
+        <span class="format-tag">Video (Reel)</span>
+        <span class="priority-badge priority-critical">CRITICAL</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK, Ireland, Scandinavia</div>
+      <div class="hook">No gongs. No juice cleanses. No life coaches. Just surf, yoga, and really good food in Morocco.</div>
+      <div class="body-copy">Quick cuts of real SALTY moments: someone wiping out and laughing, group clinking glasses at dinner, yoga that looks fun not pretentious, someone deadlifting, group dancing.
+
+Tone: self-aware, slightly irreverent, authentic. Critical for the UK market where 'wellness' has a credibility problem.</div>
+      <div class="cta-display">See What We're Actually About →</div>
+      <div class="insight"><strong>Why this works:</strong> UK and Scandinavian markets are skeptical of 'wellness' branding. The word triggers eye-rolls. This NAMES the objection and defuses it immediately. Positions SALTY as fitness + fun + community, not wellness + spirituality.</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header">
+      <h3>Erin Burnout — EU Compliant Version</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">TOF</span>
+        <span class="format-tag">Video (Reel)</span>
+        <span class="priority-badge priority-critical">CRITICAL</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">All EU</div>
+      <div class="hook">I decided I wanted more from my holidays.</div>
+      <div class="body-copy">IMPORTANT: The North American version ('I used to think burnout was just part of the deal') may trigger Meta's EU wellness ad restrictions on 'negative self-perception.'
+
+EU version reframes: not 'I was broken and this fixed me' but 'I wanted something better and I found it.'
+
+Same format: Erin speaks to camera → Morocco reveal. Different emotional register: aspiration, not desperation.</div>
+      <div class="cta-display">See the Retreat →</div>
+      <div class="insight"><strong>Regulatory:</strong> Meta EU policy prohibits wellness ads that 'create negative self-perception.' The NA Erin Burnout hook names a pain point ('burnout'). EU version MUST lead with desire ('I wanted more') not deficit. Test both — if the aspirational version works, use it globally.</div>
+    </div>
+  </div>
+
+  <div class="funnel-divider">Middle of Funnel — Consideration</div>
+
+  <div class="creative-card">
+    <div class="creative-header">
+      <h3>Morocco Carousel — EU Pricing Version</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">MOF</span>
+        <span class="format-tag">Carousel</span>
+        <span class="priority-badge priority-critical">CRITICAL</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">All EU</div>
+      <div class="hook">7 nights in Morocco. Everything included.</div>
+      <div class="body-copy">Slide 1: '7 nights in Morocco. Everything included.'
+Slide 2: Your villa (riad photos)
+Slide 3: Daily surf + yoga + fitness
+Slide 4: What's included (flights NOT included — be explicit)
+Slide 5: 'From EUR [X] / GBP [X] — Book now'
+
+Key EU difference: show pricing in EUR and GBP. Europeans are price-transparent. Explicitly state 'flights not included' because every Taghazout competitor's price is accommodation only.</div>
+      <div class="cta-display">Learn More + See Pricing →</div>
+      <div class="insight"><strong>Why this works:</strong> Panama carousel was the #1 MOF creative ($4.97 CPL). EU version must address price transparency and justify the premium vs local EUR 500 camps. The value story: 'this is a surf camp + yoga retreat + meal plan + excursions, packaged as one all-in experience.'</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header">
+      <h3>'What's Actually Included' — Value Breakdown</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">MOF</span>
+        <span class="format-tag">Infographic</span>
+        <span class="priority-badge priority-high">HIGH</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">All EU</div>
+      <div class="hook">Here's what EUR 2,200 gets you in Morocco. (It's a lot.)</div>
+      <div class="body-copy">✓ 7 nights private/shared riad accommodation
+✓ Daily surf coaching (all levels)
+✓ Daily yoga + fitness sessions
+✓ 3 meals/day (Moroccan + international)
+✓ Medina tour + cultural excursion
+✓ Airport transfers
+✓ Professional photography
+✓ SALTY welcome kit
+
+VS what you'd pay separately:
+Accomm: EUR 700 | Surf: EUR 400 | Yoga: EUR 300 | Meals: EUR 350 | Excursions: EUR 200 | Transfers: EUR 100
+Total à la carte: EUR 2,050+</div>
+      <div class="cta-display">See the Full Retreat →</div>
+      <div class="insight"><strong>Why this works:</strong> Europeans (especially Dutch, German) are value-calculators. They will Google 'Taghazout surf camp price' and see EUR 500. You MUST proactively justify 4x the price. This does the math for them.</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header">
+      <h3>'I Went Solo' — Solo Traveler Testimonial</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">MOF</span>
+        <span class="format-tag">Video (Reel)</span>
+        <span class="priority-badge priority-high">HIGH</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK, Netherlands, Scandinavia</div>
+      <div class="hook">'I booked alone, which felt terrifying. By day 2, I had a crew for life.'</div>
+      <div class="body-copy">Solo travel searches up 324% globally. European markets index high on solo wellness travel. Testimonial from a past guest who went solo. Shows: arriving alone → meeting people → group activities → end-of-trip group photo.</div>
+      <div class="cta-display">You Don't Have to Go Alone →</div>
+      <div class="insight"><strong>Why this works:</strong> Solo travel is the fastest-growing European travel segment. Most SALTY competitors market to couples or friend groups. Explicitly targeting solo travelers opens a massive segment.</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header">
+      <h3>'Your Surf Level Doesn't Matter' — Objection Handler</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">MOF</span>
+        <span class="format-tag">Video (Reel)</span>
+        <span class="priority-badge priority-high">HIGH</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK, Germany, Netherlands</div>
+      <div class="hook">Never surfed? Perfect. Surfed your whole life? Also perfect.</div>
+      <div class="body-copy">Show the spectrum: complete beginners standing up for the first time (celebrating), intermediates getting coached on technique, advanced surfers getting barrel footage reviewed.
+
+Text: 'Every SALTY trip includes coaching for every level.'</div>
+      <div class="cta-display">All Levels Welcome →</div>
+      <div class="insight"><strong>Why this works:</strong> Taghazout has a reputation as a proper surf destination among European surfers. Non-surfers might self-select out. This explicitly removes that barrier.</div>
+    </div>
+  </div>
+
+  <div class="funnel-divider">Bottom of Funnel — Conversion</div>
+
+  <div class="creative-card">
+    <div class="creative-header">
+      <h3>UK/EU Guest Testimonial (Accent Matters)</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">BOF</span>
+        <span class="format-tag">Video (Reel)</span>
+        <span class="priority-badge priority-critical">CRITICAL</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK, Ireland</div>
+      <div class="hook">'Honestly? Best holiday I've ever had. And I've done a lot of holidays.'</div>
+      <div class="body-copy">For UK/Irish BOF, the testimonial should feature a BRITISH or IRISH guest. Accent creates in-group trust. A Canadian testimonial feels 'foreign' to a British buyer.
+
+Same Olivia Testimonial format (47 leads at $9.10) — just with a voice the audience identifies with.</div>
+      <div class="cta-display">Message Us to Book →</div>
+      <div class="insight"><strong>Why this works:</strong> A British accent on a testimonial converts British buyers 2–3x better than a North American accent. This is well-documented in direct response marketing.</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header">
+      <h3>'Still Thinking About It?' — Retarget Nudge</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">BOF</span>
+        <span class="format-tag">Static</span>
+        <span class="priority-badge priority-high">HIGH</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">All EU</div>
+      <div class="hook">Still thinking about Morocco? Here's what last year's guests said…</div>
+      <div class="body-copy">'Life-changing week' — Emma, London
+'Best decision I made all year' — Lars, Amsterdam
+'I've already booked my second trip' — Sarah, Dublin
+
+Final slide: 'Only [X] spots left. Message us — we'll answer anything.'
+
+Social proof + scarcity + low-friction CTA (WhatsApp).</div>
+      <div class="cta-display">Message Us — No Pressure →</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header">
+      <h3>'Book With Friends — Get EUR 100 Off Each'</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">BOF</span>
+        <span class="format-tag">Static</span>
+        <span class="priority-badge" style="background:var(--light-blue);color:#1565C0;">MEDIUM</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">All EU</div>
+      <div class="hook">Bring a friend. You both save EUR 100.</div>
+      <div class="body-copy">Referral/group booking incentive. Europeans travel in pairs or small groups more than North Americans. A group discount is both a conversion driver AND a natural acquisition channel.
+
+Show: two friends on a surf board, both laughing. Text: 'Tag your travel partner.'</div>
+      <div class="cta-display">Book Together → Message Us</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SHEET 3: SICILY EU CREATIVE -->
+<!-- ============================================================ -->
+<div class="sheet" id="sicily-creative">
+  <div class="sheet-hero" style="background: linear-gradient(135deg, #C5940A, #e6b000);">
+    <div class="accent-bar" style="background: var(--teal);"></div>
+    <h1>Sicily — EU Creative &amp; Messaging</h1>
+    <p>Sicily is a KNOWN aspirational destination for Europeans. Don't sell Sicily — sell what SALTY adds to Sicily. Ferragosto is the unique hook no competitor owns.</p>
+  </div>
+
+  <div class="funnel-divider">Top of Funnel — Awareness</div>
+
+  <div class="creative-card">
+    <div class="creative-header" style="background: linear-gradient(135deg, #C5940A, #e6b000);">
+      <h3>'Ferragosto With Us' — Cultural Event Hook</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">TOF</span>
+        <span class="format-tag" style="background:var(--teal);color:var(--gold);">Video (Reel)</span>
+        <span class="priority-badge priority-critical">CRITICAL</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK, Ireland, All EU</div>
+      <div class="hook">August 15th. Italy shuts down. The beaches fill up. And we'll be right in the middle of it — but with surf, yoga, and a private villa.</div>
+      <div class="body-copy">Open on Italian Ferragosto footage: fireworks over the sea, beach bonfires, packed piazzas, Italian families feasting.
+
+Cut to: SALTY retreat — the same energy but with surf, yoga, a private villa, and an international crew.
+
+'Ferragosto. The Italian holiday you didn't know you needed.'</div>
+      <div class="cta-display">Experience Ferragosto →</div>
+      <div class="insight"><strong>First-mover advantage:</strong> ZERO competitors are marketing around Ferragosto. This is confirmed by research. Europeans who've been to Italy know August 15 is massive. The cultural event hook creates urgency, novelty, and aspiration. This should be the LEAD creative for EU TOF.</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header" style="background: linear-gradient(135deg, #C5940A, #e6b000);">
+      <h3>'The Italian Summer You've Been Imagining' — Aspiration Hook</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">TOF</span>
+        <span class="format-tag" style="background:var(--teal);color:var(--gold);">Video (Reel)</span>
+        <span class="priority-badge priority-critical">CRITICAL</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK, Netherlands, Scandinavia</div>
+      <div class="hook">Pasta. Sunsets. Crystal water. Ancient villages. And yes — we surf too.</div>
+      <div class="body-copy">Pure aspiration piece. Slow-motion Sicily footage: handmade pasta, golden hour on the coast, diving into turquoise water, cobblestone streets, aperitivo on a terrace.
+
+No SALTY branding until the end. Let Sicily sell itself — then the tag: 'SALTY Retreats. Endless Summer. August 9-16.'
+
+Every Northern European has an Italian summer fantasy. You're activating a pre-existing desire, not creating one.</div>
+      <div class="cta-display">Live Your Italian Summer →</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header" style="background: linear-gradient(135deg, #C5940A, #e6b000);">
+      <h3>'Not Another Beach Holiday' — Anti-Generic Hook</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">TOF</span>
+        <span class="format-tag" style="background:var(--teal);color:var(--gold);">Video (Reel)</span>
+        <span class="priority-badge priority-high">HIGH</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK, Ireland</div>
+      <div class="hook">You could do another week in Ibiza. Or you could do this.</div>
+      <div class="body-copy">Split-screen: generic Ibiza/Mykonos club scene (packed, loud, hungover) vs Sicily SALTY retreat (surf at sunrise, yoga overlooking the sea, wine with dinner, dancing under stars).
+
+'Same energy. Better story.'
+
+Targets the 25–35 UK market that's aging out of party holidays but still wants social energy. SALTY's Party rating (9/10) is the hook.</div>
+      <div class="cta-display">Upgrade Your Summer →</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header" style="background: linear-gradient(135deg, #C5940A, #e6b000);">
+      <h3>'2 Hours From Home' — Accessibility Hook</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">TOF</span>
+        <span class="format-tag" style="background:var(--teal);color:var(--gold);">Video (Reel)</span>
+        <span class="priority-badge priority-high">HIGH</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK, N. Europe, Germany</div>
+      <div class="hook">2 hours from London. Southern Sicily. 8 days you'll never forget.</div>
+      <div class="body-copy">Same structure as Morocco '3 Hours From London.' Sicily is CLOSER than Morocco for most Europeans. Direct budget flights (Ryanair, easyJet) to Catania exist from every EU hub.
+
+Add text: 'Direct flights from London, Berlin, Amsterdam, Dublin.'</div>
+      <div class="cta-display">See the Full Trip →</div>
+      <div class="insight"><strong>Why this works:</strong> Ryanair flies London → Catania for GBP 30–80. The price barrier to GET THERE is almost nothing. This should feel as easy as a domestic holiday.</div>
+    </div>
+  </div>
+
+  <div class="funnel-divider">Middle of Funnel — Consideration</div>
+
+  <div class="creative-card">
+    <div class="creative-header" style="background: linear-gradient(135deg, #C5940A, #e6b000);">
+      <h3>Sicily Carousel — EU Pricing + Ferragosto</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">MOF</span>
+        <span class="format-tag" style="background:var(--teal);color:var(--gold);">Carousel</span>
+        <span class="priority-badge priority-critical">CRITICAL</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">All EU</div>
+      <div class="hook">8 nights. Southern Sicily. Ferragosto included.</div>
+      <div class="body-copy">Slide 1: '8 nights. Southern Sicily. Ferragosto included.'
+Slide 2: Your villa — private pool, ocean views
+Slide 3: Daily schedule (surf, yoga, fitness, free time)
+Slide 4: Ferragosto special — beach party, fireworks, Italian feast
+Slide 5: What's included + EUR/GBP pricing
+
+Slide 4 is unique and no competitor has it. This transforms a standard retreat carousel into an EVENT carousel.</div>
+      <div class="cta-display">Learn More + Pricing →</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header" style="background: linear-gradient(135deg, #C5940A, #e6b000);">
+      <h3>'Ferragosto Explained' — Educational Content</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">MOF</span>
+        <span class="format-tag" style="background:var(--teal);color:var(--gold);">Video (Reel)</span>
+        <span class="priority-badge priority-high">HIGH</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK, Netherlands, Scandinavia</div>
+      <div class="hook">What is Ferragosto? Italy's biggest celebration — and it falls during our retreat.</div>
+      <div class="body-copy">Educational hook for Europeans who don't know Ferragosto (50% of Dutch/French are unfamiliar).
+
+'Every August 15th, Italy stops. Everyone goes to the beach. Fireworks. Feasts. The biggest party of the Italian summer.'
+
+Then: 'Our Endless Summer retreat falls August 9-16. You'll be there for it.'</div>
+      <div class="cta-display">Be There for Ferragosto →</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header" style="background: linear-gradient(135deg, #C5940A, #e6b000);">
+      <h3>Morocco UGC → Sicily Cross-Sell</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">MOF</span>
+        <span class="format-tag" style="background:var(--teal);color:var(--gold);">Video (Reel)</span>
+        <span class="priority-badge priority-critical">CRITICAL</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">All EU</div>
+      <div class="hook">'If you missed Morocco — don't miss Sicily. Honestly, just do it.'</div>
+      <div class="body-copy">Capture a EUROPEAN guest testimonial at Morocco retreat (May 16-23) for immediate deployment into Sicily MOF (June 1).
+
+If there are European Morocco guests, this becomes the single most powerful creative. Plan the capture NOW — brief the team before Morocco starts.</div>
+      <div class="cta-display">Join the Next One →</div>
+      <div class="insight"><strong>Strategic pipeline:</strong> The Morocco → Sicily pipeline is SALTY's biggest strategic advantage for EU. If even 1–2 UK/EU guests attend Morocco, their testimonials become gold for Sicily.</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header" style="background: linear-gradient(135deg, #C5940A, #e6b000);">
+      <h3>'Surf + Pasta + Repeat' — Lifestyle Content</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">MOF</span>
+        <span class="format-tag" style="background:var(--teal);color:var(--gold);">Video (Reel)</span>
+        <span class="priority-badge priority-high">HIGH</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">All EU</div>
+      <div class="hook">The daily routine: sunrise surf. Morning yoga. Afternoon swim. Evening pasta. Repeat for 8 days.</div>
+      <div class="body-copy">A 'day in the life' video — real footage, natural light, no voiceover. Just vibes + text overlays.
+
+Morning: surf lesson montage
+Midday: yoga on the terrace
+Afternoon: swimming, exploring Ragusa
+Evening: cooking together, wine, sunset
+
+Content marketing disguised as an ad. Feels native.</div>
+      <div class="cta-display">This Could Be Your Week →</div>
+    </div>
+  </div>
+
+  <div class="funnel-divider">Bottom of Funnel — Conversion</div>
+
+  <div class="creative-card">
+    <div class="creative-header" style="background: linear-gradient(135deg, #C5940A, #e6b000);">
+      <h3>EU Guest Testimonial — Accent Match</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">BOF</span>
+        <span class="format-tag" style="background:var(--teal);color:var(--gold);">Video (Reel)</span>
+        <span class="priority-badge priority-critical">CRITICAL</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">UK, Ireland</div>
+      <div class="hook">'Best week of my year. And I'm already looking at the next one.'</div>
+      <div class="body-copy">British accent for British audience. By Sicily BOF (June 15+), you should have either a UK/EU Morocco guest testimonial or a past UK/EU guest from any SALTY retreat.
+
+If you have NEITHER, consider offering a past UK guest a discount on Sicily in exchange for a testimonial video. The ROI is enormous.</div>
+      <div class="cta-display">Book Your Spot → Message Us</div>
+      <div class="insight"><strong>Non-negotiable:</strong> Accent-matched testimonials are the #1 conversion driver for UK BOF. If you don't have a UK/EU testimonial, getting one should be the #1 pre-campaign priority.</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header" style="background: linear-gradient(135deg, #C5940A, #e6b000);">
+      <h3>'Last Ferragosto Spots' — Scarcity + Event</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">BOF</span>
+        <span class="format-tag" style="background:var(--teal);color:var(--gold);">Static</span>
+        <span class="priority-badge priority-high">HIGH</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">All EU</div>
+      <div class="hook">[X] spots left for Ferragosto week. Once they're gone, you're waiting until 2027.</div>
+      <div class="body-copy">Ferragosto-specific urgency. This works because Ferragosto is date-specific (can't be rescheduled), the event is real, and SALTY is the only retreat offering this combination.
+
+Only run in final 3–4 weeks (mid-July → August 1).</div>
+      <div class="cta-display">Grab Your Spot → Message Us</div>
+      <div class="insight"><strong>Genuine vs manufactured scarcity:</strong> Urgency alone failed in Panama (0 leads). Urgency tied to a real, date-specific cultural event is different — it's not 'hurry up' but 'this only happens once a year.'</div>
+    </div>
+  </div>
+
+  <div class="creative-card">
+    <div class="creative-header" style="background: linear-gradient(135deg, #C5940A, #e6b000);">
+      <h3>WhatsApp — EU-Friendly CTA</h3>
+      <div class="creative-meta">
+        <span class="funnel-tag">BOF</span>
+        <span class="format-tag" style="background:var(--teal);color:var(--gold);">Video (Reel)</span>
+        <span class="priority-badge priority-critical">CRITICAL</span>
+      </div>
+    </div>
+    <div class="creative-body">
+      <div class="market-tag">All EU</div>
+      <div class="hook">Questions about Sicily? Skip the form. Just message us — we reply within hours.</div>
+      <div class="body-copy">Show actual WhatsApp conversation screenshots (mock or real) showing friendly, helpful exchanges.
+
+Tone: 'We're real people, not a booking engine.'
+
+WhatsApp usage in Europe is ~95% penetration in UK, Netherlands, Germany, and Southern Europe. 'Message us on WhatsApp' is like saying 'text us' — completely normal.</div>
+      <div class="cta-display">Chat With Us on WhatsApp →</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SHEET 4: EU AUDIENCE STRATEGY -->
+<!-- ============================================================ -->
+<div class="sheet" id="audience">
+  <div class="sheet-hero" style="background: linear-gradient(135deg, #2a6fa8, #4a9fd8);">
+    <div class="accent-bar" style="background: var(--gold);"></div>
+    <h1>EU Audience Strategy</h1>
+    <p>Market segmentation by nationality — English-speaking and English-comfortable markets. Ordered by estimated conversion potential.</p>
+  </div>
+
+  <div class="section-title">European Market Segmentation</div>
+
+  <div class="market-card">
+    <div class="market-header">
+      <h3>United Kingdom</h3>
+      <div class="budget">35–40%</div>
+    </div>
+    <div class="market-body">
+      <div class="market-stat">
+        <div class="stat-label">Addressable Population</div>
+        <div class="stat-value">5–8M (fitness/travel 25-45)</div>
+      </div>
+      <div class="market-stat">
+        <div class="stat-label">Wellness Familiarity</div>
+        <div class="stat-value">HIGH — largest outbound EU wellness market</div>
+      </div>
+      <div class="market-stat">
+        <div class="stat-label">Price Sensitivity</div>
+        <div class="stat-value">MODERATE — will pay premium for perceived value, but demand transparency. Compare against GBP 1,500–2,000 package holidays.</div>
+      </div>
+      <div class="market-stat">
+        <div class="stat-label">Platform Behavior</div>
+        <div class="stat-value">Instagram primary, TikTok growing fast (travel TikTok ROAS: 291% bump). WhatsApp native (95%). Email effective for considered purchases.</div>
+      </div>
+      <div class="market-stat full-width">
+        <div class="stat-label">Content Preference</div>
+        <div class="stat-value">Polished but authentic. Slightly irreverent humor works. Skeptical of 'wellness' branding — prefer 'fitness + holiday.' Trust peer recommendations over brand claims.</div>
+      </div>
+      <div class="market-stat full-width">
+        <div class="stat-label">Key Messaging Angles</div>
+        <div class="stat-value">• 'Anti-retreat retreat' (defuse wellness skepticism) • Accessibility ('3 hrs from London') • Solo travel friendliness • Party + social energy (Sicily) • Accent-matched testimonials are CRITICAL</div>
+      </div>
+      <div class="market-stat full-width">
+        <div class="stat-label">Top Creatives</div>
+        <div class="stat-value">Morocco: Anti-Retreat, 3hrs From London, Erin EU, UK Testimonial — Sicily: Ferragosto, Italian Summer, Not Another Beach Holiday, UK Testimonial</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="market-card">
+    <div class="market-header">
+      <h3>Ireland</h3>
+      <div class="budget">10–15%</div>
+    </div>
+    <div class="market-body">
+      <div class="market-stat">
+        <div class="stat-label">Addressable Population</div>
+        <div class="stat-value">1–2M addressable</div>
+      </div>
+      <div class="market-stat">
+        <div class="stat-label">Wellness Familiarity</div>
+        <div class="stat-value">HIGH — culturally similar to UK, strong solo travel culture</div>
+      </div>
+      <div class="market-stat full-width">
+        <div class="stat-label">Content Preference</div>
+        <div class="stat-value">Warm, community-focused. Respond to 'soul' language more than UK. Less cynical about wellness. Love adventure + social connection.</div>
+      </div>
+      <div class="market-stat full-width">
+        <div class="stat-label">Key Messaging</div>
+        <div class="stat-value">• Community and human connection • 'Restore your spirit' framing • Adventure + nature • Solo-friendly • Group booking incentives (Irish travel in pairs/groups)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="market-card">
+    <div class="market-header">
+      <h3>Netherlands</h3>
+      <div class="budget">10–15%</div>
+    </div>
+    <div class="market-body">
+      <div class="market-stat">
+        <div class="stat-label">Addressable Population</div>
+        <div class="stat-value">2–4M (25-45, English-fluent)</div>
+      </div>
+      <div class="market-stat">
+        <div class="stat-label">Wellness Familiarity</div>
+        <div class="stat-value">LOW — 50% unfamiliar with wellness holidays as concept</div>
+      </div>
+      <div class="market-stat full-width">
+        <div class="stat-label">Content Preference</div>
+        <div class="stat-value">EDUCATIONAL content needed. Value-driven, practical. Extremely transparent expectations. Dislike hard sells. Prefer clear itineraries and logical value breakdowns.</div>
+      </div>
+      <div class="market-stat full-width">
+        <div class="stat-label">Key Messaging</div>
+        <div class="stat-value">• Educational: 'What is a wellness retreat?' • Value breakdown (itemized) • Stress relief + simplicity • 'All logistics handled' • Clear, honest pricing (zero hidden costs)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="market-card">
+    <div class="market-header">
+      <h3>Scandinavia</h3>
+      <div class="budget">10–15%</div>
+    </div>
+    <div class="market-body">
+      <div class="market-stat">
+        <div class="stat-label">Addressable Population</div>
+        <div class="stat-value">3–5M (English-fluent, high disposable income)</div>
+      </div>
+      <div class="market-stat">
+        <div class="stat-label">Wellness Familiarity</div>
+        <div class="stat-value">HIGH — wellness is culturally embedded (hygge, friluftsliv)</div>
+      </div>
+      <div class="market-stat full-width">
+        <div class="stat-label">Content Preference</div>
+        <div class="stat-value">Authenticity above all. Minimalist, understated. Hate overselling. Respect quiet confidence. Value nature, sustainability, slow living. Already understand wellness — don't explain it.</div>
+      </div>
+      <div class="market-stat full-width">
+        <div class="stat-label">Key Messaging</div>
+        <div class="stat-value">• Authenticity + nature immersion • Slow living + presence (kos/hygge) • New experiences, not the concept itself • Sustainability credentials if genuine • 'Upgrade' framing</div>
+      </div>
+      <div class="market-stat full-width">
+        <div class="stat-label">Price Sensitivity</div>
+        <div class="stat-value">LOW — highest disposable income in Europe. Price is rarely the barrier. Experience quality is everything.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="market-card">
+    <div class="market-header">
+      <h3>Germany</h3>
+      <div class="budget">10–15%</div>
+    </div>
+    <div class="market-body">
+      <div class="market-stat">
+        <div class="stat-label">Addressable Population</div>
+        <div class="stat-value">4–6M (fitness-focused, English-comfortable)</div>
+      </div>
+      <div class="market-stat">
+        <div class="stat-label">Wellness Familiarity</div>
+        <div class="stat-value">MODERATE — strong spa/thermal culture but 'retreat' concept less established</div>
+      </div>
+      <div class="market-stat full-width">
+        <div class="stat-label">Content Preference</div>
+        <div class="stat-value">Organized, detail-oriented. Want clear itineraries, qualified instructors, and structured programming. Respond to sports/fitness framing more than 'wellness.' Strong existing surf culture.</div>
+      </div>
+      <div class="market-stat full-width">
+        <div class="stat-label">Key Messaging</div>
+        <div class="stat-value">• Structured programming + qualified coaches • Surf-specific (German surf culture is real) • Clear itinerary + schedule • Value for money + transparency • Fitness transformation framing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Budget Allocation Table -->
+  <div class="section-title">Recommended Budget Allocation (% of Total EU Spend)</div>
+
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Market</th>
+          <th>Morocco TOF</th>
+          <th>Morocco MOF</th>
+          <th>Morocco BOF</th>
+          <th>Sicily TOF</th>
+          <th>Sicily MOF</th>
+          <th>Sicily BOF</th>
+          <th>Rationale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>UK</strong></td>
+          <td>35%</td><td>35%</td><td>40%</td><td>30%</td><td>30%</td><td>35%</td>
+          <td>Largest addressable market, highest wellness travel familiarity, proven Meta ad responsiveness</td>
+        </tr>
+        <tr>
+          <td><strong>Ireland</strong></td>
+          <td>10%</td><td>10%</td><td>15%</td><td>10%</td><td>10%</td><td>15%</td>
+          <td>Culturally aligned with UK, strong solo travel. Higher BOF % because group booking incentives may drive late conversions.</td>
+        </tr>
+        <tr>
+          <td><strong>Netherlands</strong></td>
+          <td>15%</td><td>15%</td><td>10%</td><td>15%</td><td>15%</td><td>10%</td>
+          <td>Need educational TOF/MOF content. Lower BOF — let them self-qualify through content before pushing conversion.</td>
+        </tr>
+        <tr>
+          <td><strong>Scandinavia</strong></td>
+          <td>15%</td><td>15%</td><td>15%</td><td>15%</td><td>15%</td><td>15%</td>
+          <td>Even distribution — high income, no price barrier. Steady allocation lets algorithm optimize across funnel.</td>
+        </tr>
+        <tr>
+          <td><strong>Germany</strong></td>
+          <td>15%</td><td>15%</td><td>10%</td><td>15%</td><td>15%</td><td>10%</td>
+          <td>Strong surf interest for Morocco. Sicily less natural fit. Detailed/structured content in MOF.</td>
+        </tr>
+        <tr>
+          <td><strong>Other EU</strong></td>
+          <td>10%</td><td>10%</td><td>10%</td><td>15%</td><td>15%</td><td>15%</td>
+          <td>Italy, Spain, France — especially for Sicily where Mediterranean proximity is a draw.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SHEET 5: MESSAGING FRAMEWORK -->
+<!-- ============================================================ -->
+<div class="sheet" id="messaging">
+  <div class="sheet-hero" style="background: linear-gradient(135deg, #3A6B35, #2d8a25);">
+    <div class="accent-bar" style="background: var(--gold);"></div>
+    <h1>Messaging Translation Guide</h1>
+    <p>The SAME retreat needs DIFFERENT messaging for EU audiences. Here's the translation matrix — NA version vs EU version with rationale for every difference.</p>
+  </div>
+
+  <div class="section-title">EU vs North America — Messaging Framework</div>
+
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="min-width:160px">Principle</th>
+          <th>North America</th>
+          <th>EU Version</th>
+          <th>Why the Difference</th>
+          <th style="min-width:100px">Applies To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Pain Point Framing</strong></td>
+          <td style="background:var(--light-red);">✓ Direct pain: 'You're burnt out. You need this.'</td>
+          <td style="background:var(--light-green);">✗ NOT ALLOWED. Reframe: 'You deserve more from your holidays.'</td>
+          <td>Meta EU policy prohibits 'negative self-perception' in wellness ads. Must frame as aspiration, not deficit.</td>
+          <td>ALL EU ads</td>
+        </tr>
+        <tr>
+          <td><strong>Price Presentation</strong></td>
+          <td style="background:var(--light-red);">USD price, 'starting at' framing, payment plans emphasized</td>
+          <td style="background:var(--light-green);">EUR + GBP dual pricing. Full value breakdown. 'Everything included' emphasis. No hidden costs.</td>
+          <td>Europeans expect price transparency. Competitors lead with 'zero hidden costs.' Europeans will Google-compare against EUR 500/week camps.</td>
+          <td>ALL MOF/BOF</td>
+        </tr>
+        <tr>
+          <td><strong>Urgency Messaging</strong></td>
+          <td style="background:var(--light-red);">'Only 5 spots left!' / 'Book before prices go up!'</td>
+          <td style="background:var(--light-green);">'Ferragosto only happens once a year' / 'Last spots for August' — tie urgency to EVENTS, not artificial scarcity.</td>
+          <td>Europeans are more skeptical of manufactured urgency. Date-specific events create genuine scarcity that feels authentic.</td>
+          <td>BOF only</td>
+        </tr>
+        <tr>
+          <td><strong>Testimonial Voice</strong></td>
+          <td style="background:var(--light-red);">Any past guest — accent doesn't matter as much</td>
+          <td style="background:var(--light-green);">MUST feature UK/EU guest for UK/EU audiences. Accent = trust signal.</td>
+          <td>In-group identification is stronger in EU markets. Accent matching is 2–3x more effective for direct response.</td>
+          <td>ALL testimonials</td>
+        </tr>
+        <tr>
+          <td><strong>Wellness Positioning</strong></td>
+          <td style="background:var(--light-red);">'Wellness retreat' is understood and accepted</td>
+          <td style="background:var(--light-green);">'Fitness holiday' or 'active retreat' or 'adventure trip' — avoid 'wellness' for UK/Scandi audiences.</td>
+          <td>UK and Scandinavian markets are skeptical of 'wellness.' 'Fitness + adventure + community' resonates better.</td>
+          <td>ALL TOF/MOF</td>
+        </tr>
+        <tr>
+          <td><strong>Solo Travel</strong></td>
+          <td style="background:var(--light-red);">Mentioned but not emphasized</td>
+          <td style="background:var(--light-green);">LEAD with solo-friendliness. Solo travel searches up 324%.</td>
+          <td>Solo travel is a massive European trend. Being solo-friendly is a competitive advantage worth leading with.</td>
+          <td>MOF especially</td>
+        </tr>
+        <tr>
+          <td><strong>Destination Knowledge</strong></td>
+          <td style="background:var(--light-red);">Morocco/Sicily need to be 'sold' as destinations</td>
+          <td style="background:var(--light-green);">Morocco is KNOWN (surf); Sicily is ASPIRATIONAL (Italian dream). Don't explain — sell what SALTY adds.</td>
+          <td>European travelers already have mental models. Selling the destination wastes ad real estate. Sell the EXPERIENCE layered on top.</td>
+          <td>ALL TOF</td>
+        </tr>
+        <tr>
+          <td><strong>CTA Style</strong></td>
+          <td style="background:var(--light-red);">'Book Now' / 'Sign Up' — direct, transactional</td>
+          <td style="background:var(--light-green);">'Message Us' / 'Let's Talk' / 'Chat With Us' — conversational, low-pressure.</td>
+          <td>Europeans prefer non-aggressive CTAs. 'Book Now' feels pushy. WhatsApp is a natural CTA given 95%+ EU penetration.</td>
+          <td>ALL BOF</td>
+        </tr>
+        <tr>
+          <td><strong>Community Framing</strong></td>
+          <td style="background:var(--light-red);">'Join our tribe' / 'SALTY fam'</td>
+          <td style="background:var(--light-green);">'Meet people like you' / 'International crew' / 'Friends you haven't met yet'</td>
+          <td>'Tribe' and 'fam' feel performative to European audiences. Emphasize the OUTCOME (new friends) not the BRAND.</td>
+          <td>ALL funnel</td>
+        </tr>
+        <tr>
+          <td><strong>Flight Cost Reframe</strong></td>
+          <td style="background:var(--light-red);">Flights are a significant added cost from North America</td>
+          <td style="background:var(--light-green);">'Direct flights from GBP 30–80' — flights are TRIVIAL. Lead with this.</td>
+          <td>Ryanair London → Catania is GBP 40. The flight cost is less than a nice dinner. Say this explicitly.</td>
+          <td>TOF + MOF</td>
+        </tr>
+        <tr>
+          <td><strong>Regulatory Compliance</strong></td>
+          <td style="background:var(--light-red);">Standard Meta ad policies</td>
+          <td style="background:var(--light-green);">GDPR, DMA, Digital Services Act. First-party data strategy critical.</td>
+          <td>Meta's DMA compliance lets EU users limit ad personalization. Build email list + WhatsApp community as hedge against platform restrictions.</td>
+          <td>Strategy level</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SHEET 6: ACTION ITEMS -->
+<!-- ============================================================ -->
+<div class="sheet" id="actions">
+  <div class="sheet-hero" style="background: linear-gradient(135deg, #F75A3D, #d4432a);">
+    <div class="accent-bar" style="background: var(--gold);"></div>
+    <h1>EU Action Items</h1>
+    <p>12 prioritized action items to execute the European strategy. Ordered by impact and deadline urgency.</p>
+  </div>
+
+  <div class="section-title">Prioritized Action Items</div>
+
+  <div class="action-card">
+    <div class="action-number">1</div>
+    <div class="action-content">
+      <h4>Source UK/EU past guest testimonial</h4>
+      <div class="action-meta">
+        <span>Owner: <strong>Nate</strong></span>
+        <span>Deadline: <strong>Before March 1</strong></span>
+      </div>
+      <div class="action-detail">Check all past SALTY guests for UK/EU attendees. Reach out for a phone-filmed testimonial. If none exist, offer a Morocco discount to a UK contact in exchange for honest testimonial. This is the #1 gap in EU BOF strategy.</div>
+    </div>
+    <span class="priority-badge priority-critical">CRITICAL</span>
+  </div>
+
+  <div class="action-card">
+    <div class="action-number">2</div>
+    <div class="action-content">
+      <h4>Create EU-compliant Erin Burnout version</h4>
+      <div class="action-meta">
+        <span>Owner: <strong>Erin + Nate</strong></span>
+        <span>Deadline: <strong>Before March 1</strong></span>
+      </div>
+      <div class="action-detail">Rescript the Erin hook from pain-point ('burnout') to aspiration ('I wanted more from my holidays'). Film or re-edit. This affects ALL EU TOF. Must comply with Meta's 'no negative self-perception' rule.</div>
+    </div>
+    <span class="priority-badge priority-critical">CRITICAL</span>
+  </div>
+
+  <div class="action-card">
+    <div class="action-number">3</div>
+    <div class="action-content">
+      <h4>Build EUR/GBP pricing carousel for Morocco</h4>
+      <div class="action-meta">
+        <span>Owner: <strong>KP + Erin</strong></span>
+        <span>Deadline: <strong>Before March 1</strong></span>
+      </div>
+      <div class="action-detail">EU audiences need local currency pricing. Create carousel with EUR and GBP prices. Include explicit 'flights not included' note and full value breakdown vs à la carte pricing.</div>
+    </div>
+    <span class="priority-badge priority-critical">CRITICAL</span>
+  </div>
+
+  <div class="action-card">
+    <div class="action-number">4</div>
+    <div class="action-content">
+      <h4>List on BookSurfCamps + BookRetreats</h4>
+      <div class="action-meta">
+        <span>Owner: <strong>Nate</strong></span>
+        <span>Deadline: <strong>Before March 1</strong></span>
+      </div>
+      <div class="action-detail">These aggregator platforms dominate organic search for 'surf retreat Morocco' and 'yoga retreat Sicily' in Europe. Listing is free or low-cost. Table stakes for EU visibility.</div>
+    </div>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+
+  <div class="action-card">
+    <div class="action-number">5</div>
+    <div class="action-content">
+      <h4>Configure WhatsApp Business for EU</h4>
+      <div class="action-meta">
+        <span>Owner: <strong>Sabhi + Nate</strong></span>
+        <span>Deadline: <strong>Before March 1</strong></span>
+      </div>
+      <div class="action-detail">WhatsApp is 95% penetration in EU. Configure WhatsApp Business with auto-responses, UTM-tagged links, and dedicated Morocco/Sicily flows. This is the primary EU conversion channel.</div>
+    </div>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+
+  <div class="action-card">
+    <div class="action-number">6</div>
+    <div class="action-content">
+      <h4>Plan Morocco retreat UGC capture (for Sicily)</h4>
+      <div class="action-meta">
+        <span>Owner: <strong>Nate + Erin</strong></span>
+        <span>Deadline: <strong>Before May 16</strong></span>
+      </div>
+      <div class="action-detail">Brief the Morocco retreat team: capture 3-4 guest testimonials on Day 7. Prioritize ANY European guests. These become the #1 Sicily BOF creative. Film in good light, phone quality is fine.</div>
+    </div>
+    <span class="priority-badge priority-critical">CRITICAL</span>
+  </div>
+
+  <div class="action-card">
+    <div class="action-number">7</div>
+    <div class="action-content">
+      <h4>Create 'Anti-Retreat Retreat' TOF creative</h4>
+      <div class="action-meta">
+        <span>Owner: <strong>KP + Nate</strong></span>
+        <span>Deadline: <strong>Before March 1</strong></span>
+      </div>
+      <div class="action-detail">UK audiences are skeptical of 'wellness.' The 'no gongs, no juice cleanses' creative defuses this. Quick to produce — mostly existing footage with a new voiceover/text overlay.</div>
+    </div>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+
+  <div class="action-card">
+    <div class="action-number">8</div>
+    <div class="action-content">
+      <h4>Build Ferragosto creative package (Sicily)</h4>
+      <div class="action-meta">
+        <span>Owner: <strong>KP + Erin</strong></span>
+        <span>Deadline: <strong>Before May 15</strong></span>
+      </div>
+      <div class="action-detail">No competitor owns this angle. Create: (1) Ferragosto TOF hook video, (2) Ferragosto Explained educational piece, (3) 'Last Ferragosto Spots' BOF static. Source Italian Ferragosto footage (stock or original).</div>
+    </div>
+    <span class="priority-badge priority-critical">CRITICAL</span>
+  </div>
+
+  <div class="action-card">
+    <div class="action-number">9</div>
+    <div class="action-content">
+      <h4>Research EU Meta ad policy for wellness category</h4>
+      <div class="action-meta">
+        <span>Owner: <strong>Nate</strong></span>
+        <span>Deadline: <strong>Before March 1</strong></span>
+      </div>
+      <div class="action-detail">Verify whether SALTY ads will be classified under Meta's 'health & wellness' restrictions in EU. If yes, certain optimization events (Lead, Purchase) may be limited. Test before full budget deployment.</div>
+    </div>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+
+  <div class="action-card">
+    <div class="action-number">10</div>
+    <div class="action-content">
+      <h4>Create group booking / referral incentive</h4>
+      <div class="action-meta">
+        <span>Owner: <strong>Nate</strong></span>
+        <span>Deadline: <strong>Before March 15</strong></span>
+      </div>
+      <div class="action-detail">Europeans travel in pairs/groups more than NA. A 'bring a friend, both save EUR 100' incentive is both a conversion tool and an acquisition channel. Simple to implement.</div>
+    </div>
+    <span class="priority-badge" style="background:var(--light-blue);color:#1565C0;">MEDIUM</span>
+  </div>
+
+  <div class="action-card">
+    <div class="action-number">11</div>
+    <div class="action-content">
+      <h4>Set up EU-specific ad sets (not just audience overlays)</h4>
+      <div class="action-meta">
+        <span>Owner: <strong>Nate</strong></span>
+        <span>Deadline: <strong>Before March 1</strong></span>
+      </div>
+      <div class="action-detail">Create SEPARATE ad sets for EU audiences. Different messaging, different copy, different CTAs. The carousel copy, testimonial selection, and pricing display must be EU-specific.</div>
+    </div>
+    <span class="priority-badge priority-high">HIGH</span>
+  </div>
+
+  <div class="action-card">
+    <div class="action-number">12</div>
+    <div class="action-content">
+      <h4>Monitor 'The Salty Pelican' brand confusion</h4>
+      <div class="action-meta">
+        <span>Owner: <strong>KP</strong></span>
+        <span>Deadline: <strong>Ongoing</strong></span>
+      </div>
+      <div class="action-detail">The Salty Pelican runs surf+yoga retreats in Portugal/Sri Lanka with overlapping 'salty' branding. Monitor for paid search conflicts. Consider 'SALTY Retreats' (full name) in all EU ad copy to differentiate.</div>
+    </div>
+    <span class="priority-badge" style="background:var(--light-blue);color:#1565C0;">MEDIUM</span>
+  </div>
+</div>
+
+</main>
+
+<script>
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.sheet').forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.sheet).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
