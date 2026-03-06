@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SALTY — Audience Analysis 2026</title>
+<style>
+@font-face {
+  font-family: 'TAN Headline';
+  src: url('../assets/salty-design/TAN-Headline/TANHEADLINE-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Roca';
+  src: url('../assets/salty-design/Roca Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Roca';
+  src: url('../assets/salty-design/Roca Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+:root {
+  --cream: #F7F4ED; --beige: #E7D7C0;
+  --teal: #0E3A2D; --coral: #F75A3D;
+  --gold: #FED260; --sky: #B6D4EA;
+  --seafoam: #A4E5D9; --forest: #3A6B35;
+  --slate: #4A4E58; --charcoal: #383838;
+  --white: #ffffff;
+  --shadow: 0 1px 4px rgba(14,58,45,.08);
+  --r: 14px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Roca',Georgia,serif;
+  background:var(--cream); color:var(--slate);
+  line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+
+/* NAV */
+.site-nav{
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  background:var(--teal); display:flex; align-items:stretch; height:56px;
+  box-shadow:0 2px 16px rgba(0,0,0,.25);
+}
+.nav-brand{
+  display:flex; align-items:center; gap:8px; padding:0 20px;
+  font-family:'TAN Headline',Georgia,serif; font-size:13px; letter-spacing:.08em;
+  color:var(--gold); white-space:nowrap; text-decoration:none;
+  border-right:1px solid rgba(255,255,255,.1);
+}
+.nav-brand span{color:rgba(255,255,255,.5)}
+.tab-bar{display:flex; overflow-x:auto; flex:1; scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-btn{
+  padding:0 20px; border:none; background:transparent;
+  color:rgba(255,255,255,.55); font-family:'Roca',serif; font-size:13px;
+  cursor:pointer; white-space:nowrap; border-bottom:3px solid transparent;
+  transition:all .2s;
+}
+.tab-btn:hover{color:rgba(255,255,255,.9)}
+.tab-btn.active{color:#fff; border-bottom-color:var(--coral)}
+
+/* PANELS */
+.panel{display:none; padding:80px 32px 80px; max-width:1600px; margin:0 auto}
+.panel.active{display:block}
+
+/* HERO */
+.panel-hero{
+  background:linear-gradient(135deg,var(--teal),#1a5a46);
+  border-radius:20px; padding:48px 56px;
+  color:#fff; margin-bottom:48px; position:relative; overflow:hidden;
+}
+.panel-hero::before{
+  content:''; position:absolute; top:-40%; right:-10%;
+  width:400px; height:400px;
+  background:radial-gradient(circle,rgba(254,210,96,.12) 0%,transparent 70%);
+  border-radius:50%;
+}
+.panel-hero .accent{width:48px;height:3px;background:var(--coral);border-radius:2px;margin-bottom:16px}
+.panel-hero h1{
+  font-family:'TAN Headline',Georgia,serif; font-size:clamp(22px,3vw,38px);
+  letter-spacing:.04em; text-transform:uppercase; margin-bottom:12px; position:relative;
+}
+.panel-hero p{color:rgba(255,255,255,.75); max-width:700px; position:relative}
+
+/* SECTION TITLE */
+.section-title{
+  font-family:'TAN Headline',Georgia,serif; font-size:18px;
+  text-transform:uppercase; letter-spacing:.06em; color:var(--teal);
+  margin:48px 0 20px; padding-bottom:10px; border-bottom:2px solid var(--gold);
+}
+
+/* STAGE HEADER BAR */
+.stage-section{margin-bottom:8px}
+.stage-header-bar{
+  display:flex; align-items:center; gap:12px;
+  padding:12px 18px; border-radius:12px 12px 0 0;
+  font-family:'TAN Headline',serif; font-size:14px; letter-spacing:.05em;
+  margin-top:28px;
+}
+.stage-bar-tof{background:var(--sky); color:var(--teal)}
+.stage-bar-reengage{background:var(--gold); color:var(--teal)}
+.stage-bar-mof{background:var(--teal); color:#fff}
+.stage-bar-bof{background:var(--coral); color:#fff}
+
+/* BADGES */
+.badge{
+  display:inline-flex; align-items:center;
+  font-family:'TAN Headline',Georgia,serif; font-size:10px;
+  letter-spacing:.06em; text-transform:uppercase;
+  padding:3px 9px; border-radius:20px; line-height:1.4; white-space:nowrap;
+}
+.stage-tof{background:var(--sky); color:var(--teal)}
+.stage-reengage{background:var(--gold); color:var(--teal)}
+.stage-mof{background:var(--teal); color:#fff}
+.stage-bof{background:var(--coral); color:#fff}
+.stage-other{background:var(--beige); color:var(--teal)}
+.priority-critical{background:#FFEBEE; color:var(--coral)}
+.priority-high{background:#E8F5E9; color:var(--forest)}
+.priority-medium{background:#F3F4F6; color:var(--slate)}
+.status-ready{background:#E8F5E9; color:var(--forest)}
+.status-pending{background:#FFF8E1; color:#E65100}
+.type-pill{
+  display:inline-block; font-size:11px; padding:2px 8px; border-radius:8px;
+  background:var(--beige); color:var(--teal); font-weight:700; white-space:nowrap;
+}
+.source-tag{
+  font-size:11px; padding:2px 8px; border-radius:8px;
+  background:var(--cream); border:1px solid var(--beige); white-space:nowrap;
+}
+.src-reuse{background:#e3f2fd; border-color:#90caf9}
+.src-exist{background:#e8f5e9; border-color:#a5d6a7}
+.src-new{background:#fff3e0; border-color:#ffcc80}
+.src-adapt{background:#f3e5f5; border-color:#ce93d8}
+.src-recre{background:#fce4ec; border-color:#f48fb1}
+.src-compi{background:#f1f8e9; border-color:#aed581}
+.unique-badge{
+  font-family:'TAN Headline',serif; font-size:10px; letter-spacing:.06em;
+  background:linear-gradient(135deg,var(--coral),#e04828); color:#fff;
+  padding:2px 8px; border-radius:20px;
+}
+
+/* TABLES */
+.table-wrap{
+  overflow-x:auto; border-radius:0 0 var(--r) var(--r);
+  box-shadow:var(--shadow); border:1px solid rgba(14,58,45,.09);
+  border-top:none; margin-bottom:4px;
+}
+.stage-section .table-wrap{margin-bottom:0}
+table{width:100%; border-collapse:collapse; font-size:13px}
+thead th{
+  background:rgba(14,58,45,.06); color:var(--teal);
+  font-family:'TAN Headline',serif; font-size:10px; letter-spacing:.07em;
+  text-transform:uppercase; padding:11px 14px; text-align:left; white-space:nowrap;
+}
+.stage-bar-tof + .table-wrap thead th{background:rgba(182,212,234,.3)}
+.stage-bar-mof + .table-wrap thead th{background:rgba(14,58,45,.15); color:var(--teal)}
+.stage-bar-bof + .table-wrap thead th{background:rgba(247,90,61,.1)}
+tbody td{
+  padding:11px 14px; border-bottom:1px solid var(--beige);
+  vertical-align:top; background:#fff;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:rgba(14,58,45,.02)}
+.geo-cell{font-size:12px; color:var(--slate); white-space:normal; min-width:100px}
+.budget-cell{text-align:center; font-size:15px; color:var(--forest); white-space:nowrap}
+.targeting-cell{font-size:12px; line-height:1.6; min-width:260px; max-width:340px}
+.creative-cell{font-size:12px; line-height:1.6; min-width:180px}
+.primary-cell{font-weight:700; color:var(--teal)}
+.notes-cell{font-size:12px; line-height:1.6; min-width:180px; max-width:280px; color:var(--slate)}
+.fmt-cell{font-size:12px; white-space:nowrap}
+.num-cell{text-align:center; color:var(--slate); opacity:.5; font-size:14px}
+
+/* MESSAGING ANGLES */
+.angles-grid{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr));
+  gap:16px; margin-bottom:8px;
+}
+.angle-card{
+  background:#fff; border-radius:var(--r);
+  border:1px solid rgba(14,58,45,.09); box-shadow:var(--shadow);
+  padding:20px; display:flex; flex-direction:column; gap:10px;
+  transition:box-shadow .2s, transform .2s;
+}
+.angle-card:hover{box-shadow:0 8px 24px rgba(14,58,45,.12); transform:translateY(-2px)}
+.angle-card.angle-stage-tof{border-top:3px solid var(--sky)}
+.angle-card.angle-stage-reengage{border-top:3px solid var(--gold)}
+.angle-card.angle-stage-mof{border-top:3px solid var(--teal)}
+.angle-card.angle-stage-bof{border-top:3px solid var(--coral)}
+.angle-top{display:flex; justify-content:space-between; align-items:flex-start; gap:8px}
+.angle-name{
+  font-family:'TAN Headline',serif; font-size:13px; text-transform:uppercase;
+  letter-spacing:.04em; color:var(--teal); line-height:1.3;
+}
+.angle-what{font-size:14px; font-weight:700; color:var(--charcoal); line-height:1.4}
+.angle-meta{display:flex; flex-direction:column; gap:6px}
+.angle-meta > div{display:flex; gap:8px; font-size:12px}
+.meta-label{
+  font-family:'TAN Headline',serif; font-size:9px; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--slate); opacity:.5;
+  min-width:60px; padding-top:2px;
+}
+.angle-creatives{color:var(--teal); font-weight:700}
+
+/* CHECKLIST */
+.checklist-table tbody td{font-size:13px}
+.summary-pills{
+  display:flex; flex-wrap:wrap; gap:12px; margin-top:16px; margin-bottom:8px;
+}
+.summary-pill{
+  background:#fff; border:1px solid var(--beige); border-radius:var(--r);
+  padding:12px 16px; display:flex; flex-direction:column; align-items:center; gap:2px;
+  min-width:120px;
+}
+.pill-val{font-family:'TAN Headline',serif; font-size:16px; color:var(--teal); text-align:center}
+.pill-label{font-size:11px; color:var(--slate); opacity:.7; text-align:center}
+
+/* RETREAT TOGGLE */
+.retreat-toggle{
+  display:flex; gap:4px; margin-bottom:24px;
+  background:#fff; border-radius:12px; padding:4px;
+  width:fit-content; border:1px solid var(--beige); box-shadow:var(--shadow);
+}
+.retreat-btn{
+  padding:8px 24px; border:none; border-radius:8px; cursor:pointer;
+  font-family:'TAN Headline',serif; font-size:12px; letter-spacing:.06em;
+  text-transform:uppercase; background:transparent; color:var(--slate);
+  transition:all .2s;
+}
+.retreat-btn.active{
+  background:var(--teal); color:var(--gold);
+  box-shadow:0 2px 8px rgba(14,58,45,.2);
+}
+
+.retreat-content{display:none}
+.retreat-content.active{display:block}
+
+@media(max-width:900px){
+  .panel{padding:72px 16px 60px}
+  .panel-hero{padding:32px 28px}
+  .angles-grid{grid-template-columns:1fr}
+  .tab-btn{padding:0 12px; font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-brand" href="../">SALTY DOCS <span>/ Audience Analysis</span></a>
+  <div class="tab-bar">
+    <button class="tab-btn active" data-panel="targeting">Audience Targeting</button>
+    <button class="tab-btn" data-panel="creative-map">Creative Pairings</button>
+    <button class="tab-btn" data-panel="angles">Messaging Angles</button>
+    <button class="tab-btn" data-panel="checklist">Production Checklist</button>
+  </div>
+</nav>
+
+<!-- ═══ AUDIENCE TARGETING ═══════════════════════════════════════════════════ -->
+<div class="panel active" id="targeting">
+  <div class="panel-hero">
+    <div class="accent"></div>
+    <h1>Audience Targeting Matrix</h1>
+    <p>Meta Ads Manager interest categories, behaviors, and budget allocation for every audience segment — Morocco (May 16–23) and Sicily (Aug 9–16).</p>
+  </div>
+
+  <div class="retreat-toggle">
+    <button class="retreat-btn active" onclick="switchRetreat(this,'aud-morocco','aud-sicily')">Morocco</button>
+    <button class="retreat-btn" onclick="switchRetreat(this,'aud-sicily','aud-morocco')">Sicily</button>
+  </div>
+
+  <div class="retreat-content active" id="aud-morocco">
+    <div class="section-title">Morocco — Beyond the Dunes Pt 2</div>
+    <div class="stage-section">
+<div class="stage-header-bar stage-bar-tof"><span class="badge stage-tof">TOF</span> <span>TOF Audiences</span></div>
+<div class="table-wrap"><table class="aud-table"><thead><tr>
+<th>Audience</th><th>Type</th><th>Geo</th><th>Budget %</th>
+<th>Interests / Behaviors</th><th>Age / Gender</th>
+<th>Size Est.</th><th>Best Creative Pairing</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Canada Broad + Fitness/Travel</strong></td>
+<td><span class="type-pill">Interest</span></td>
+<td class="geo-cell">Canada</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="targeting-cell">Interests: Yoga, Surfing, CrossFit, Fitness and wellness, Adventure travel, Backpacking, Boutique hotels, Meditation, Health &amp; fitness, Outdoor recreation<br>Behaviors: Frequent international travelers, Travel app users<br>Exclude: Past purchasers, email list</td>
+<td>26–50, All</td>
+<td>2–5M</td>
+<td class="creative-cell">Brett 8s, Erin Burnout NA, Surf Montage</td>
+<td class="notes-cell">Start broad, let algorithm optimize. Exclude converters.</td>
+</tr>
+<tr>
+<td><strong>US Key Markets</strong></td>
+<td><span class="type-pill">Interest + Geo</span></td>
+<td class="geo-cell">NYC, LA, Miami, Austin, Denver, Chicago</td>
+<td class="budget-cell"><strong>10%</strong></td>
+<td class="targeting-cell">Interests: Yoga retreats, Surf travel, Wellness travel, Boutique fitness, Group fitness, SoulCycle, Barry's, F45 Training, Beach vacation<br>Behaviors: Frequent international travelers<br>Exclude: Past purchasers</td>
+<td>26–45, All</td>
+<td>1–2M</td>
+<td class="creative-cell">Brett 8s, Erin Burnout NA</td>
+<td class="notes-cell">Geo-target cities with direct Morocco flights. Smaller allocation than v2.</td>
+</tr>
+<tr>
+<td><strong>UK + Ireland</strong></td>
+<td><span class="type-pill">Interest</span></td>
+<td class="geo-cell">United Kingdom, Ireland</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="targeting-cell">Interests: Surfing, Yoga, Fitness holidays, Adventure holidays, Wellness retreats, Morocco travel, Beach holidays, Solo travel, Boutique hotels, Outdoor fitness<br>Behaviors: Frequent travelers, Engaged shoppers<br>Exclude: Past purchasers</td>
+<td>25–45, All</td>
+<td>1–3M</td>
+<td class="creative-cell">3hrs From London, Anti-Retreat, Erin EU, Surf Morocco</td>
+<td class="notes-cell">Morocco is 3hrs from London. Known surf destination for Brits.</td>
+</tr>
+<tr>
+<td><strong>Western Europe (FR, DE, NL, BE)</strong></td>
+<td><span class="type-pill">Interest</span></td>
+<td class="geo-cell">France, Germany, Netherlands, Belgium</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="targeting-cell">Interests: Surf, Yoga, Fitness-Urlaub, Reisen, Strandurlaub, Wellenreiten, Outdoor-Fitness, Abenteuerreisen, Surf camp, All-inclusive holidays<br>Behaviors: Frequent travelers<br>Note: French/German interest names may differ — check Meta Ads Manager</td>
+<td>25–45, All</td>
+<td>2–4M</td>
+<td class="creative-cell">Surf Morocco, Your Next Long Weekend, Erin EU</td>
+<td class="notes-cell">NEW audience. Start with surf/yoga/travel interests. Test local language interests.</td>
+</tr>
+<tr>
+<td><strong>Scandinavia (SE, NO, DK)</strong></td>
+<td><span class="type-pill">Interest</span></td>
+<td class="geo-cell">Sweden, Norway, Denmark</td>
+<td class="budget-cell"><strong>5%</strong></td>
+<td class="targeting-cell">Interests: Yoga, Surfing, Outdoor fitness, Wellness travel, Active holidays, Nature travel, Meditation, Healthy living<br>Behaviors: Frequent international travelers</td>
+<td>25–45, All</td>
+<td>500K–1M</td>
+<td class="creative-cell">Erin EU, Surf Morocco, Permission to Leave</td>
+<td class="notes-cell">High disposable income, authenticity matters. Smaller test budget.</td>
+</tr>
+<tr>
+<td><strong>LLA Purchasers 1–3%</strong></td>
+<td><span class="type-pill">Lookalike</span></td>
+<td class="geo-cell">US + CA + UK + EU</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="targeting-cell">Source: Stripe CAPI purchaser list<br>Lookalike: 1% (tightest, highest value) + 3% (broader)<br>NO additional interest layering — let algorithm work</td>
+<td>Auto</td>
+<td>500K–1M</td>
+<td class="creative-cell">Brett 8s, Erin Burnout (both versions)</td>
+<td class="notes-cell">NEW from Stripe integration. Should be highest-value TOF audience. Build ASAP.</td>
+</tr>
+<tr>
+<td><strong>LLA Website Visitors 1–3%</strong></td>
+<td><span class="type-pill">Lookalike</span></td>
+<td class="geo-cell">US + CA + UK + EU</td>
+<td class="budget-cell"><strong>10%</strong></td>
+<td class="targeting-cell">Source: Meta Pixel website visitor list (last 180 days)<br>Lookalike: 1% + 3%<br>NO additional interest layering</td>
+<td>Auto</td>
+<td>500K–1.5M</td>
+<td class="creative-cell">Brett 8s, Erin Burnout, Surf Morocco</td>
+<td class="notes-cell">Proven performer: 16% CTR in SL. Supplement with purchaser LLA.</td>
+</tr>
+<tr>
+<td><strong>Niche: Surf Community</strong></td>
+<td><span class="type-pill">Interest Stack</span></td>
+<td class="geo-cell">UK, DE, NL, CA, US</td>
+<td class="budget-cell"><strong>5%</strong></td>
+<td class="targeting-cell">Interests: Surfing AND (Surf magazine OR Surf spots OR Surfboard OR Point break OR Longboarding)<br>Exclude: Professional surfers<br>Note: Taghazout is already known in EU surf community</td>
+<td>22–40, All</td>
+<td>500K–1M</td>
+<td class="creative-cell">Surf Morocco (PRIMARY), Surf Level Doesn't Matter</td>
+<td class="notes-cell">Niche targeting for the established surf community. Test separately.</td>
+</tr>
+</tbody></table></div>
+<div class="stage-section">
+<div class="stage-header-bar stage-bar-mof"><span class="badge stage-mof">MOF</span> <span>MOF Audiences</span></div>
+<div class="table-wrap"><table class="aud-table"><thead><tr>
+<th>Audience</th><th>Type</th><th>Geo</th><th>Budget %</th>
+<th>Interests / Behaviors</th><th>Age / Gender</th>
+<th>Size Est.</th><th>Best Creative Pairing</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Video Viewers 50%+ (from TOF)</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>30%</strong></td>
+<td class="targeting-cell">Source: People who watched 50%+ of ANY TOF video<br>Build this audience 2 weeks into TOF<br>Exclude: Past purchasers, existing leads</td>
+<td>Auto</td>
+<td>Depends on TOF</td>
+<td class="creative-cell">Morocco Carousel (PRIMARY), Trip Walkthrough</td>
+<td class="notes-cell">Standard retarget. Must build during TOF before MOF launches.</td>
+</tr>
+<tr>
+<td><strong>Website Visitors 30D</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>25%</strong></td>
+<td class="targeting-cell">Source: Meta Pixel — all /retreats/morocco page visitors, last 30 days<br>Exclude: Past purchasers</td>
+<td>Auto</td>
+<td>500–2K</td>
+<td class="creative-cell">Trip Walkthrough, Testimonial, Surf Level</td>
+<td class="notes-cell">Substance over hooks. They already visited — give them details.</td>
+</tr>
+<tr>
+<td><strong>Engaged IG/FB 30D</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="targeting-cell">Source: People who engaged with SALTY IG or FB page in last 30 days (likes, comments, saves, shares, profile visits)<br>Exclude: Past purchasers</td>
+<td>Auto</td>
+<td>2–5K</td>
+<td class="creative-cell">Morocco Carousel (MUST PAIR), WhatsApp Direct</td>
+<td class="notes-cell">CRITICAL PAIRING: Carousel x Engaged IG/FB = $4.97 CPL in Panama.</td>
+</tr>
+<tr>
+<td><strong>Email Subscribers (non-booked)</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="targeting-cell">Source: Email list upload (exclude past purchasers)<br>Match rate: typically 50–70% on Meta</td>
+<td>Auto</td>
+<td>1–3K</td>
+<td class="creative-cell">Trip Walkthrough, Surf Level, WhatsApp Direct</td>
+<td class="notes-cell">Already know you. Lower budget — they see organic content too.</td>
+</tr>
+<tr>
+<td><strong>European LLA 1% (Website + Video)</strong></td>
+<td><span class="type-pill">Lookalike</span></td>
+<td class="geo-cell">UK + EU only</td>
+<td class="budget-cell"><strong>10%</strong></td>
+<td class="targeting-cell">Source: EU website visitors + EU video viewers combined<br>Lookalike: 1% EU-seeded<br>Purpose: Find new EU prospects similar to existing EU engagers</td>
+<td>Auto</td>
+<td>200K–500K</td>
+<td class="creative-cell">Morocco Carousel EU, Erin EU</td>
+<td class="notes-cell">TEST: EU-seeded LLA vs global LLA for Morocco.</td>
+</tr>
+</tbody></table></div>
+<div class="stage-section">
+<div class="stage-header-bar stage-bar-bof"><span class="badge stage-bof">BOF</span> <span>BOF Audiences</span></div>
+<div class="table-wrap"><table class="aud-table"><thead><tr>
+<th>Audience</th><th>Type</th><th>Geo</th><th>Budget %</th>
+<th>Interests / Behaviors</th><th>Age / Gender</th>
+<th>Size Est.</th><th>Best Creative Pairing</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>High-Intent Visitors 14D</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>30%</strong></td>
+<td class="targeting-cell">Source: Meta Pixel — visited /retreats/morocco OR /booking pages in last 14 DAYS<br>This is the hottest audience. 14-day recency = highest intent.</td>
+<td>Auto</td>
+<td>50–200</td>
+<td class="creative-cell">Strongest Testimonial (PRIMARY), Inclusions Video</td>
+<td class="notes-cell">Best BOF efficiency in Panama: $7.10 CPL. Pair with best creative.</td>
+</tr>
+<tr>
+<td><strong>Stacked: Website + Video 75%</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>25%</strong></td>
+<td class="targeting-cell">Source: Visited website AND watched 75%+ of any video<br>Double-qualified. Small but high-intent.<br>Exclude: Past purchasers</td>
+<td>Auto</td>
+<td>100–500</td>
+<td class="creative-cell">Testimonials (rotation), Inclusions Video</td>
+<td class="notes-cell">Cap frequency at 3–4x/week to prevent fatigue.</td>
+</tr>
+<tr>
+<td><strong>WhatsApp Non-Bookers</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="targeting-cell">Source: Clicked WhatsApp CTA but did NOT purchase<br>Requires: WhatsApp Click custom event configured<br>This is a NEW audience type from WhatsApp-first strategy</td>
+<td>Auto</td>
+<td>50–150</td>
+<td class="creative-cell">Testimonial #2, Inclusions Video, Urgency+Proof</td>
+<td class="notes-cell">They showed intent but didn't convert. One more push.</td>
+</tr>
+<tr>
+<td><strong>Email Clickers (Non-Booked)</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="targeting-cell">Source: Opened emails AND clicked links but did NOT book<br>Upload from email platform with click-level segmentation</td>
+<td>Auto</td>
+<td>100–300</td>
+<td class="creative-cell">Inclusions Video, WhatsApp Invitation</td>
+<td class="notes-cell">CTA to WhatsApp, not website. They already visited the site.</td>
+</tr>
+<tr>
+<td><strong>All MOF Engagers (Safety Net)</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="targeting-cell">Source: Anyone who engaged with MOF creative but didn't convert<br>Broad safety net. Monitor for audience overlap with above segments.</td>
+<td>Auto</td>
+<td>200–1K</td>
+<td class="creative-cell">Strongest Testimonial, WhatsApp Invitation</td>
+<td class="notes-cell">Catch-all. Exclude High-Intent and WA Non-Bookers to avoid overlap.</td>
+</tr>
+</tbody></table></div></div>
+  </div>
+
+  <div class="retreat-content" id="aud-sicily">
+    <div class="section-title">Sicily — Endless Summer</div>
+    <div class="stage-section">
+<div class="stage-header-bar stage-bar-tof"><span class="badge stage-tof">TOF</span> <span>TOF Audiences</span></div>
+<div class="table-wrap"><table class="aud-table"><thead><tr>
+<th>Audience</th><th>Type</th><th>Geo</th><th>Budget %</th>
+<th>Interests / Behaviors</th><th>Age / Gender</th>
+<th>Size Est.</th><th>Best Creative Pairing</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Canada Core + Fitness/Travel</strong></td>
+<td><span class="type-pill">Interest</span></td>
+<td class="geo-cell">Canada</td>
+<td class="budget-cell"><strong>12%</strong></td>
+<td class="targeting-cell">Interests: Yoga, CrossFit, Fitness, Adventure travel, Italian holidays, Mediterranean travel, Beach vacation<br>Behaviors: Frequent international travelers</td>
+<td>26–50, All</td>
+<td>2–5M</td>
+<td class="creative-cell">Brett 8s, Erin Burnout Sicily NA, Endless Summer</td>
+<td class="notes-cell">Lower allocation than Morocco — Sicily is more EU.</td>
+</tr>
+<tr>
+<td><strong>US Key Markets</strong></td>
+<td><span class="type-pill">Interest + Geo</span></td>
+<td class="geo-cell">NYC, LA, Miami, SF</td>
+<td class="budget-cell"><strong>8%</strong></td>
+<td class="targeting-cell">Interests: Italian holidays, Yoga retreats, Surf travel, Wellness travel, Sicily travel<br>Behaviors: Frequent international travelers</td>
+<td>26–45, All</td>
+<td>1–2M</td>
+<td class="creative-cell">Brett 8s, Erin Burnout NA</td>
+<td class="notes-cell">Smallest TOF allocation. Sicily is further from US.</td>
+</tr>
+<tr>
+<td><strong>UK + Ireland</strong></td>
+<td><span class="type-pill">Interest</span></td>
+<td class="geo-cell">United Kingdom, Ireland</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="targeting-cell">Interests: Italian holidays, Surfing, Yoga, Beach holidays, Wellness retreats, Sicily, Southern Italy, Ibiza alternatives, Active holidays, Solo travel<br>Behaviors: Frequent travelers</td>
+<td>25–45, All</td>
+<td>1–3M</td>
+<td class="creative-cell">Ferragosto, Italian Summer, Not Another Beach Holiday, 2hrs From Home</td>
+<td class="notes-cell">Sicily is a known British holiday destination. 2hr direct flights.</td>
+</tr>
+<tr>
+<td><strong>Italy + Mediterranean (IT, ES, GR, HR)</strong></td>
+<td><span class="type-pill">Interest</span></td>
+<td class="geo-cell">Italy, Spain, Greece, Croatia</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="targeting-cell">Interests: Surf, Yoga, Fitness, Ferragosto, Vacanze estive, Surf camp, Ritiri benessere, Active holidays<br>Behaviors: Domestic travelers (Italians), Holiday planners<br>Note: Italian-language interest targeting for IT market</td>
+<td>25–45, All</td>
+<td>2–4M</td>
+<td class="creative-cell">Italian Summer (PRIMARY), Ferragosto, Endless Summer</td>
+<td class="notes-cell">Italians traveling within Italy for Ferragosto is real. Test IT-language ads.</td>
+</tr>
+<tr>
+<td><strong>Northern Europe (DE, NL, SE, NO, DK)</strong></td>
+<td><span class="type-pill">Interest</span></td>
+<td class="geo-cell">Germany, Netherlands, Sweden, Norway, Denmark</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="targeting-cell">Interests: Italian holidays, Surf, Yoga, Active holidays, Sommerurlaub, Strandurlaub, Wellness reisen, Mediterranean travel<br>Behaviors: Frequent travelers, High-income</td>
+<td>25–45, All</td>
+<td>2–4M</td>
+<td class="creative-cell">Endless Summer, Erin EU, 2hrs From Home</td>
+<td class="notes-cell">Northern Europeans vacation in southern Italy in August. Apply Morocco learnings.</td>
+</tr>
+<tr>
+<td><strong>LLA All Sources (Purchasers + Website + Video)</strong></td>
+<td><span class="type-pill">Lookalike</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="targeting-cell">Source: Stripe purchasers + Website visitors + Video viewers (combined seed)<br>Lookalike: 1% + 3%<br>Richest seed ever: Morocco + Panama + SL purchasers</td>
+<td>Auto</td>
+<td>500K–2M</td>
+<td class="creative-cell">Brett 8s, Erin EU, Endless Summer</td>
+<td class="notes-cell">Strongest LLA you've ever built. More data = better performance.</td>
+</tr>
+<tr>
+<td><strong>Niche: Italian Food + Culture Lovers</strong></td>
+<td><span class="type-pill">Interest Stack</span></td>
+<td class="geo-cell">UK, DE, NL, Scandinavia</td>
+<td class="budget-cell"><strong>5%</strong></td>
+<td class="targeting-cell">Interests: Italian cuisine AND (Cooking classes OR Italian wine OR Mediterranean diet OR Food tourism OR Sicily travel)<br>This reaches people who LOVE Italy but haven't considered a retreat there</td>
+<td>25–50, All</td>
+<td>1–2M</td>
+<td class="creative-cell">Italian Summer, Ferragosto, Surf+Pasta</td>
+<td class="notes-cell">Expands beyond fitness crowd. Gateway through food/culture.</td>
+</tr>
+<tr>
+<td><strong>Niche: 'Aging Out of Party Holidays'</strong></td>
+<td><span class="type-pill">Interest Stack</span></td>
+<td class="geo-cell">UK, IE</td>
+<td class="budget-cell"><strong>5%</strong></td>
+<td class="targeting-cell">Interests: (Ibiza OR Zante OR Mykonos OR Music festivals) AND (Yoga OR Fitness OR Wellness OR Healthy living)<br>Age: 28–38<br>This captures people transitioning from party holidays to experiences</td>
+<td>28–38, All</td>
+<td>300K–800K</td>
+<td class="creative-cell">Not Another Beach Holiday (PRIMARY), Endless Summer</td>
+<td class="notes-cell">SALTY's 9/10 party rating is the bridge. Not yoga retreats, not Ibiza. The middle ground.</td>
+</tr>
+</tbody></table></div>
+<div class="stage-section">
+<div class="stage-header-bar stage-bar-mof"><span class="badge stage-mof">MOF</span> <span>MOF Audiences</span></div>
+<div class="table-wrap"><table class="aud-table"><thead><tr>
+<th>Audience</th><th>Type</th><th>Geo</th><th>Budget %</th>
+<th>Interests / Behaviors</th><th>Age / Gender</th>
+<th>Size Est.</th><th>Best Creative Pairing</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Video Viewers 50%+ (from TOF)</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>25%</strong></td>
+<td class="targeting-cell">Source: 50%+ viewers of any Sicily TOF video<br>Build during TOF phase</td>
+<td>Auto</td>
+<td>Depends on TOF</td>
+<td class="creative-cell">Sicily Carousel (PRIMARY), Trip Walkthrough</td>
+<td class="notes-cell">Same approach as Morocco.</td>
+</tr>
+<tr>
+<td><strong>Website Visitors 30D</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="targeting-cell">Source: /retreats/sicily page visitors, last 30 days<br>Larger than Morocco pool after 2 campaigns driving traffic</td>
+<td>Auto</td>
+<td>500–3K</td>
+<td class="creative-cell">Trip Walkthrough, Morocco UGC</td>
+<td class="notes-cell">Bigger and warmer than Morocco's pool.</td>
+</tr>
+<tr>
+<td><strong>Engaged IG/FB 60D</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="targeting-cell">Source: IG/FB engagers last 60 DAYS (extended from 30)<br>Extended window captures Morocco campaign engagers</td>
+<td>Auto</td>
+<td>3–8K</td>
+<td class="creative-cell">Sicily Carousel (MUST PAIR), Ferragosto Party</td>
+<td class="notes-cell">60D window captures Morocco engagement. Larger, warmer pool.</td>
+</tr>
+<tr>
+<td><strong>Morocco Campaign Engagers (Non-Bookers)</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>25%</strong></td>
+<td class="targeting-cell">Source: Engaged with ANY Morocco ad but did NOT book<br>This is the #1 audience advantage for Sicily<br>Build from Morocco campaign engagement data</td>
+<td>Auto</td>
+<td>500–2K</td>
+<td class="creative-cell">Morocco UGC Testimonial, Sicily Carousel, Cross-Sell</td>
+<td class="notes-cell">GOLD AUDIENCE. They wanted Morocco and didn't act. Second chance.</td>
+</tr>
+<tr>
+<td><strong>Email List (Non-Booked)</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="targeting-cell">Source: Email list (exclude purchasers)<br>Grows with each campaign</td>
+<td>Auto</td>
+<td>1–3K</td>
+<td class="creative-cell">Trip Walkthrough, Ferragosto Party</td>
+<td class="notes-cell">Low budget, high warmth.</td>
+</tr>
+</tbody></table></div>
+<div class="stage-section">
+<div class="stage-header-bar stage-bar-bof"><span class="badge stage-bof">BOF</span> <span>BOF Audiences</span></div>
+<div class="table-wrap"><table class="aud-table"><thead><tr>
+<th>Audience</th><th>Type</th><th>Geo</th><th>Budget %</th>
+<th>Interests / Behaviors</th><th>Age / Gender</th>
+<th>Size Est.</th><th>Best Creative Pairing</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>High-Intent Visitors 14D</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>30%</strong></td>
+<td class="targeting-cell">Source: /retreats/sicily + /booking pages, last 14 days<br>Recency = intent</td>
+<td>Auto</td>
+<td>50–300</td>
+<td class="creative-cell">Morocco Guest Testimonial (PRIMARY), Inclusions</td>
+<td class="notes-cell">Pair with freshest testimonial.</td>
+</tr>
+<tr>
+<td><strong>Stacked: Site + Video 75%</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="targeting-cell">Source: Website visitor AND 75%+ video viewer<br>Larger pool from more campaigns</td>
+<td>Auto</td>
+<td>100–500</td>
+<td class="creative-cell">Testimonials (rotation), Inclusions</td>
+<td class="notes-cell">More data = more algorithm room.</td>
+</tr>
+<tr>
+<td><strong>Morocco BOF Non-Bookers</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="targeting-cell">Source: People in Morocco BOF audiences who did NOT convert<br>GOLD: second-chance cross-sell<br>Build from Morocco BOF audience data</td>
+<td>Auto</td>
+<td>100–500</td>
+<td class="creative-cell">Morocco Cross-Sell FOMO, Morocco UGC Testimonial</td>
+<td class="notes-cell">Cross-retreat retargeting is new. If this works, repeat for every future retreat.</td>
+</tr>
+<tr>
+<td><strong>WhatsApp Non-Bookers</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="targeting-cell">Source: WhatsApp CTA clickers who didn't book<br>Validated by Morocco data at this point</td>
+<td>Auto</td>
+<td>50–200</td>
+<td class="creative-cell">Repeat Guest Testimonial, WhatsApp Invitation, Urgency+Proof</td>
+<td class="notes-cell">If Morocco WA close rate &gt;15%, increase allocation.</td>
+</tr>
+<tr>
+<td><strong>Email Clickers + MOF Engagers</strong></td>
+<td><span class="type-pill">Custom</span></td>
+<td class="geo-cell">All</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="targeting-cell">Source: Email clickers + broad MOF engager catch-all<br>Exclude all above BOF audiences to avoid overlap</td>
+<td>Auto</td>
+<td>200–1K</td>
+<td class="creative-cell">WhatsApp Invitation, Inclusions Video</td>
+<td class="notes-cell">Push all leads toward WhatsApp as final conversion channel.</td>
+</tr>
+</tbody></table></div></div>
+  </div>
+</div>
+
+<!-- ═══ CREATIVE PAIRINGS ═════════════════════════════════════════════════════ -->
+<div class="panel" id="creative-map">
+  <div class="panel-hero" style="background:linear-gradient(135deg,#C5940A,#9e6a00);">
+    <div class="accent" style="background:var(--teal)"></div>
+    <h1>Audience × Creative Pairings</h1>
+    <p>Which creative runs to which audience. Primary = launch with. Secondary = add after 5–7 days for rotation. The right pairing is as important as the creative itself.</p>
+  </div>
+
+  <div class="retreat-toggle">
+    <button class="retreat-btn active" onclick="switchRetreat(this,'map-morocco','map-sicily')">Morocco</button>
+    <button class="retreat-btn" onclick="switchRetreat(this,'map-sicily','map-morocco')">Sicily</button>
+  </div>
+
+  <div class="retreat-content active" id="map-morocco">
+    <div class="section-title">Morocco — Audience × Creative Map</div>
+    <div class="stage-section">
+<div class="stage-header-bar stage-bar-tof"><span class="badge stage-tof">TOF</span> <span>TOF — Audience × Creative Pairings</span></div>
+<div class="table-wrap"><table><thead><tr>
+<th>Audience</th><th>Geo</th><th>Size</th><th>Budget %</th>
+<th>Primary Creative</th><th>Secondary / Rotation</th><th>Targeting</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Canada Broad + Fitness/Travel</strong></td>
+<td class="geo-cell">Canada</td>
+<td>2–5M</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="creative-cell primary-cell">Brett 8s, 9-5 Erin NA, So Much Fun Workout</td>
+<td class="creative-cell">Sarah Partnership, Are Retreats for Men (male segment)</td>
+<td class="targeting-cell">Yoga, Surfing, CrossFit, F45, Adventure travel, Boutique hotels, Fitness and wellness<br>Behavior: Frequent international travelers<br>Exclude: Purchasers, email list</td>
+<td class="notes-cell">Start broad. Let algorithm optimize. Kill underperformers by Day 3.</td>
+</tr>
+<tr>
+<td><strong>US Key Markets</strong></td>
+<td class="geo-cell">NYC, LA, Miami, Austin, Denver</td>
+<td>1–2M</td>
+<td class="budget-cell"><strong>10%</strong></td>
+<td class="creative-cell primary-cell">Brett 8s, 9-5 Erin NA</td>
+<td class="creative-cell">So Much Fun Workout, Girls Solo Travel (female), Are Retreats for Men (male)</td>
+<td class="targeting-cell">Yoga retreats, Surf travel, Wellness travel, Group fitness, SoulCycle, Beach vacation<br>Behavior: Frequent international travelers</td>
+<td class="notes-cell">Geo-targeted cities with direct Morocco flight access.</td>
+</tr>
+<tr>
+<td><strong>UK + Ireland</strong></td>
+<td class="geo-cell">UK, Ireland</td>
+<td>1–3M</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="creative-cell primary-cell">3 Hours From London (PRIMARY), 9-5 Erin EU, Brett 8s</td>
+<td class="creative-cell">So Much Fun Workout, Girls Solo Travel (female), Sarah Partnership</td>
+<td class="targeting-cell">Surfing, Yoga, Fitness holidays, Adventure holidays, Morocco travel, Beach holidays, Solo travel, Boutique hotels<br>Behavior: Frequent travelers, Engaged shoppers</td>
+<td class="notes-cell">Morocco is 3hrs from London. Known surf destination for Brits. Lead with accessibility.</td>
+</tr>
+<tr>
+<td><strong>Western Europe (FR, DE, NL, BE)</strong></td>
+<td class="geo-cell">France, Germany, Netherlands, Belgium</td>
+<td>2–4M</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="creative-cell primary-cell">9-5 Erin EU, So Much Fun Workout, Brett 8s</td>
+<td class="creative-cell">3 Hours From London (adapt for Paris/Amsterdam), Girls Solo Travel</td>
+<td class="targeting-cell">Surf, Yoga, Fitness, All-inclusive holidays, Adventure travel, Surf camp, Active holidays<br>Note: Check local-language interest names in Ads Manager</td>
+<td class="notes-cell">NEW EU audience. Start with sport/travel interests. Value-conscious — EU carousel critical for MOF follow-up.</td>
+</tr>
+<tr>
+<td><strong>Scandinavia</strong></td>
+<td class="geo-cell">Sweden, Norway, Denmark</td>
+<td>500K–1M</td>
+<td class="budget-cell"><strong>5%</strong></td>
+<td class="creative-cell primary-cell">9-5 Erin EU, So Much Fun Workout</td>
+<td class="creative-cell">Girls Solo Travel, Brett 8s</td>
+<td class="targeting-cell">Yoga, Surfing, Outdoor fitness, Active holidays, Nature travel, Wellness travel<br>Behavior: Frequent international travelers</td>
+<td class="notes-cell">High disposable income. Authenticity matters. Smaller test budget.</td>
+</tr>
+<tr>
+<td><strong>LLA Purchasers 1–3%</strong></td>
+<td class="geo-cell">US+CA+UK+EU</td>
+<td>500K–1M</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="creative-cell primary-cell">Brett 8s, 9-5 Erin (both versions)</td>
+<td class="creative-cell">So Much Fun Workout, Girls Solo Travel</td>
+<td class="targeting-cell">Source: Stripe CAPI purchaser list. LLA 1% + 3%.<br>NO additional interest layering — let algorithm work.</td>
+<td class="notes-cell">NEW from Stripe. Should be highest-value TOF audience. Build ASAP.</td>
+</tr>
+<tr>
+<td><strong>LLA Website + Video 1–3%</strong></td>
+<td class="geo-cell">US+CA+UK+EU</td>
+<td>500K–1.5M</td>
+<td class="budget-cell"><strong>10%</strong></td>
+<td class="creative-cell primary-cell">Brett 8s, 9-5 Erin (both versions), So Much Fun Workout</td>
+<td class="creative-cell">Girls Solo Travel, Sarah Partnership</td>
+<td class="targeting-cell">Source: Pixel website visitors (180D) + video viewers. LLA 1% + 3%.</td>
+<td class="notes-cell">Proven: 16% CTR in SL. Supplement with purchaser LLA.</td>
+</tr>
+<tr>
+<td><strong>Male Fitness Niche</strong></td>
+<td class="geo-cell">CA, US, UK, DE</td>
+<td>300K–800K</td>
+<td class="budget-cell"><strong>5%</strong></td>
+<td class="creative-cell primary-cell">Are Retreats for Men (PRIMARY), Brett 8s</td>
+<td class="creative-cell">So Much Fun Workout</td>
+<td class="targeting-cell">CrossFit AND (Surfing OR MMA OR Strength training OR Adventure travel)<br>Gender: Male, Age: 25–45<br>AVOID: Yoga, Meditation, Wellness as interests for this segment</td>
+<td class="notes-cell">NICHE test. Men who'd never search 'wellness retreat.' Lead with fitness/sport. Anti-woo positioning.</td>
+</tr>
+<tr>
+<td><strong>Female Solo Travel Niche</strong></td>
+<td class="geo-cell">UK, NL, Scandinavia, CA</td>
+<td>300K–800K</td>
+<td class="budget-cell"><strong>5%</strong></td>
+<td class="creative-cell primary-cell">Girls Solo Travel (PRIMARY), 9-5 Erin EU</td>
+<td class="creative-cell">So Much Fun Workout, Sarah Partnership</td>
+<td class="targeting-cell">Solo travel AND (Yoga OR Fitness OR Adventure travel OR Beach holidays)<br>Gender: Female, Age: 25–40</td>
+<td class="notes-cell">Solo travel up 324% in Europe. Women 25–40 are primary demo.</td>
+</tr>
+</tbody></table></div></div>
+<div class="stage-section">
+<div class="stage-header-bar stage-bar-reengage"><span class="badge stage-reengage">RE-ENGAGE</span> <span>RE-ENGAGE — Audience × Creative Pairings</span></div>
+<div class="table-wrap"><table><thead><tr>
+<th>Audience</th><th>Geo</th><th>Size</th><th>Budget %</th>
+<th>Primary Creative</th><th>Secondary / Rotation</th><th>Targeting</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Panama + SL Non-Converters</strong></td>
+<td class="geo-cell">All (past funnel)</td>
+<td>500–2K</td>
+<td class="budget-cell"><strong>100%</strong></td>
+<td class="creative-cell primary-cell">Carousel 'It Might Be Time', Didi Testimonial</td>
+<td class="creative-cell">Cat Traer Testimonial</td>
+<td class="targeting-cell">Custom audience: Panama /retreats page visitors (all time) + SL /retreats page visitors (all time) + Past leads who didn't purchase + Email openers (non-booked)<br>Exclude: Purchasers</td>
+<td class="notes-cell">WARMEST audience in the entire campaign. They already know SALTY. The creative's job: 'we know you were interested. here's the next one.' Small audience, high conversion potential. Low budget, high ROAS.</td>
+</tr>
+</tbody></table></div></div>
+<div class="stage-section">
+<div class="stage-header-bar stage-bar-mof"><span class="badge stage-mof">MOF</span> <span>MOF — Audience × Creative Pairings</span></div>
+<div class="table-wrap"><table><thead><tr>
+<th>Audience</th><th>Geo</th><th>Size</th><th>Budget %</th>
+<th>Primary Creative</th><th>Secondary / Rotation</th><th>Targeting</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Engaged IG/FB 30D</strong></td>
+<td class="geo-cell">All</td>
+<td>2–5K</td>
+<td class="budget-cell"><strong>25%</strong></td>
+<td class="creative-cell primary-cell">Trip Carousel NA (or EU), Cat Traer Testimonial</td>
+<td class="creative-cell">2025 Reviews Carousel, Value for Money Calculator</td>
+<td class="targeting-cell">IG/FB engagers last 30 days (likes, comments, saves, shares, profile visits)<br>Exclude: Purchasers</td>
+<td class="notes-cell">CRITICAL PAIRING: Carousel × Engaged IG/FB = $4.97 CPL in Panama. Don't split.</td>
+</tr>
+<tr>
+<td><strong>Video Viewers 50%+</strong></td>
+<td class="geo-cell">All</td>
+<td>Depends on TOF</td>
+<td class="budget-cell"><strong>25%</strong></td>
+<td class="creative-cell primary-cell">Trip Carousel (NA or EU), Erin 2025 Recap</td>
+<td class="creative-cell">Cat Traer Testimonial, Value for Money Calculator</td>
+<td class="targeting-cell">Custom: 50%+ viewers of any TOF video. Build 2 weeks into TOF.</td>
+<td class="notes-cell">Standard retarget. They watched your TOF — now give them substance.</td>
+</tr>
+<tr>
+<td><strong>Website Visitors 30D</strong></td>
+<td class="geo-cell">All</td>
+<td>500–2K</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="creative-cell primary-cell">Erin 2025 Recap, Value for Money Calculator</td>
+<td class="creative-cell">Cat Traer Testimonial, 2025 Reviews Carousel</td>
+<td class="targeting-cell">Pixel: all /retreats/morocco visitors, 30 days. Exclude: Purchasers.</td>
+<td class="notes-cell">They've visited the site. Give detail and social proof, not hooks.</td>
+</tr>
+<tr>
+<td><strong>Email Subscribers (non-booked)</strong></td>
+<td class="geo-cell">All</td>
+<td>1–3K</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="creative-cell primary-cell">Cat Traer Testimonial, Erin 2025 Recap</td>
+<td class="creative-cell">Value for Money Calculator</td>
+<td class="targeting-cell">Email list upload. Exclude purchasers. Match rate ~50–70%.</td>
+<td class="notes-cell">Low budget, high warmth. They see organic content too.</td>
+</tr>
+<tr>
+<td><strong>EU LLA 1% (Website + Video)</strong></td>
+<td class="geo-cell">UK+EU only</td>
+<td>200K–500K</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="creative-cell primary-cell">Trip Carousel EU, 9-5 Erin EU</td>
+<td class="creative-cell">Value for Money Calculator EU</td>
+<td class="targeting-cell">Source: EU website visitors + EU video viewers. LLA 1%.</td>
+<td class="notes-cell">TEST: EU-seeded LLA for finding new EU prospects at MOF.</td>
+</tr>
+</tbody></table></div></div>
+<div class="stage-section">
+<div class="stage-header-bar stage-bar-bof"><span class="badge stage-bof">BOF</span> <span>BOF — Audience × Creative Pairings</span></div>
+<div class="table-wrap"><table><thead><tr>
+<th>Audience</th><th>Geo</th><th>Size</th><th>Budget %</th>
+<th>Primary Creative</th><th>Secondary / Rotation</th><th>Targeting</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>High-Intent Visitors 14D</strong></td>
+<td class="geo-cell">All</td>
+<td>50–200</td>
+<td class="budget-cell"><strong>30%</strong></td>
+<td class="creative-cell primary-cell">Morocco Vlog (PRIMARY), Itinerary Video</td>
+<td class="creative-cell">Ask a Question Reel, Pricing Carousels</td>
+<td class="targeting-cell">Pixel: /retreats/morocco + /booking pages, last 14 DAYS.</td>
+<td class="notes-cell">Hottest leads. Best BOF efficiency: $7.10 CPL in Panama. Pair with strongest assets.</td>
+</tr>
+<tr>
+<td><strong>Stacked: Site + Video 75%</strong></td>
+<td class="geo-cell">All</td>
+<td>100–500</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="creative-cell primary-cell">Morocco Vlog, Ask a Question Reel</td>
+<td class="creative-cell">Pricing Carousels, Itinerary Video</td>
+<td class="targeting-cell">Website visitor AND 75%+ video viewer. Double-qualified.</td>
+<td class="notes-cell">Cap frequency 3–4x/week. Rotate creative to prevent fatigue.</td>
+</tr>
+<tr>
+<td><strong>WhatsApp Non-Bookers</strong></td>
+<td class="geo-cell">All</td>
+<td>50–150</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="creative-cell primary-cell">Ask a Question Reel (PRIMARY), Pricing Carousels</td>
+<td class="creative-cell">Day-by-Day Carousel, Morocco Vlog</td>
+<td class="targeting-cell">Custom: WhatsApp CTA clickers who didn't purchase. Requires WhatsApp Click event.</td>
+<td class="notes-cell">They showed intent (clicked WhatsApp) but didn't close. One more push.</td>
+</tr>
+<tr>
+<td><strong>Email Clickers (Non-Booked)</strong></td>
+<td class="geo-cell">All</td>
+<td>100–300</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="creative-cell primary-cell">Itinerary Video, Day-by-Day Carousel</td>
+<td class="creative-cell">Ask a Question Reel, Pricing Carousels</td>
+<td class="targeting-cell">Email platform export: opened + clicked but didn't book.</td>
+<td class="notes-cell">CTA to WhatsApp. They already visited via email — push to conversation.</td>
+</tr>
+<tr>
+<td><strong>All MOF Engagers (Safety Net)</strong></td>
+<td class="geo-cell">All</td>
+<td>200–1K</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="creative-cell primary-cell">Morocco Vlog, Ask a Question Reel</td>
+<td class="creative-cell">Pricing Carousels</td>
+<td class="targeting-cell">Broad: anyone who engaged with MOF ads but didn't convert. Exclude all above BOF segments.</td>
+<td class="notes-cell">Catch-all. Exclude High-Intent, WA Non-Bookers, Email Clickers to avoid overlap.</td>
+</tr>
+</tbody></table></div></div>
+  </div>
+
+  <div class="retreat-content" id="map-sicily">
+    <div class="section-title">Sicily — Audience × Creative Map</div>
+    <div class="stage-section">
+<div class="stage-header-bar stage-bar-tof"><span class="badge stage-tof">TOF</span> <span>TOF — Audience × Creative Pairings</span></div>
+<div class="table-wrap"><table><thead><tr>
+<th>Audience</th><th>Geo</th><th>Size</th><th>Budget %</th>
+<th>Primary Creative</th><th>Secondary / Rotation</th><th>Targeting</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Canada Core + Fitness/Travel</strong></td>
+<td class="geo-cell">Canada</td>
+<td>2–5M</td>
+<td class="budget-cell"><strong>12%</strong></td>
+<td class="creative-cell primary-cell">Brett 8s, 9-5 Erin NA, So Much Fun Workout</td>
+<td class="creative-cell">Are Retreats for Men (male), Girls Solo Travel (female)</td>
+<td class="targeting-cell">Yoga, Surfing, CrossFit, F45, Adventure travel, Italian holidays, Mediterranean travel<br>Behavior: Frequent international travelers</td>
+<td class="notes-cell">Lower than Morocco — Sicily is more EU-oriented.</td>
+</tr>
+<tr>
+<td><strong>US Key Markets</strong></td>
+<td class="geo-cell">NYC, LA, Miami, SF</td>
+<td>1–2M</td>
+<td class="budget-cell"><strong>8%</strong></td>
+<td class="creative-cell primary-cell">Brett 8s, 9-5 Erin NA</td>
+<td class="creative-cell">So Much Fun Workout, Girls Solo Travel</td>
+<td class="targeting-cell">Italian holidays, Yoga retreats, Surf travel, Wellness travel<br>Behavior: Frequent international travelers</td>
+<td class="notes-cell">Smallest TOF allocation. Sicily is further from US.</td>
+</tr>
+<tr>
+<td><strong>UK + Ireland</strong></td>
+<td class="geo-cell">UK, Ireland</td>
+<td>1–3M</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="creative-cell primary-cell">2hrs From London, Ferragosto With Us, 9-5 Erin EU</td>
+<td class="creative-cell">Brett 8s, Girls Solo Travel, So Much Fun Workout</td>
+<td class="targeting-cell">Italian holidays, Surfing, Yoga, Beach holidays, Sicily, Southern Italy, Active holidays, Solo travel<br>Behavior: Frequent travelers</td>
+<td class="notes-cell">Sicily = known British holiday destination. 2hr direct flights. Lead with Ferragosto + accessibility.</td>
+</tr>
+<tr>
+<td><strong>Italy + Mediterranean (IT, ES, GR, HR)</strong></td>
+<td class="geo-cell">Italy, Spain, Greece, Croatia</td>
+<td>2–4M</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="creative-cell primary-cell">Ferragosto With Us (PRIMARY), 9-5 Erin EU</td>
+<td class="creative-cell">So Much Fun Workout, Brett 8s</td>
+<td class="targeting-cell">Surf, Yoga, Fitness, Ferragosto, Vacanze estive, Active holidays<br>Behavior: Domestic travelers<br>Note: Italian-language interests for IT market</td>
+<td class="notes-cell">Italians traveling within Italy for Ferragosto = real behavior. Test IT-language ads.</td>
+</tr>
+<tr>
+<td><strong>Northern Europe (DE, NL, SE, NO, DK)</strong></td>
+<td class="geo-cell">Germany, Netherlands, Scandinavia</td>
+<td>2–4M</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="creative-cell primary-cell">9-5 Erin EU, Ferragosto With Us, So Much Fun Workout</td>
+<td class="creative-cell">2hrs From London (adapt for Berlin/Amsterdam), Girls Solo Travel</td>
+<td class="targeting-cell">Italian holidays, Surf, Yoga, Active holidays, Mediterranean travel, Wellness travel<br>Behavior: Frequent travelers, High-income</td>
+<td class="notes-cell">Apply Morocco learnings. High disposable income, authenticity matters.</td>
+</tr>
+<tr>
+<td><strong>LLA All Sources</strong></td>
+<td class="geo-cell">All</td>
+<td>500K–2M</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="creative-cell primary-cell">Brett 8s, 9-5 Erin (both versions), So Much Fun Workout</td>
+<td class="creative-cell">Girls Solo Travel, Are Retreats for Men</td>
+<td class="targeting-cell">Source: Stripe purchasers + Website visitors + Video viewers (combined)<br>LLA 1% + 3%. Richest seed ever: Morocco + Panama + SL purchasers.</td>
+<td class="notes-cell">Strongest LLA you've ever built.</td>
+</tr>
+<tr>
+<td><strong>Male Fitness Niche</strong></td>
+<td class="geo-cell">CA, US, UK, DE</td>
+<td>300K–800K</td>
+<td class="budget-cell"><strong>5%</strong></td>
+<td class="creative-cell primary-cell">Are Retreats for Men (PRIMARY), Brett 8s</td>
+<td class="creative-cell">So Much Fun Workout</td>
+<td class="targeting-cell">CrossFit AND (Surfing OR MMA OR Strength training OR Adventure travel)<br>Male 25–45. AVOID: Yoga, Meditation as interests.</td>
+<td class="notes-cell">Ferragosto = 'Italy's biggest party' is the hook for men.</td>
+</tr>
+<tr>
+<td><strong>Female Solo Travel Niche</strong></td>
+<td class="geo-cell">UK, NL, Scandinavia, CA</td>
+<td>300K–800K</td>
+<td class="budget-cell"><strong>5%</strong></td>
+<td class="creative-cell primary-cell">Girls Solo Travel (PRIMARY), 9-5 Erin EU</td>
+<td class="creative-cell">So Much Fun Workout, Ferragosto With Us</td>
+<td class="targeting-cell">Solo travel AND (Yoga OR Fitness OR Adventure travel OR Italian holidays)<br>Female 25–40.</td>
+<td class="notes-cell">Solo travel up 324% in Europe.</td>
+</tr>
+</tbody></table></div></div>
+<div class="stage-section">
+<div class="stage-header-bar stage-bar-reengage"><span class="badge stage-reengage">RE-ENGAGE</span> <span>RE-ENGAGE — Audience × Creative Pairings</span></div>
+<div class="table-wrap"><table><thead><tr>
+<th>Audience</th><th>Geo</th><th>Size</th><th>Budget %</th>
+<th>Primary Creative</th><th>Secondary / Rotation</th><th>Targeting</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>All Past Funnel Non-Converters</strong></td>
+<td class="geo-cell">All (past funnel)</td>
+<td>1–3K</td>
+<td class="budget-cell"><strong>100%</strong></td>
+<td class="creative-cell primary-cell">Carousel 'It Might Be Time' (Sicily), Amanda K Testimonial</td>
+<td class="creative-cell">Keara Testimonial</td>
+<td class="targeting-cell">Custom: Morocco /retreats visitors + Panama /retreats visitors + SL /retreats visitors + Past leads + Email openers + Morocco campaign engagers (all non-purchasers)<br>Morocco non-converters = BIGGEST new pool for Sicily.</td>
+<td class="notes-cell">Warmest audience. Morocco campaign JUST ran — those people are hot. Past Sicily guests = strongest proof. Low budget, high ROAS.</td>
+</tr>
+</tbody></table></div></div>
+<div class="stage-section">
+<div class="stage-header-bar stage-bar-mof"><span class="badge stage-mof">MOF</span> <span>MOF — Audience × Creative Pairings</span></div>
+<div class="table-wrap"><table><thead><tr>
+<th>Audience</th><th>Geo</th><th>Size</th><th>Budget %</th>
+<th>Primary Creative</th><th>Secondary / Rotation</th><th>Targeting</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Engaged IG/FB 60D</strong></td>
+<td class="geo-cell">All</td>
+<td>3–8K</td>
+<td class="budget-cell"><strong>25%</strong></td>
+<td class="creative-cell primary-cell">Trip Carousel (NA or EU), Keara Testimonial</td>
+<td class="creative-cell">2024+2025 Reviews Carousel, Amanda Testimonial</td>
+<td class="targeting-cell">IG/FB engagers last 60 DAYS (extended to capture Morocco campaign engagement)<br>Exclude: Purchasers</td>
+<td class="notes-cell">60D window = captures Morocco campaign engagement. Carousel × Engaged IG/FB = $4.97 CPL in Panama.</td>
+</tr>
+<tr>
+<td><strong>Video Viewers 50%+</strong></td>
+<td class="geo-cell">All</td>
+<td>Depends on TOF</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="creative-cell primary-cell">Trip Carousel, Erin 'Third Time' Recap</td>
+<td class="creative-cell">Amanda Testimonial, Value for Money Calculator</td>
+<td class="targeting-cell">Custom: 50%+ viewers of any Sicily TOF video. Build 2 weeks into TOF.</td>
+<td class="notes-cell">Standard retarget. Substance over hooks.</td>
+</tr>
+<tr>
+<td><strong>Morocco Campaign Engagers (Non-Bookers)</strong></td>
+<td class="geo-cell">All</td>
+<td>500–2K</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="creative-cell primary-cell">Amanda K Testimonial, Trip Carousel, Erin 'Third Time'</td>
+<td class="creative-cell">Keara Testimonial, Value for Money Calculator</td>
+<td class="targeting-cell">Custom: Engaged with ANY Morocco ad but did NOT book.<br>Build from Morocco campaign data. This is the #1 audience advantage for Sicily.</td>
+<td class="notes-cell">GOLD AUDIENCE. They wanted Morocco and didn't act. Sicily = second chance. Past Sicily guest testimonials are the perfect content for this audience.</td>
+</tr>
+<tr>
+<td><strong>Website Visitors 30D</strong></td>
+<td class="geo-cell">All</td>
+<td>500–3K</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="creative-cell primary-cell">Erin 'Third Time' Recap, Value for Money Calculator</td>
+<td class="creative-cell">Keara Testimonial, 2024+2025 Reviews Carousel</td>
+<td class="targeting-cell">Pixel: /retreats/sicily visitors, 30 days. Exclude: Purchasers.</td>
+<td class="notes-cell">Larger than Morocco's pool after multiple campaigns driving traffic.</td>
+</tr>
+<tr>
+<td><strong>Email List (Non-Booked)</strong></td>
+<td class="geo-cell">All</td>
+<td>1–3K</td>
+<td class="budget-cell"><strong>10%</strong></td>
+<td class="creative-cell primary-cell">Erin 'Third Time', Value for Money Calculator</td>
+<td class="creative-cell">Amanda Testimonial</td>
+<td class="targeting-cell">Email list upload. Exclude purchasers.</td>
+<td class="notes-cell">Low budget, high warmth. Email list grows with each campaign.</td>
+</tr>
+<tr>
+<td><strong>EU LLA 1% (Website + Video)</strong></td>
+<td class="geo-cell">UK+EU only</td>
+<td>200K–500K</td>
+<td class="budget-cell"><strong>10%</strong></td>
+<td class="creative-cell primary-cell">Trip Carousel EU, Ferragosto With Us</td>
+<td class="creative-cell">Value for Money Calculator EU</td>
+<td class="targeting-cell">Source: EU website visitors + EU video viewers. LLA 1%.</td>
+<td class="notes-cell">TEST: EU-seeded LLA. Apply Morocco learnings on EU LLA performance.</td>
+</tr>
+</tbody></table></div></div>
+<div class="stage-section">
+<div class="stage-header-bar stage-bar-bof"><span class="badge stage-bof">BOF</span> <span>BOF — Audience × Creative Pairings</span></div>
+<div class="table-wrap"><table><thead><tr>
+<th>Audience</th><th>Geo</th><th>Size</th><th>Budget %</th>
+<th>Primary Creative</th><th>Secondary / Rotation</th><th>Targeting</th><th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>High-Intent Visitors 14D</strong></td>
+<td class="geo-cell">All</td>
+<td>50–300</td>
+<td class="budget-cell"><strong>30%</strong></td>
+<td class="creative-cell primary-cell">Sicily Hype Video (PRIMARY), Ask a Question Reel</td>
+<td class="creative-cell">Itinerary Carousel, Pricing Carousel</td>
+<td class="targeting-cell">Pixel: /retreats/sicily + /booking pages, 14 days.<br>Recency = intent.</td>
+<td class="notes-cell">Best BOF efficiency ($7.10 CPL in Panama). Pair with strongest assets.</td>
+</tr>
+<tr>
+<td><strong>Stacked: Site + Video 75%</strong></td>
+<td class="geo-cell">All</td>
+<td>100–500</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="creative-cell primary-cell">Sicily Hype Video, Ask a Question Reel</td>
+<td class="creative-cell">Pricing Carousel, Itinerary Carousel</td>
+<td class="targeting-cell">Website visitor AND 75%+ video viewer. Double-qualified.</td>
+<td class="notes-cell">Cap frequency 3–4x/week.</td>
+</tr>
+<tr>
+<td><strong>Morocco BOF Non-Bookers</strong></td>
+<td class="geo-cell">All</td>
+<td>100–500</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="creative-cell primary-cell">Sicily Hype Video, Ask a Question Reel</td>
+<td class="creative-cell">Amanda K Testimonial, Pricing Carousel</td>
+<td class="targeting-cell">Custom: People in Morocco BOF who did NOT convert.<br>Cross-retreat retargeting.</td>
+<td class="notes-cell">GOLD. Second-chance cross-sell. They were deep in Morocco funnel. Sicily Hype Video = FOMO-inducing for this audience.</td>
+</tr>
+<tr>
+<td><strong>WhatsApp Non-Bookers</strong></td>
+<td class="geo-cell">All</td>
+<td>50–200</td>
+<td class="budget-cell"><strong>15%</strong></td>
+<td class="creative-cell primary-cell">Ask a Question Reel (PRIMARY), Pricing Carousel</td>
+<td class="creative-cell">Itinerary Carousel, Sicily Hype Video</td>
+<td class="targeting-cell">Custom: WhatsApp CTA clickers who didn't book. Validated by Morocco data.</td>
+<td class="notes-cell">If Morocco WA close rate &gt;15%, increase allocation.</td>
+</tr>
+<tr>
+<td><strong>Email Clickers + MOF Engagers</strong></td>
+<td class="geo-cell">All</td>
+<td>200–1K</td>
+<td class="budget-cell"><strong>20%</strong></td>
+<td class="creative-cell primary-cell">Ask a Question Reel, Sicily Hype Video</td>
+<td class="creative-cell">Pricing Carousel</td>
+<td class="targeting-cell">Email clickers + MOF engagers. Exclude all above BOF segments.</td>
+<td class="notes-cell">Push toward WhatsApp. Catch-all safety net.</td>
+</tr>
+</tbody></table></div></div>
+  </div>
+</div>
+
+<!-- ═══ MESSAGING ANGLES ══════════════════════════════════════════════════════ -->
+<div class="panel" id="angles">
+  <div class="panel-hero" style="background:linear-gradient(135deg,#3A6B35,#2a5128);">
+    <div class="accent"></div>
+    <h1>Messaging Angles</h1>
+    <p>Every creative maps to one primary messaging angle. Understanding the angle is how you know why a creative works — and how to iterate on it. Morocco and Sicily share a base taxonomy with Sicily-specific additions.</p>
+  </div>
+
+  <div class="retreat-toggle">
+    <button class="retreat-btn active" onclick="switchRetreat(this,'ang-morocco','ang-sicily')">Morocco</button>
+    <button class="retreat-btn" onclick="switchRetreat(this,'ang-sicily','ang-morocco')">Sicily</button>
+  </div>
+
+  <div class="retreat-content active" id="ang-morocco">
+    <div class="section-title">Morocco — Messaging Angle Taxonomy</div>
+    <div class="angles-grid">
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">Pattern Interrupt</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">Stop scrolling. Something raw and real just hit your feed.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Cold audiences — everyone. Broad reach.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Brett 8s</span></div>
+    <div><span class="meta-label">Notes</span><span>Universal. EU version adds 'all-inclusive' + '3hrs from London' in copy.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">Escape / Permission</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">You're stuck in a loop. You deserve to break it.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Burnt-out professionals, routine-trapped adults 28–45.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">9-5 Erin (NA + EU)</span></div>
+    <div><span class="meta-label">Notes</span><span>NA: pain-point framing ('burnout as badge'). EU: aspiration framing ('I wanted more'). Same concept, different emotional register. EU must comply with Meta wellness ad policy.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">Fun Fitness / Anti-Boring</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">Workouts should make you smile, not suffer.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Fitness enthusiasts who are bored with gym routines. CrossFit, F45, group fitness crowd.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">So Much Fun Workout</span></div>
+    <div><span class="meta-label">Notes</span><span>Universal angle. EU copy adds pricing + accessibility.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">Influencer Endorsement</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">Someone you trust is going — and they're genuinely excited.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Sarah's existing audience + SALTY's audiences for social proof.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Sarah Partnership</span></div>
+    <div><span class="meta-label">Notes</span><span>Authentic voice &gt; brand voice. Don't over-brand. If her audience is EU-heavy, add GBP/EUR overlay.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">Female Solo Travel</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">Going solo doesn't mean going alone. 67% of guests book solo.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Women 25–40 considering solo travel. Especially UK women (fastest-growing solo segment).</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Girls Solo Travel</span></div>
+    <div><span class="meta-label">Notes</span><span>Solo travel searches up 324% in Europe. Lead with solo-friendliness in EU. UK/NL/Scandi women index highest.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">Male Permission</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">Retreats aren't just for women. Here's why this is the best trip a guy can take.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Men 25–45 interested in fitness/sport/adventure. Especially those who'd never search 'wellness retreat.'</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Are Retreats for Men</span></div>
+    <div><span class="meta-label">Notes</span><span>Anti-woo positioning critical. Name the stereotypes ('crystals, sound baths, journaling') and dismiss them. Target: CrossFit, Surfing, MMA, Strength training. AVOID: Yoga, Meditation, Wellness in male audience interests.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">EU Accessibility</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">Morocco is 3 hours from London. Direct flights under £80. This is easy.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>UK and European travelers who think Morocco is far or complicated.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">3 Hours From London</span></div>
+    <div><span class="meta-label">Notes</span><span>EU-ONLY. The #1 objection killer for UK buyers. Competitors don't lead with this.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-reengage">
+  <div class="angle-top">
+    <span class="angle-name">Re-Activation / 'We See You'</span>
+    <span class="badge stage-reengage">RE-ENGAGE</span>
+  </div>
+  <p class="angle-what">You looked at this before. The door's still open.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Past Panama/SL funnel dropoffs. People who almost booked but didn't.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Carousel 'It Might Be Time'</span></div>
+    <div><span class="meta-label">Notes</span><span>Warm, non-aggressive. Name their past behavior ('you looked at Panama'). EU version adds EUR/GBP pricing.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-reengage">
+  <div class="angle-top">
+    <span class="angle-name">Fresh Social Proof (Single Voice)</span>
+    <span class="badge stage-reengage">RE-ENGAGE</span>
+  </div>
+  <p class="angle-what">A real person. A real experience. Their honest words.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Warm audiences (RE-ENGAGE + MOF). People who need peer validation.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Didi Testimonial, Cat Traer Testimonial</span></div>
+    <div><span class="meta-label">Notes</span><span>If either has UK/EU accent → prioritize in EU ad sets. Accent-matched = 2–3x conversion.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-mof">
+  <div class="angle-top">
+    <span class="angle-name">Trip Details / Substance</span>
+    <span class="badge stage-mof">MOF</span>
+  </div>
+  <p class="angle-what">Here's exactly what you get. Every detail.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Interested but uncommitted. Need substance to move from 'curious' to 'considering.'</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Trip Details Carousel (NA + EU)</span></div>
+    <div><span class="meta-label">Notes</span><span>EU version: EUR/GBP, 'no hidden costs,' value breakdown vs à la carte. Dutch/German audiences need the math.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-mof">
+  <div class="angle-top">
+    <span class="angle-name">Volume Social Proof</span>
+    <span class="badge stage-mof">MOF</span>
+  </div>
+  <p class="angle-what">Not one person — MANY people say this is incredible.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Evaluating audiences who need quantity of proof, not just quality.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">2025 Guest Reviews Carousel</span></div>
+    <div><span class="meta-label">Notes</span><span>EU version leads with UK/EU guest quotes + city of origin for peer identification.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-mof">
+  <div class="angle-top">
+    <span class="angle-name">Insider Enthusiasm</span>
+    <span class="badge stage-mof">MOF</span>
+  </div>
+  <p class="angle-what">The people who run this retreat can't wait to go back. That says something.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Warm audiences who know the brand but need one more trust signal.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Erin 2025 Recap</span></div>
+    <div><span class="meta-label">Notes</span><span>EU version adds accessibility + pricing at the end. Same enthusiasm, different close.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-mof">
+  <div class="angle-top">
+    <span class="angle-name">Value Justification / Math</span>
+    <span class="badge stage-mof">MOF</span>
+  </div>
+  <p class="angle-what">Let's do the math. Here's what you'd pay separately vs all-inclusive.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Price-conscious prospects. Especially EU audiences who'll compare against €500 camps.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Value for Money Pricing Calculator</span></div>
+    <div><span class="meta-label">Notes</span><span>CRITICAL for EU. Dutch and German audiences will Google-compare. Do the math FOR them. EUR version essential.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-bof">
+  <div class="angle-top">
+    <span class="angle-name">What's Included (Detail)</span>
+    <span class="badge stage-bof">BOF</span>
+  </div>
+  <p class="angle-what">Here's everything. No surprises. The full breakdown.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>High-intent prospects ready to decide. Need the final detail.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Itinerary Video, Day-by-Day Carousel</span></div>
+    <div><span class="meta-label">Notes</span><span>EU version adds EUR/GBP + 'flights not included.' Same detail, local currency.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-bof">
+  <div class="angle-top">
+    <span class="angle-name">Immersion / Proof It's Real</span>
+    <span class="badge stage-bof">BOF</span>
+  </div>
+  <p class="angle-what">Watch the actual footage. This is what really happened.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>High-intent + warm audiences who need visual confirmation.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Morocco Vlog</span></div>
+    <div><span class="meta-label">Notes</span><span>Real footage &gt; staged content. EU note: call out any EU guests or recognizable elements.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-bof">
+  <div class="angle-top">
+    <span class="angle-name">Pricing Clarity</span>
+    <span class="badge stage-bof">BOF</span>
+  </div>
+  <p class="angle-what">Here's the price. Per night. By room type. With payment plans.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Decision-stage prospects. The price ISN'T a surprise — it's presented clearly.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Pricing Plan Carousels</span></div>
+    <div><span class="meta-label">Notes</span><span>EU: EUR/GBP, per-night breakdown normalizes cost. Payment plans reduce sticker shock. 'Flights not included.'</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-bof">
+  <div class="angle-top">
+    <span class="angle-name">Direct Conversation / 'Just Ask'</span>
+    <span class="badge stage-bof">BOF</span>
+  </div>
+  <p class="angle-what">Skip the website. Talk to an actual human. No pitch.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Everyone in BOF who hasn't converted. The final nudge.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Ask Us a Question Reel</span></div>
+    <div><span class="meta-label">Notes</span><span>WhatsApp CTA is MORE natural for EU (95% penetration). 'Message us' &gt; 'Book now' for European CTAs.</span></div>
+  </div>
+</div>
+</div>
+  </div>
+
+  <div class="retreat-content" id="ang-sicily">
+    <div class="section-title">Sicily — Messaging Angle Taxonomy</div>
+    <div class="angles-grid">
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">Pattern Interrupt</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">Stop scrolling. Raw and real.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Cold audiences — everyone.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Brett 8s</span></div>
+    <div><span class="meta-label">Notes</span><span>Same as Morocco. Sicily copy ('trade your desk for southern Sicily').</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">Escape / Permission</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">The 9-5 isn't all there is. You deserve better summers.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Burnt-out professionals 28–45.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">9-5 Erin (NA + EU)</span></div>
+    <div><span class="meta-label">Notes</span><span>Sicily-specific: 'an August that actually felt like living.' EU version plants Ferragosto seed early.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">Fun Fitness / Anti-Boring</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">Workouts that make you smile.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Fitness enthusiasts bored with gym routines.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">So Much Fun Workout</span></div>
+    <div><span class="meta-label">Notes</span><span>Same video. Copy references Sicilian beaches, Mediterranean terraces.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">Female Solo Travel</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">Going solo ≠ going alone. 67% book solo.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Women 25–40 — fastest-growing solo travel segment.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Girls Solo Travel</span></div>
+    <div><span class="meta-label">Notes</span><span>Same video. Copy adds Ferragosto + 'direct flights from €30.'</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">Male Permission</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">Retreats aren't just for women. It's fitness + Italy + the best party of the summer.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Men 25–45 in fitness/sport. Never search 'wellness retreat.'</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Are Retreats for Men</span></div>
+    <div><span class="meta-label">Notes</span><span>Same video. Ferragosto = 'Italy's biggest party' hits harder for male angle. It's a TRIP, not a retreat.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">Ferragosto / Cultural Event</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">Italy's biggest celebration falls during this retreat. No one else offers this.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Europeans — UK, N. Europe, Italy. Also NA as curiosity play.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Ferragosto With Us</span></div>
+    <div><span class="meta-label">Notes</span><span>SICILY-UNIQUE. Zero competitors. Educational for Dutch/Scandi who may not know Ferragosto. Date-specific urgency that's genuine, not manufactured.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-tof">
+  <div class="angle-top">
+    <span class="angle-name">EU Accessibility</span>
+    <span class="badge stage-tof">TOF</span>
+  </div>
+  <p class="angle-what">Sicily is 2 hours from London. Flights from GBP 30. Easier than you think.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>UK + EU who think Sicily is a big trip.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">2 Hours From London</span></div>
+    <div><span class="meta-label">Notes</span><span>EVEN STRONGER than Morocco version. Ryanair GBP 30 = 'the flight costs less than dinner.'</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-reengage">
+  <div class="angle-top">
+    <span class="angle-name">Re-Activation / 'We See You'</span>
+    <span class="badge stage-reengage">RE-ENGAGE</span>
+  </div>
+  <p class="angle-what">You've been thinking about this. The door is still open — and this time it's Italy.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Past Morocco/Panama/SL funnel dropoffs.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Carousel 'It Might Be Time'</span></div>
+    <div><span class="meta-label">Notes</span><span>Now includes MOROCCO non-converters — biggest new pool. Ferragosto = new reason to act ('this one's different').</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-reengage">
+  <div class="angle-top">
+    <span class="angle-name">Past Sicily Guest Proof</span>
+    <span class="badge stage-reengage">RE-ENGAGE</span>
+  </div>
+  <p class="angle-what">Someone who WAS THERE tells you it's worth it.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Past non-converters + new MOF prospects.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Amanda K, Keara Testimonials</span></div>
+    <div><span class="meta-label">Notes</span><span>PAST SICILY GUESTS — stronger than generic SALTY testimonials. They can speak to THIS experience, not just the brand. Check accents for EU deployment.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-mof">
+  <div class="angle-top">
+    <span class="angle-name">Trip Details / Substance</span>
+    <span class="badge stage-mof">MOF</span>
+  </div>
+  <p class="angle-what">Here's exactly what you get. Every detail. Ferragosto included.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Interested but uncommitted. Need substance.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Trip Details Carousel (NA + EU)</span></div>
+    <div><span class="meta-label">Notes</span><span>Ferragosto as Slide 4 = unique hook no competitor has. EU version: EUR/GBP, 'no hidden costs,' competitive pricing context.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-mof">
+  <div class="angle-top">
+    <span class="angle-name">Volume Social Proof (Multi-Year)</span>
+    <span class="badge stage-mof">MOF</span>
+  </div>
+  <p class="angle-what">Two years of guests say this is incredible.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Evaluating audiences. Quantity of proof matters.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Guest Reviews Carousel (2024+2025)</span></div>
+    <div><span class="meta-label">Notes</span><span>TWO YEARS of reviews &gt; one year. Shows consistency. Erin going for a THIRD time reinforces this.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-mof">
+  <div class="angle-top">
+    <span class="angle-name">Insider Enthusiasm (Triple Down)</span>
+    <span class="badge stage-mof">MOF</span>
+  </div>
+  <p class="angle-what">The host is going for a THIRD TIME. That says everything.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Warm audiences who need one more trust signal.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Erin 'Third Time' Recap</span></div>
+    <div><span class="meta-label">Notes</span><span>THIRD TIME is the key differentiator from Morocco's version. Three repeats = 'this isn't a fluke, it's genuinely that good.' Strongest host endorsement possible: 'I spend MY vacation here.'</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-mof">
+  <div class="angle-top">
+    <span class="angle-name">Value Justification / Math</span>
+    <span class="badge stage-mof">MOF</span>
+  </div>
+  <p class="angle-what">The math: booking separately costs MORE than all-inclusive SALTY.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Price-conscious prospects. Especially EU (NL, DE).</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Value for Money Calculator</span></div>
+    <div><span class="meta-label">Notes</span><span>Ferragosto as a line item ('included' or 'priceless') = unique value-add. Competitors (Adventure Yogi GBP 1,599, Yoga Escapes GBP 2,400) offer LESS.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-bof">
+  <div class="angle-top">
+    <span class="angle-name">Direct Conversation / 'Just Ask'</span>
+    <span class="badge stage-bof">BOF</span>
+  </div>
+  <p class="angle-what">Skip the website. Talk to the humans who've done this retreat twice.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Everyone in BOF who hasn't converted.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Ask Us a Question (Sicily-specific)</span></div>
+    <div><span class="meta-label">Notes</span><span>NEW creative for Sicily — not reused from Morocco. Sicily-specific refs (Ferragosto, villa, 'we've done it twice'). Self-aware retargeting: 'I can tell you're interested because you're still here.'</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-bof">
+  <div class="angle-top">
+    <span class="angle-name">Day-by-Day Detail</span>
+    <span class="badge stage-bof">BOF</span>
+  </div>
+  <p class="angle-what">Here's every day. Ferragosto is Day 7 — the climax.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>90% committed, need to SEE the schedule.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Itinerary Carousel</span></div>
+    <div><span class="meta-label">Notes</span><span>Ferragosto on Day 7 = narrative climax. The carousel builds to it.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-bof">
+  <div class="angle-top">
+    <span class="angle-name">Pricing Clarity</span>
+    <span class="badge stage-bof">BOF</span>
+  </div>
+  <p class="angle-what">Here's the price. Per night. With Ferragosto included.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>Decision-stage. Price isn't a surprise — it's presented clearly.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Pricing Plan Carousel</span></div>
+    <div><span class="meta-label">Notes</span><span>Per-night breakdown + Ferragosto as unique line item.</span></div>
+  </div>
+</div>
+<div class="angle-card angle-stage-bof">
+  <div class="angle-top">
+    <span class="angle-name">Immersion / Hype / FOMO</span>
+    <span class="badge stage-bof">BOF</span>
+  </div>
+  <p class="angle-what">Two years of real footage. This is what actually happens.</p>
+  <div class="angle-meta">
+    <div><span class="meta-label">Who</span><span>High-intent fence-sitters who need the final push.</span></div>
+    <div><span class="meta-label">Creatives</span><span class="angle-creatives">Sicily Hype Video</span></div>
+    <div><span class="meta-label">Notes</span><span>TWO YEARS of footage = legitimacy. Proven product, not an experiment. Include Morocco BOF Non-Bookers for cross-retreat FOMO.</span></div>
+  </div>
+</div>
+</div>
+  </div>
+</div>
+
+<!-- ═══ PRODUCTION CHECKLIST ═════════════════════════════════════════════════ -->
+<div class="panel" id="checklist">
+  <div class="panel-hero" style="background:linear-gradient(135deg,#2a6fa8,#1a4f88);">
+    <div class="accent"></div>
+    <h1>Production Checklist</h1>
+    <p>Every creative asset across both retreats — format, source, owner, status, and whether an EU version is needed. 21 assets per retreat, 42 total.</p>
+  </div>
+
+  <div class="retreat-toggle">
+    <button class="retreat-btn active" onclick="switchRetreat(this,'chk-morocco','chk-sicily')">Morocco (21 assets)</button>
+    <button class="retreat-btn" onclick="switchRetreat(this,'chk-sicily','chk-morocco')">Sicily (21 assets)</button>
+  </div>
+
+  <div class="retreat-content active" id="chk-morocco">
+    <div class="section-title">Morocco — Creative Production Status</div>
+    <div class="table-wrap"><table class="checklist-table"><thead><tr>
+<th>#</th><th>Creative</th><th>Stage</th><th>Format</th><th>Source</th><th>Owner</th><th>Status</th><th>EU Version?</th>
+</tr></thead><tbody>
+<tr><td class="num-cell">1</td><td><strong>Brett 'Feel Like Sh**' (8s)</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 8s</td><td><span class="source-tag src-reuse">REUSE</span></td><td>Nate</td><td><span class="badge status-ready">Ready</span></td><td>Yes (copy)</td></tr>
+<tr><td class="num-cell">2</td><td><strong>9-5 Erin — NA Version</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 15–20s</td><td><span class="source-tag src-recre">RECREATE</span></td><td>Erin + Nate</td><td><span class="badge status-pending">To Shoot</span></td><td>No</td></tr>
+<tr><td class="num-cell">3</td><td><strong>9-5 Erin — EU Version</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 15–20s</td><td><span class="source-tag src-recre">RECREATE</span></td><td>Erin + Nate</td><td><span class="badge status-pending">To Shoot</span></td><td>Yes</td></tr>
+<tr><td class="num-cell">4</td><td><strong>So Much Fun Workout</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 15–30s</td><td><span class="source-tag src-exist">EXISTING</span></td><td>Erin + KP</td><td><span class="badge status-ready">Edit for ads</span></td><td>Yes (copy)</td></tr>
+<tr><td class="num-cell">5</td><td><strong>Sarah Partnership</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 30–60s</td><td><span class="source-tag src-new">NEW</span></td><td>Sarah + Nate</td><td><span class="badge status-pending">To Shoot</span></td><td>If audience EU</td></tr>
+<tr><td class="num-cell">6</td><td><strong>Girls Solo Travel</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 15–30s</td><td><span class="source-tag src-exist">EXISTING</span></td><td>KP</td><td><span class="badge status-ready">Edit for ads</span></td><td>Yes (copy)</td></tr>
+<tr><td class="num-cell">7</td><td><strong>Are Retreats for Men</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 30–60s</td><td><span class="source-tag src-new">NEW</span></td><td>Nate</td><td><span class="badge status-pending">To Record</span></td><td>Yes (copy)</td></tr>
+<tr><td class="num-cell">8</td><td><strong>3 Hours From London</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 10–15s</td><td><span class="source-tag src-new">NEW</span></td><td>KP + Nate</td><td><span class="badge status-pending">To Create</span></td><td>EU only</td></tr>
+<tr><td class="num-cell">9</td><td><strong>Carousel — 'It Might Be Time'</strong></td><td><span class="badge stage-reengage">RE-ENGAGE</span></td><td class="fmt-cell">Carousel</td><td><span class="source-tag src-new">NEW</span></td><td>KP + Nate</td><td><span class="badge status-pending">To Create</span></td><td>Yes (copy)</td></tr>
+<tr><td class="num-cell">10</td><td><strong>Didi Testimonial</strong></td><td><span class="badge stage-reengage">RE-ENGAGE</span></td><td class="fmt-cell">Video 30–60s</td><td><span class="source-tag src-exist">EXISTING</span></td><td>Nate</td><td><span class="badge status-ready">Edit</span></td><td>Check accent</td></tr>
+<tr><td class="num-cell">11</td><td><strong>Cat Traer Testimonial</strong></td><td><span class="badge stage-other">RE-ENGAGE + MOF</span></td><td class="fmt-cell">Video 30–60s</td><td><span class="source-tag src-exist">EXISTING</span></td><td>Nate</td><td><span class="badge status-ready">Edit</span></td><td>Check accent</td></tr>
+<tr><td class="num-cell">12</td><td><strong>Trip Details Carousel — NA</strong></td><td><span class="badge stage-mof">MOF</span></td><td class="fmt-cell">Carousel</td><td><span class="source-tag src-new">NEW</span></td><td>Erin + KP</td><td><span class="badge status-pending">To Create</span></td><td>No</td></tr>
+<tr><td class="num-cell">13</td><td><strong>Trip Details Carousel — EU</strong></td><td><span class="badge stage-mof">MOF</span></td><td class="fmt-cell">Carousel</td><td><span class="source-tag src-new">NEW</span></td><td>Erin + KP</td><td><span class="badge status-pending">To Create</span></td><td>Yes</td></tr>
+<tr><td class="num-cell">14</td><td><strong>2025 Guest Reviews Carousel</strong></td><td><span class="badge stage-mof">MOF</span></td><td class="fmt-cell">Carousel</td><td><span class="source-tag src-new">NEW</span></td><td>KP + Erin</td><td><span class="badge status-pending">To Create</span></td><td>Yes (quotes)</td></tr>
+<tr><td class="num-cell">15</td><td><strong>Erin 2025 Recap — 'Why I'm Excited'</strong></td><td><span class="badge stage-mof">MOF</span></td><td class="fmt-cell">Video 30–45s</td><td><span class="source-tag src-new">NEW</span></td><td>Erin</td><td><span class="badge status-pending">To Shoot</span></td><td>Yes (copy)</td></tr>
+<tr><td class="num-cell">16</td><td><strong>Value for Money Pricing Calculator</strong></td><td><span class="badge stage-mof">MOF</span></td><td class="fmt-cell">Video 20–30s</td><td><span class="source-tag src-recre">RECREATE</span></td><td>Nate or Erin</td><td><span class="badge status-pending">To Create</span></td><td>Yes (EUR)</td></tr>
+<tr><td class="num-cell">17</td><td><strong>Itinerary Video — What's Included</strong></td><td><span class="badge stage-bof">BOF</span></td><td class="fmt-cell">Video 30–45s</td><td><span class="source-tag src-new">NEW</span></td><td>Nate</td><td><span class="badge status-pending">To Shoot</span></td><td>Yes (copy)</td></tr>
+<tr><td class="num-cell">18</td><td><strong>Morocco Vlog (2025 Footage)</strong></td><td><span class="badge stage-bof">BOF</span></td><td class="fmt-cell">Video 45–90s</td><td><span class="source-tag src-exist">EXISTING</span></td><td>Nate</td><td><span class="badge status-ready">Edit for ads</span></td><td>Yes (copy)</td></tr>
+<tr><td class="num-cell">19</td><td><strong>Pricing Plan Carousels</strong></td><td><span class="badge stage-bof">BOF</span></td><td class="fmt-cell">Carousel</td><td><span class="source-tag src-new">NEW</span></td><td>KP</td><td><span class="badge status-pending">To Create</span></td><td>Yes (EUR/GBP)</td></tr>
+<tr><td class="num-cell">20</td><td><strong>Day-by-Day Itinerary Carousel</strong></td><td><span class="badge stage-bof">BOF</span></td><td class="fmt-cell">Carousel</td><td><span class="source-tag src-new">NEW</span></td><td>KP + Erin</td><td><span class="badge status-pending">To Create</span></td><td>Yes (copy)</td></tr>
+<tr><td class="num-cell">21</td><td><strong>Ask a Question Reel</strong></td><td><span class="badge stage-bof">BOF</span></td><td class="fmt-cell">Video 15–20s</td><td><span class="source-tag src-new">NEW</span></td><td>Nate</td><td><span class="badge status-pending">To Record</span></td><td>Yes (copy)</td></tr>
+</tbody></table></div>
+<div class="summary-pills">
+<div class="summary-pill"><span class="pill-val">1</span><span class="pill-label">REUSE (existing, no changes)</span></div>
+<div class="summary-pill"><span class="pill-val">4</span><span class="pill-label">EXISTING (repurpose/edit for ads)</span></div>
+<div class="summary-pill"><span class="pill-val">3</span><span class="pill-label">RECREATE (same format, new version)</span></div>
+<div class="summary-pill"><span class="pill-val">13</span><span class="pill-label">NEW (original creative)</span></div>
+<div class="summary-pill"><span class="pill-val">21</span><span class="pill-label">TOTAL</span></div>
+<div class="summary-pill"><span class="pill-val">17 of 21 need EU copy</span><span class="pill-label">With EU copy variants</span></div>
+<div class="summary-pill"><span class="pill-val">2 (9-5 Erin EU, 3hrs From London)</span><span class="pill-label">Separate EU-only creative</span></div>
+<div class="summary-pill"><span class="pill-val">2 (Didi, Cat Traer)</span><span class="pill-label">Need accent check for EU</span></div>
+</div>
+  </div>
+
+  <div class="retreat-content" id="chk-sicily">
+    <div class="section-title">Sicily — Creative Production Status</div>
+    <div class="table-wrap"><table class="checklist-table"><thead><tr>
+<th>#</th><th>Creative</th><th>Stage</th><th>Format</th><th>Source</th><th>Owner</th><th>Status</th><th>EU Version?</th><th>Sicily-Unique?</th>
+</tr></thead><tbody>
+<tr><td class="num-cell">1</td><td><strong>Brett 'Feel Like Sh**' (8s)</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 8s</td><td><span class="source-tag src-reuse">REUSE (Morocco)</span></td><td>Nate</td><td><span class="badge status-ready">Ready — new copy</span></td><td>Yes (copy)</td><td>No</td></tr>
+<tr><td class="num-cell">2</td><td><strong>9-5 Erin — NA</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 15–20s</td><td><span class="source-tag src-reuse">REUSE (Morocco)</span></td><td>Erin + Nate</td><td><span class="badge status-ready">Ready — new copy</span></td><td>No</td><td>No</td></tr>
+<tr><td class="num-cell">3</td><td><strong>9-5 Erin — EU</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 15–20s</td><td><span class="source-tag src-reuse">REUSE (Morocco)</span></td><td>Erin + Nate</td><td><span class="badge status-ready">Ready — new copy</span></td><td>Yes</td><td>No</td></tr>
+<tr><td class="num-cell">4</td><td><strong>So Much Fun Workout</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 15–30s</td><td><span class="source-tag src-reuse">REUSE (Morocco)</span></td><td>Erin + KP</td><td><span class="badge status-ready">Ready — new copy</span></td><td>Yes (copy)</td><td>No</td></tr>
+<tr><td class="num-cell">5</td><td><strong>Girls Solo Travel</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 15–30s</td><td><span class="source-tag src-reuse">REUSE (Morocco)</span></td><td>KP</td><td><span class="badge status-ready">Ready — new copy</span></td><td>Yes (copy)</td><td>No</td></tr>
+<tr><td class="num-cell">6</td><td><strong>Are Retreats for Men</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 30–60s</td><td><span class="source-tag src-reuse">REUSE (Morocco)</span></td><td>Nate</td><td><span class="badge status-ready">Ready — new copy</span></td><td>Yes (copy)</td><td>No</td></tr>
+<tr><td class="num-cell">7</td><td><strong>Ferragosto With Us</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 15–20s</td><td><span class="source-tag src-new">NEW</span></td><td>KP + Erin</td><td><span class="badge status-pending">To Create</span></td><td>EU primary</td><td><span class="unique-badge">UNIQUE</span></td></tr>
+<tr><td class="num-cell">8</td><td><strong>2 Hours From London</strong></td><td><span class="badge stage-tof">TOF</span></td><td class="fmt-cell">Video 10–15s</td><td><span class="source-tag src-new">NEW</span></td><td>KP</td><td><span class="badge status-pending">To Create</span></td><td>EU only</td><td><span class="unique-badge">UNIQUE</span></td></tr>
+<tr><td class="num-cell">9</td><td><strong>Carousel 'It Might Be Time' (Sicily)</strong></td><td><span class="badge stage-reengage">RE-ENGAGE</span></td><td class="fmt-cell">Carousel</td><td><span class="source-tag src-adapt">ADAPT (Morocco)</span></td><td>KP + Nate</td><td><span class="badge status-pending">To Create</span></td><td>Yes (copy)</td><td>Adapted</td></tr>
+<tr><td class="num-cell">10</td><td><strong>Amanda K Testimonial</strong></td><td><span class="badge stage-other">RE-ENGAGE + MOF</span></td><td class="fmt-cell">Video 30–60s</td><td><span class="source-tag src-exist">EXISTING</span></td><td>Nate</td><td><span class="badge status-ready">Captured</span></td><td>Check accent</td><td>YES (Sicily guest)</td></tr>
+<tr><td class="num-cell">11</td><td><strong>Keara Testimonial</strong></td><td><span class="badge stage-other">RE-ENGAGE + MOF</span></td><td class="fmt-cell">Video 30–60s</td><td><span class="source-tag src-exist">EXISTING</span></td><td>Nate</td><td><span class="badge status-ready">Captured</span></td><td>Check accent</td><td>YES (Sicily guest)</td></tr>
+<tr><td class="num-cell">12</td><td><strong>Trip Details Carousel — NA</strong></td><td><span class="badge stage-mof">MOF</span></td><td class="fmt-cell">Carousel</td><td><span class="source-tag src-new">NEW</span></td><td>Erin + KP</td><td><span class="badge status-pending">To Create</span></td><td>No</td><td><span class="unique-badge">UNIQUE</span></td></tr>
+<tr><td class="num-cell">13</td><td><strong>Trip Details Carousel — EU</strong></td><td><span class="badge stage-mof">MOF</span></td><td class="fmt-cell">Carousel</td><td><span class="source-tag src-new">NEW</span></td><td>Erin + KP</td><td><span class="badge status-pending">To Create</span></td><td>Yes</td><td><span class="unique-badge">UNIQUE</span></td></tr>
+<tr><td class="num-cell">14</td><td><strong>Guest Reviews Carousel (2024+2025)</strong></td><td><span class="badge stage-mof">MOF</span></td><td class="fmt-cell">Carousel</td><td><span class="source-tag src-new">NEW</span></td><td>KP + Erin</td><td><span class="badge status-pending">To Create</span></td><td>Yes (quotes)</td><td><span class="unique-badge">UNIQUE</span></td></tr>
+<tr><td class="num-cell">15</td><td><strong>Erin 'Third Time' Recap</strong></td><td><span class="badge stage-mof">MOF</span></td><td class="fmt-cell">Video 30–45s</td><td><span class="source-tag src-new">NEW</span></td><td>Erin</td><td><span class="badge status-pending">To Shoot</span></td><td>Yes (copy)</td><td><span class="unique-badge">UNIQUE</span></td></tr>
+<tr><td class="num-cell">16</td><td><strong>Value for Money Calculator</strong></td><td><span class="badge stage-mof">MOF</span></td><td class="fmt-cell">Video 20–30s</td><td><span class="source-tag src-recre">RECREATE (format)</span></td><td>Nate or Erin</td><td><span class="badge status-pending">To Create</span></td><td>Yes (EUR)</td><td>YES (pricing)</td></tr>
+<tr><td class="num-cell">17</td><td><strong>Ask a Question — Sicily-Specific</strong></td><td><span class="badge stage-bof">BOF</span></td><td class="fmt-cell">Video 15–20s</td><td><span class="source-tag src-new">NEW</span></td><td>Nate</td><td><span class="badge status-pending">To Record</span></td><td>Yes (copy)</td><td><span class="unique-badge">UNIQUE</span></td></tr>
+<tr><td class="num-cell">18</td><td><strong>Day-by-Day Itinerary Carousel</strong></td><td><span class="badge stage-bof">BOF</span></td><td class="fmt-cell">Carousel</td><td><span class="source-tag src-new">NEW</span></td><td>KP + Erin</td><td><span class="badge status-pending">To Create</span></td><td>Yes (copy)</td><td><span class="unique-badge">UNIQUE</span></td></tr>
+<tr><td class="num-cell">19</td><td><strong>Pricing Plan Carousel</strong></td><td><span class="badge stage-bof">BOF</span></td><td class="fmt-cell">Carousel</td><td><span class="source-tag src-new">NEW</span></td><td>KP</td><td><span class="badge status-pending">To Create</span></td><td>Yes (EUR/GBP)</td><td><span class="unique-badge">UNIQUE</span></td></tr>
+<tr><td class="num-cell">20</td><td><strong>Sicily Hype Video (Past Trips)</strong></td><td><span class="badge stage-bof">BOF</span></td><td class="fmt-cell">Video 30–60s</td><td><span class="source-tag src-compi">COMPILE</span></td><td>Nate + Erin</td><td><span class="badge status-ready">Compile footage</span></td><td>Yes (copy)</td><td><span class="unique-badge">UNIQUE</span></td></tr>
+<tr><td class="num-cell">21</td><td><strong>(Keara + Amanda in MOF)</strong></td><td><span class="badge stage-mof">MOF</span></td><td class="fmt-cell">Video</td><td><span class="source-tag src-exist">EXISTING</span></td><td>Nate</td><td><span class="badge status-ready">Captured</span></td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<div class="summary-pills">
+<div class="summary-pill"><span class="pill-val">5 videos</span><span class="pill-label">REUSE from Morocco (new copy only)</span></div>
+<div class="summary-pill"><span class="pill-val">1 carousel</span><span class="pill-label">ADAPT from Morocco (modified)</span></div>
+<div class="summary-pill"><span class="pill-val">3 testimonials + hype video</span><span class="pill-label">EXISTING / CAPTURED</span></div>
+<div class="summary-pill"><span class="pill-val">10 pieces</span><span class="pill-label">NEW (Sicily-specific)</span></div>
+<div class="summary-pill"><span class="pill-val">21</span><span class="pill-label">TOTAL UNIQUE ASSETS</span></div>
+<div class="summary-pill"><span class="pill-val">14 of 21</span><span class="pill-label">Sicily-unique creative</span></div>
+<div class="summary-pill"><span class="pill-val">5 of 21</span><span class="pill-label">Reused video with new copy</span></div>
+<div class="summary-pill"><span class="pill-val">17 of 21</span><span class="pill-label">Need EU copy variants</span></div>
+<div class="summary-pill"><span class="pill-val">2 (Amanda K, Keara)</span><span class="pill-label">Need accent check</span></div>
+</div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+function switchRetreat(btn, showId, hideId) {
+  const toggle = btn.parentElement;
+  toggle.querySelectorAll('.retreat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = toggle.parentElement;
+  panel.querySelector('#' + showId).classList.add('active');
+  panel.querySelector('#' + hideId).classList.remove('active');
+}
+</script>
+</body>
+</html>
